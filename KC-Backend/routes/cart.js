@@ -1,8 +1,6 @@
 const express = require('express');
-const cart = require('../models/cart');
 const router = express.Router()
 const Cart = require('../models/cart');
-const products = require('../models/products');
 const Product = require('../models/products');
 const User = require('../models/users')
 
@@ -27,7 +25,7 @@ router.get('/getcart/:cartId', getCart, async (req, res) => {
 //adding products to user cart
 router.post('/:id/addtocart/:pId', getUser, getItem, async (req, res) => {
 
-    const userId = res.user._id;
+    const userId = res.user;
     quantity = 1;
 
     try {
@@ -43,11 +41,10 @@ router.post('/:id/addtocart/:pId', getUser, getItem, async (req, res) => {
         const name = item.ProductName;
         //If cart already exists for user,
         if (cart) {
-
-            const itemIndex = cart.products.findIndex((itm) => {
-                return itm.productId === productId
-            });
-            
+            //getting the index of the product from the cart
+            const itemIndex = cart.products.findIndex((p)=>{
+                return p.productId.toString() === productId.toString()
+            })
             //check if product exists or not
             if (itemIndex > -1) {
                 let product = cart.products[itemIndex];
@@ -59,7 +56,7 @@ router.post('/:id/addtocart/:pId', getUser, getItem, async (req, res) => {
 
                 cart.products[itemIndex] = product;
                 await cart.save();
-                res.status(200).send(cart + itemIndex);
+                res.status(200).send(cart);
             } else {
                 cart.products.push({ productId,name, quantity, price });
                 cart.total = cart.products.reduce((acc, curr) => {
@@ -67,7 +64,7 @@ router.post('/:id/addtocart/:pId', getUser, getItem, async (req, res) => {
                 }, 0)
 
                 await cart.save();
-                res.status(200).send(cart + itemIndex);
+                res.status(200).send(cart);
             }
         } else {
             //no cart exists, create one

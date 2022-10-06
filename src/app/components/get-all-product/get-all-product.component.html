@@ -1,0 +1,44 @@
+<h2>Product Listing</h2>
+<div *ngIf="products && user">
+    <table>
+        <thead>
+            <tr class="bg-primary">     
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Description</th>
+                <th>ProductImage</th>
+                <th>CreatedOn</th>
+                <th>inStock</th>
+                <th>TopProduct</th>
+                <th>Ingredient</th>
+                <th>Action</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <a routerLink="/users/{{user._id}}/products/{{product._id}}">
+                   <td>{{product._id}}</td> 
+                </a>
+                <td>{{product.ProductName}}</td>
+                <td>{{product.Category}}</td>
+                <td>{{product.Price}}</td>
+                <td>{{product.Discount}}</td>
+                <td>{{product.Description}}</td>
+                <td>{{product.ProductImage}}</td>
+                <td>{{product.CreatedOn}}</td>
+                <td>{{product.inStock}}</td>
+                <td>{{product.TopProduct}}</td>
+                <td>{{product.Ingredient}}</td>
+                <td> 
+                    <button routerLink="/users/{{user._id}}/products/{{product._id}}/edit" class="btnBlue" >Edit</button> 
+                    <button class="btnRed" (click)="deleteProduct(product._id)">Delete</button>
+                    <button class="btnGreen" (click)="addToCart(user._id, product._id)">Add to Cart</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

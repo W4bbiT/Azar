@@ -1,0 +1,34 @@
+<div class="content-box" *ngIf="product">
+    <h2>Edit Product</h2>
+    <form class="example-form" [formGroup]="productForm">
+            <label>Product Name</label>
+            <input type="text" formControlName="ProductName" [(ngModel)]="product.ProductName">
+
+            <label>Product Category</label>
+            <input type="text" formControlName="Category" [(ngModel)]="product.Category">
+
+            <label>Price</label>
+            <input type="number" formControlName="Price" [(ngModel)]="product.Price">
+
+            <label>Discount</label>
+            <input type="number" formControlName="Discount" [(ngModel)]="product.Discount">
+
+            <label>Description</label>
+            <input type="text" formControlName="Description" [(ngModel)]="product.Description">
+
+            <label>Product Image URL</label>
+            <input type="text" formControlName="ProductImage" [(ngModel)]="product.ProductImage">
+
+            <label>How many in stock?</label>
+            <input type="number" formControlName="inStock" [(ngModel)]="product.inStock">
+
+            <label>Ingredient</label>
+            <input type="text" formControlName="Ingredient" [(ngModel)]="product.Ingredient">
+
+            <label>Top Product</label>
+            <input type="checkbox" formControlName="TopProduct" [(ngModel)]="product.TopProduct">
+
+
+            <button (click)="editProduct()">Edit Product</button>
+    </form>
+</div>

@@ -1,0 +1,12 @@
+<p>get-one-user works!</p>
+<div class="content-box">
+    <a routerLink="/users">
+        <button>Back</button>
+    </a>
+    <div *ngIf="user">
+        <h2>{{user.fName}}</h2>
+        <p>{{user.lName}}</p>
+        <p>{{user.dob}}</p>
+    </div>
+
+</div>

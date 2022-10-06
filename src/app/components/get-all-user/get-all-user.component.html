@@ -1,0 +1,44 @@
+<p>get-all-user works!</p>
+<div *ngIf="users">
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Email</td>
+                <td>Password</td>
+                <td>Date of Birth</td>
+                <td>Phone</td>
+                <td>Street Address</td>
+                <td>City</td>
+                <td>State</td>
+                <td>Zipcode</td>
+                <td>Profile Image</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <a routerLink="/users/{{user._id}}">
+                  <td>{{user._id}}</td>  
+                </a>
+                <td>{{user.fName}}</td>
+                <td>{{user.lName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.dob}}</td>
+                <td>{{user.phone}}</td>
+                <td>{{user.address.streetAddress}}</td>
+                <td>{{user.address.city}}</td>
+                <td>{{user.address.state}}</td>
+                <td>{{user.address.zipcode}}</td>
+                <td>{{user.profileImage}}</td>
+                <td>
+                    <button class="btnBlue" routerLink="/users/{{user._id}}/edit">Edit</button>
+                    <button class="btnRed" (click)="deleteUserButton(user._id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

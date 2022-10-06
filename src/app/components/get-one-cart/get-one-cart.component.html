@@ -1,0 +1,14 @@
+<div class="content-box">
+    <a routerLink="/users">
+        <button>Back</button>
+    </a>
+    <div *ngIf="cart">
+        <h2>{{cart._id}}</h2>
+        <p>{{cart.userId}}</p>
+        <div *ngFor="let product of cart.products">
+            <p>{{product.productId}}</p>
+            <p>{{product.quantity}}</p>
+            <p>{{product.price}}</p>
+        </div>
+    </div>
+</div>

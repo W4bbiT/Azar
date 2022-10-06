@@ -1,0 +1,12 @@
+<div class="content-box">
+    <div *ngIf="user && product">
+        <a routerLink="/users/{{user._id}}/products">
+            <button>Back</button>
+        </a>
+
+        <h2>{{product.ProductName}}</h2>
+        <p>{{product.Description}}</p>
+        <p>${{product.Price}}</p>
+    </div>
+
+</div>

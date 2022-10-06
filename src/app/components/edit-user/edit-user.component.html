@@ -1,0 +1,53 @@
+<div class="content-box">
+    <h2>Edit User</h2>
+    <form class="example-form" *ngIf="user" (ngSubmit)="editUser()" [formGroup]="userForm">
+            <label>First Name</label>
+            <input type="text" formControlName="fName" 
+            [(ngModel)]="user.fName">
+
+            <label>Last Name</label>
+            <input type="text" formControlName="lName"
+            [(ngModel)]="user.lName">
+
+            <label>Email</label>
+            <input type="email" formControlName="email"
+            [(ngModel)]="user.email">
+
+            <label>Password</label>
+            <input type="password" formControlName="password"
+            [(ngModel)]="user.password">
+
+            <label>Date of birth</label>
+            <input type="date" formControlName="dob"
+            [(ngModel)]="user.dob">
+
+            <label>phone</label>
+            <input type="text" formControlName="phone"
+            [(ngModel)]="user.phone">
+
+            <label>Profile Image</label>
+            <input type="text" formControlName="profileImage"
+            [(ngModel)]="user.profileImage">  
+
+            <label>Address: </label>
+            <div formGroupName="address">
+                <label>Street Address</label>
+                <input type="text" formControlName="streetAddress"
+                [(ngModel)]="user.address.streetAddress">
+    
+                <label>City</label>
+                <input type="text" formControlName="city"
+                [(ngModel)]="user.address.city">
+    
+                <label>State</label>
+                <input type="text" formControlName="state"
+                [(ngModel)]="user.address.state">
+    
+                <label>Zipcode</label>
+                <input type="text" formControlName="zipcode"
+                [(ngModel)]="user.address.zipcode">
+            </div>
+
+            <button class="btnEdit" type="submit">Edit User</button>
+    </form>
+</div>

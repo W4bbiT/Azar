@@ -42,7 +42,7 @@ router.post('/:id/addtocart/:pId', getUser, getItem, async (req, res) => {
         //If cart already exists for user,
         if (cart) {
             //getting the index of the product from the cart
-            const itemIndex = cart.products.findIndex((p)=>{
+            const itemIndex = cart.products.findIndex((p) => {
                 return p.productId.toString() === productId.toString()
             })
             //check if product exists or not
@@ -58,7 +58,7 @@ router.post('/:id/addtocart/:pId', getUser, getItem, async (req, res) => {
                 await cart.save();
                 res.status(200).send(cart);
             } else {
-                cart.products.push({ productId,name, quantity, price });
+                cart.products.push({ productId, name, quantity, price });
                 cart.total = cart.products.reduce((acc, curr) => {
                     return acc + curr.quantity * curr.price;
                 }, 0)
@@ -82,51 +82,71 @@ router.post('/:id/addtocart/:pId', getUser, getItem, async (req, res) => {
 
 })
 //updating one
-router.patch('/:id/editcart/:cartId/:pId', getUser, getCart, getItem, async (req, res) => {
-    if (req.body.quantity != null) {
-        try {
-            const updatedCart = await Cart.findOneAndUpdate({
-                _id: res.cart._id,
-                'products.productId': res.item._id
-            },
-                {
-                    $set: {
-                        products: {
-                            productId: res.item._id,
-                            quantity: req.body.quantity,
-                            price: res.item.Price * req.body.quantity
-                        }
-                    }
-                })
-            res.json(updatedCart)
-        } catch (err) {
-            res.status(400).json({
-                message: err.message
-            })
+router.patch('/:id/editcart/:pId', getUser, getItem, async (req, res) => {
+    const userId = res.user;
+    quantity = req.body.quantity;
+    try {
+        const cart = await Cart.findOne({ userId });
+        const item = res.item;
+
+        if (!item) {
+            res.status(404).send({ message: "item not found" });
+            return;
         }
+        const productId = item._id;
+        //If cart already exists for user,
+        if (cart) {
+            const itemIndex = cart.products.findIndex((p) => {
+                return p.productId.toString() === productId.toString()
+            })
+
+            if (itemIndex > -1) {
+                let product = cart.products[itemIndex];
+                product.quantity = quantity;
+
+                cart.total = cart.products.reduce((acc, curr) => {
+                    return acc + curr.quantity * curr.price;
+                }, 0)
+
+                cart.products[itemIndex] = product;
+                await cart.save();
+                res.status(200).send(cart);
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("something went wrong");
     }
 
 })
 //deleting one
-router.delete('/:id/delete-item/:cartId/:pId', getUser, getItem, getCart, async (req, res) => {
+router.delete('/:id/delete-item/:pId', getUser, getItem, async (req, res) => {
+    const userId = res.user;
     try {
-        const deletedItem = await Cart.updateOne({
-            userId: res.cart.userId,
-            _id: res.cart._id
-        },
-            {
-                $pull: {
-                    products: {
-                        productId: res.item._id
-                    }
+        const productId = res.item._id;
+        let cart = await Cart.findOne({ userId });
+        const itemIndex = cart.products.findIndex((p) => {
+            return p.productId.toString() === productId.toString()
+        })
+        if (itemIndex > -1) {
+            let item = cart.products[itemIndex];
+            cart.total -= item.quantity * item.price;
 
-                }
-            })
-        res.json(deletedItem)
-        //res.json({ message: 'Item deleted!' })
-    }
-    catch (err) {
-        res.status(500).json({ message: err.message })
+            if (cart.total < 0) {
+                cart.total = 0;
+            }
+            cart.products.splice(itemIndex, 1);
+            cart.total = cart.products.reduce((acc, curr) => {
+                return acc + curr.quantity * curr.price;
+            }, 0)
+            cart = await cart.save();
+            res.status(200).send(cart);
+        } else {
+            res.status(404).send("item not found")
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(400).send();
     }
 })
 

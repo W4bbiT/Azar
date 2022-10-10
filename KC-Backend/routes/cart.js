@@ -84,7 +84,6 @@ router.post('/:id/addtocart/:pId', getUser, getItem, async (req, res) => {
 //updating one
 router.patch('/:id/editcart/:pId', getUser, getItem, async (req, res) => {
     const userId = res.user;
-    quantity = req.body.quantity;
     try {
         const cart = await Cart.findOne({ userId });
         const item = res.item;
@@ -102,7 +101,7 @@ router.patch('/:id/editcart/:pId', getUser, getItem, async (req, res) => {
 
             if (itemIndex > -1) {
                 let product = cart.products[itemIndex];
-                product.quantity = quantity;
+                product.quantity = req.body.products[itemIndex].quantity;
 
                 cart.total = cart.products.reduce((acc, curr) => {
                     return acc + curr.quantity * curr.price;

@@ -1,1 +1,31 @@
-<p>get-all-cart works!</p>
+<div class="content-box" *ngIf="cart">
+    <table>
+        <thead>
+            <tr>
+                <td>Product Name</td>
+                <td>Quantity</td>
+                <td>Unit Price</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of cart.products">
+                <td>{{product.name}}</td>
+                <td>
+                    <input type="number" [(ngModel)]="product.quantity">
+                    <button class="btnBlue" (click)="updateQuantity(product.productId)">Update Quantity</button>
+                </td>
+                <td>${{product.price}}</td>
+                <td>
+                    <button class="btnRed" (click)="pullProduct(product.productId)">Delete</button>       
+                </td>
+            </tr>
+        </tbody>
+        <tr>
+            <td>Total:</td>
+            <td></td>
+            <td>${{cart.total}}</td>
+        </tr>
+    </table>
+
+</div>

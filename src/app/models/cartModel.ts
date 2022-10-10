@@ -3,7 +3,9 @@ export interface Cart{
     userId: String,
     products: [{
         productId: String,
+        name: String,
         quantity: Number,
         price: Number
     }]
+    total: Number
 }

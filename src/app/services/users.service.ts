@@ -52,11 +52,12 @@ export class UsersService {
     )
   }
 
-  //getting all 
+  //getting cart for User
   getCartForUser(id: String): Observable<any> {
     return this.http.get<any>(`/api/user/${id}/cart`)
   }
 
+  //adding a product to cart
   addProductToMyCart(id: String, pid: String, data: Cart): Observable<Cart> {
     return this.http.post<Cart>(
       `/api/user/${id}/addtocart/${pid}`,
@@ -65,6 +66,17 @@ export class UsersService {
     )
   }
 
+  updateCart(id: String, pid: String, data: any): Observable<any> {
+    return this.http.patch<any>(
+      `/api/user/${id}/editcart/${pid}`,
+      data,
+      httpOptions
+    )
+  }
+
+  pullProductFromCart(id: String, pid: String): Observable<any>{
+    return this.http.delete(`/api/user/${id}/delete-item/${pid}`)
+  }
 
 
 

@@ -1,21 +1,53 @@
-<div class="content-box">
-    <h2>Sign Up</h2>
+<div class="w-screen h-fit rounded-md py-5 bg-gray-100">
 
-           <form class="example-form" [formGroup]="userForm">
-            <label>First Name</label>
-            <input type="text" formControlName="fName" placeholder="Enter first name">
 
-            <label>Last Name</label>
-            <input type="text" formControlName="lName" placeholder="Enter last name">
+    <form [formGroup]="userForm">
+        <h2 class="mx-5 h-12 py-2 px-2 text-gray-100 bg-black">Register
+        </h2>
+        <div class="block bg-black rounded-full m-8">
+            <label class="w-1/4 text-white m-3 rounded-r-full">First Name :</label>
+            <input class="w-3/4 m-2 py-1 px-2 rounded-r-full" type="text" formControlName="fName"
+                placeholder="Enter first name">
+        </div>
 
-            <label>Email</label>
-            <input type="text" formControlName="email" placeholder="Enter email">
+        <div class="block bg-black rounded-full m-8">
+            <label class="w-1/4 text-white m-3">Last Name :</label>
+            <input class="w-3/4 m-2 py-1 px-2 rounded-r-full" type="text" formControlName="lName"
+                placeholder="Enter last name">
+        </div>
 
-            <label>Password</label>
-            <input type="text" formControlName="password" placeholder="Enter password">
+        <div class="block bg-black rounded-full m-8">
+            <label class="w-2/6 text-white m-3">Email :</label>
+            <input class="w-4/6 m-2 py-1 px-2 rounded-r-full" type="text" formControlName="email"
+                placeholder="Enter email">
+        </div>
 
-            <button (click)="registerUser()">Register</button>
-    </form> 
+        <div class="block bg-black rounded-full m-8">
+            <label class="w-2/6 text-white m-3">Confirm Email :</label>
+            <input class="w-4/6 m-2 py-1 px-2 rounded-r-full" type="text" formControlName="email"
+                placeholder="Enter email">
+        </div>
+
+        <div class="block bg-black rounded-full m-8">
+            <label class="w-2/6 text-white m-3">Password :</label>
+            <input class="w-4/6 m-2 py-1 px-2 rounded-r-full" type="text" formControlName="password"
+                placeholder="Enter password">
+        </div>
+
+        <div class="block bg-black rounded-full m-8">
+            <label class="w-2/6 text-white m-3">Confirm Password :</label>
+            <input class="w-4/6 m-2 py-1 px-2 rounded-r-full" type="text" formControlName="password"
+                placeholder="Enter password">
+        </div>
+
+        <div class="block m-8">
+            <button class="w-full h-12 text-gray-600 border border-gray-200 hover:text-white hover:bg-black
+            focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 
+            hover:border-transparent text-white py-1 px-2 
+            rounded-full" (click)="registerUser()">Register</button>
+        </div>
+
+    </form>
 
 
 </div>

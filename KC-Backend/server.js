@@ -10,6 +10,10 @@ db.once('open', () => console.log('Connected to Database'))
 
 app.use(express.json())
 
+
+const AdminRoute = require('./routes/admin')
+app.use('/api/admin', AdminRoute)
+
 const usersRouter = require('./routes/users')
 app.use('/api/user', usersRouter)
 

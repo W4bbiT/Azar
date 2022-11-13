@@ -12,17 +12,19 @@ import { GetOneCartComponent } from './components/get-one-cart/get-one-cart.comp
 import { GetOneOrderComponent } from './components/get-one-order/get-one-order.component';
 import { GetOneProductComponent } from './components/get-one-product/get-one-product.component';
 import { GetOneUserComponent } from './components/get-one-user/get-one-user.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 const routes: Routes = [
   //homepage
-  { path: '', redirectTo: 'users/:id/products', pathMatch: 'full' },
+  { path: '', component: HomePageComponent, pathMatch: 'full' },
   //users
   { path: 'adduser', component: CreateUserComponent },
   { path: 'users', component: GetAllUserComponent },
   { path: 'users/:id', component: GetOneUserComponent },
   { path: 'users/:id/edit', component: EditUserComponent },
-  //products
-  { path: 'users/:id/products', component: GetAllProductComponent, pathMatch: 'full' },
+  
+  //products for Admin
+  { path: 'users/:id/products', component: GetAllProductComponent},
   { path: 'users/:id/products/:pid', component: GetOneProductComponent },
   { path: 'users/:id/products/:pid/edit', component: EditProductComponent },
   { path: 'users/:id/addproduct', component: CreateProductComponent },

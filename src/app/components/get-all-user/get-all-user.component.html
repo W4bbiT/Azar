@@ -1,7 +1,6 @@
-<p>get-all-user works!</p>
-<div *ngIf="users">
-    <table>
-        <thead>
+<div class="w-screen h-screen bg-black" *ngIf="users">
+    <table class="table-auto">
+        <thead class="text-gray-500 font-extrabold border border-gray-500">
             <tr>
                 <td>ID</td>
                 <td>First Name</td>
@@ -18,10 +17,10 @@
                 <td>Action</td>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-gray-300 border border-gray-500">
             <tr *ngFor="let user of users">
                 <a routerLink="/users/{{user._id}}">
-                  <td>{{user._id}}</td>  
+                  <td class="m-1 pt-4" >{{user._id}}</td>  
                 </a>
                 <td>{{user.fName}}</td>
                 <td>{{user.lName}}</td>
@@ -35,8 +34,8 @@
                 <td>{{user.address.zipcode}}</td>
                 <td>{{user.profileImage}}</td>
                 <td>
-                    <button class="btnBlue" routerLink="/users/{{user._id}}/edit">Edit</button>
-                    <button class="btnRed" (click)="deleteUserButton(user._id)">Delete</button>
+                    <button class="border-blue-600 m-1 p-2 border rounded-xl" routerLink="/users/{{user._id}}/edit">Edit</button>
+                    <button class="border-red-600 m-1 p-2 border rounded-xl " (click)="deleteUserButton(user._id)">Delete</button>
                 </td>
             </tr>
         </tbody>

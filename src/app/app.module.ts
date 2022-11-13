@@ -23,6 +23,7 @@ import { ProductsService } from './services/products.service';
 
 import { MaterialModule } from 'src/MaterialModule';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     GetAllOrderComponent,
     GetOneOrderComponent,
     GetAllCartComponent,
-    GetOneCartComponent  
+    GetOneCartComponent,
+    HomePageComponent  
   ],
   imports: [
     BrowserModule,

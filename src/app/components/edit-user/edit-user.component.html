@@ -1,53 +1,122 @@
-<div class="content-box">
-    <h2>Edit User</h2>
-    <form class="example-form" *ngIf="user" (ngSubmit)="editUser()" [formGroup]="userForm">
-            <label>First Name</label>
-            <input type="text" formControlName="fName" 
-            [(ngModel)]="user.fName">
+<div class="w-screen h-screen bg-black flex justify-center items-center">
 
-            <label>Last Name</label>
-            <input type="text" formControlName="lName"
-            [(ngModel)]="user.lName">
-
-            <label>Email</label>
-            <input type="email" formControlName="email"
-            [(ngModel)]="user.email">
-
-            <label>Password</label>
-            <input type="password" formControlName="password"
-            [(ngModel)]="user.password">
-
-            <label>Date of birth</label>
-            <input type="date" formControlName="dob"
-            [(ngModel)]="user.dob">
-
-            <label>phone</label>
-            <input type="text" formControlName="phone"
-            [(ngModel)]="user.phone">
-
-            <label>Profile Image</label>
-            <input type="text" formControlName="profileImage"
-            [(ngModel)]="user.profileImage">  
-
-            <label>Address: </label>
-            <div formGroupName="address">
-                <label>Street Address</label>
-                <input type="text" formControlName="streetAddress"
-                [(ngModel)]="user.address.streetAddress">
-    
-                <label>City</label>
-                <input type="text" formControlName="city"
-                [(ngModel)]="user.address.city">
-    
-                <label>State</label>
-                <input type="text" formControlName="state"
-                [(ngModel)]="user.address.state">
-    
-                <label>Zipcode</label>
-                <input type="text" formControlName="zipcode"
-                [(ngModel)]="user.address.zipcode">
+    <div class="w-fit h-fit rounded-xl bg-gray-200 m-5">
+        <h2 class="m-5 p-3 w-full bg-black text-white">Edit User</h2>
+        <form *ngIf="user" (ngSubmit)="editUser()" [formGroup]="userForm">
+            <div class="flex flex-row bg-black rounded-full m-8 w-fit">
+                <div class="w-48 p-2">
+                    <label class="m-1 p-1 text-white rounded-l-full">First Name</label>
+                </div>
+                <div class="w-96 mr-2">
+                    <input class="w-full m-1 p-1 rounded-r-full" type="text" formControlName="fName"
+                        placeholder="{{user.fName}}">
+                </div>
             </div>
 
-            <button class="btnEdit" type="submit">Edit User</button>
-    </form>
+            <div class="flex flex-row bg-black rounded-full m-8 w-fit">
+                <div class="w-48 p-2">
+                    <label class="m-1 p-1 text-white rounded-l-full">Last Name</label>
+                </div>
+                <div class="w-96 mr-2">
+                    <input class="w-full m-1 p-1 rounded-r-full" type="text" formControlName="lName"
+                        placeholder="{{user.lName}}">
+                </div>
+            </div>
+            <div class="flex flex-row bg-black rounded-full m-8 w-fit">
+                <div class="w-48 p-2">
+                    <label class="m-1 p-1 text-white rounded-l-full">Email</label>
+                </div>
+                <div class="w-96 mr-2">
+                    <input class="w-full m-1 p-1 rounded-r-full" type="email" formControlName="email"
+                        placeholder="{{user.email}}">
+                </div>
+            </div>
+            <div class="flex flex-row bg-black rounded-full m-8 w-fit">
+                <div class="w-48 p-2">
+                    <label class="m-1 p-1 text-white rounded-l-full">Password</label>
+                </div>
+                <div class="w-96 mr-2">
+                    <input class="w-full m-1 p-1 rounded-r-full" type="password" formControlName="password"
+                        placeholder="{{user.password}}">
+                </div>
+            </div>
+
+            <div class="flex flex-row bg-black rounded-full m-8 w-fit">
+                <div class="w-48 p-2">
+                    <label class="m-1 p-1 text-white rounded-l-full">Date of birth</label>
+                </div>
+                <div class="w-96 mr-2">
+                    <input class="w-full m-1 p-1 rounded-r-full" type="date" formControlName="dob" placeholder="{{user.dob}}">
+                </div>
+            </div>
+            <div class="flex flex-row bg-black rounded-full m-8 w-fit">
+                <div class="w-48 p-2">
+                    <label class="m-1 p-1 text-white rounded-l-full">Phone</label>
+                </div>
+                <div class="w-96 mr-2">
+                    <input class="w-full m-1 p-1 rounded-r-full" type="text" formControlName="phone"
+                        placeholder="{{user.phone}}">
+                </div>
+            </div>
+            <div class="flex flex-row bg-black rounded-full m-8 w-fit">
+                <div class="w-48 p-2">
+                    <label class="m-1 p-1 text-white rounded-l-full">Profile Image</label>
+                </div>
+                <div class="w-96 mr-2">
+                    <input class="w-full m-1 p-1 rounded-r-full" type="text" formControlName="profileImage"
+                        placeholder="{{user.profileImage}}">
+                </div>
+            </div>
+            <div>
+                <label class="text-2xl p-1 m-3 text-gray-500 rounded-l-full">Address: </label>
+                <div [formGroup]="addressForm">
+
+                    <div class="flex flex-row bg-black rounded-full m-8 w-fit">
+                        <div class="w-48 p-2">
+                            <label class="m-1 p-1 text-white rounded-l-full">Street
+                                Address</label>
+                        </div>
+                        <div class="w-96 mr-2">
+                            <input class="w-full m-1 p-1 rounded-r-full" type="text" formControlName="streetAddress"
+                                placeholder="{{user.address.streetAddress}}" value="{{user.address.streetAddress}}">
+                        </div>
+                    </div>
+                    <div class="flex flex-row bg-black rounded-full m-8 w-fit">
+                        <div class="w-48 p-2">
+                            <label class="m-1 p-1 text-white rounded-l-full">City</label>
+                        </div>
+                        <div class="w-96 mr-2">
+                            <input class="w-full m-1 p-1 rounded-r-full" type="text" formControlName="city"
+                                placeholder="{{user.address.city}}" value="{{user.address.city}}">
+                        </div>
+                    </div>
+                    <div class="flex flex-row bg-black rounded-full m-8 w-fit">
+                        <div class="w-48 p-2">
+                            <label class="m-1 p-1 text-white rounded-l-full">State</label>
+                        </div>
+                        <div class="w-96 mr-2">
+                            <input class="w-full m-1 p-1 rounded-r-full" type="text" formControlName="state"
+                                placeholder="{{user.address.state}}" value="{{user.address.state}}">
+                        </div>
+                    </div>
+                    <div class="flex flex-row bg-black rounded-full m-8 w-fit">
+                        <div class="w-48 p-2">
+                            <label class="m-1 p-1 text-white rounded-l-full">Zipcode</label>
+                        </div>
+                        <div class="w-96 mr-2">
+                            <input class="w-full m-1 p-1 rounded-r-full" type="text" formControlName="zipcode"
+                                placeholder="{{user.address.zipcode}}" value="{{user.address.zipcode}}">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="grid">
+                <button class="justify-self-stretch m-8 border hover:bg-black bg-gray-500 text-white rounded-full p-2" 
+                type="submit">Edit User</button>
+
+            </div>
+
+        </form>
+    </div>
 </div>

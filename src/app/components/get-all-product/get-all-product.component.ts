@@ -33,8 +33,6 @@ export class GetAllProductComponent implements OnInit {
       .subscribe(user => this.user = user);
   }
 
-
-
   deleteProduct(productId: String){
     this.productService.deleteProduct(productId)
     .subscribe(

@@ -1,8 +1,8 @@
 <h2>Product Listing</h2>
-<div *ngIf="products && user">
+<div class="bg-black w-screen h-full" *ngIf="products && user">
     <table>
         <thead>
-            <tr class="bg-primary">     
+            <tr class="">     
                 <th>ID</th>
                 <th>Name</th>
                 <th>Category</th>
@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let product of products">
-                <a routerLink="/users/{{user._id}}/products/{{product._id}}">
+                <a routerLink="/products/{{product._id}}">
                    <td>{{product._id}}</td> 
                 </a>
                 <td>{{product.ProductName}}</td>

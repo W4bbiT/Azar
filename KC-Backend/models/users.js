@@ -3,12 +3,20 @@ const UserSchema = new mongoose.Schema({
     fName: String,
     lName: String,
     dob: Date,
-    email: String,
-    password: String,
+    email: {
+        type: String,
+        required: true,
+        lowercase: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
     profileImage: String,
-    admin: {
-        type: Boolean,
-        default: false
+    role: {
+        type: String,
+        default: "Customer"
     },
     phone: String,
     address: {
@@ -18,11 +26,11 @@ const UserSchema = new mongoose.Schema({
         zipcode: String
     },
     orders: {
-        type : mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Order'
     },
     cart: {
-        type : mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Cart',
         index: true,
         required: true,

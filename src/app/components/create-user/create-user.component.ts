@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -13,28 +14,29 @@ export class CreateUserComponent implements OnInit {
   userForm !: FormGroup
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UsersService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-      fName: ['', Validators.required],
-      lName: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      fName: [''],
+      lName: [''],
+      email: [''],
+      password: [''],
     })
   }
 
-  registerUser(){
+  onSubmit(){
     if(this.userForm.valid){
-      this.userService.createUser(this.userForm.value)
+      this.authService.register(this.userForm.value)
       .subscribe({
         next:(res) => {
+          console.log(res);
           alert("User created successfully")
-          this.router.navigateByUrl('/users')
+          this.router.navigateByUrl('/signin')
         },
-        error:()=>{
+        error:(err)=>{
           alert("Check whats missing!")
         }
       })

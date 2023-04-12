@@ -1,31 +1,31 @@
+require('./passport')
 const express = require('express');
 const router = express.Router()
 const Cart = require('../models/cart');
 const Product = require('../models/products');
 const User = require('../models/users')
+const passport = require('passport')
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
+router.use(passport.initialize())
 
 //Gettign all
-router.get('/:id/cart', getUser, async (req, res) => {
+router.get('/:id/cart', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
         const cart = await Cart.findOne({
-            'userId': res.user
+            'userId': req.user._id
         }).exec()
         res.json(cart)
     } catch (err) {
         res.status(500).json({ message: err.message })
     }
 })
-//getting one
-router.get('/getcart/:cartId', getCart, async (req, res) => {
-    res.send(res.cart)
-})
-//adding products to user cart
-router.post('/:id/addtocart/:pId', getUser, getItem, async (req, res) => {
 
-    const userId = res.user;
+//adding products to user cart
+router.post('/:id/addtocart/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
+
+    const userId = req.user._id;
     quantity = 1;
 
     try {
@@ -82,8 +82,8 @@ router.post('/:id/addtocart/:pId', getUser, getItem, async (req, res) => {
 
 })
 //updating one
-router.patch('/:id/editcart/:pId', getUser, getItem, async (req, res) => {
-    const userId = res.user;
+router.patch('/:id/editcart/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
+    const userId = req.user._id;
     try {
         const cart = await Cart.findOne({ userId });
         const item = res.item;
@@ -119,8 +119,8 @@ router.patch('/:id/editcart/:pId', getUser, getItem, async (req, res) => {
 
 })
 //deleting one
-router.delete('/:id/delete-item/:pId', getUser, getItem, async (req, res) => {
-    const userId = res.user;
+router.delete('/:id/delete-item/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
+    const userId = req.user._id;
     try {
         const productId = res.item._id;
         let cart = await Cart.findOne({ userId });
@@ -178,20 +178,4 @@ async function getItem(req, res, next) {
 
     next()
 }
-
-async function getUser(req, res, next) {
-    let user
-    try {
-        user = await User.findById(req.params.id)
-        if (user == null) {
-            return res.status(404).json({ message: 'Couldn\'t find User' })
-        }
-    } catch (err) {
-        return res.status(500).json({ message: err.message })
-    }
-    res.user = user
-
-    next()
-}
-
 module.exports = router

@@ -23,7 +23,7 @@ export class GetOneProductComponent implements OnInit {
 
   ngOnInit(): void {
     const uid = this.route.snapshot.paramMap.get('id');
-    this.userService.getOneUser(uid)
+    this.userService.getOneUser()
     .subscribe(user => this.user = user)
 
     const id = this.route.snapshot.paramMap.get('pid');

@@ -10,64 +10,67 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
-  isLoading: boolean = true;
-  user: any;
-  addressForm: FormGroup = this.formBuilder.group({
-    streetAddress: new FormControl('', Validators.required),
-    city: new FormControl('', Validators.required),
-    state: new FormControl('', Validators.required),
-    zipcode: new FormControl('', Validators.required),
-  })
+  user: User;
   userForm: FormGroup = this.formBuilder.group({
-    fName: new FormControl('', Validators.required),
-    lName: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-    dob: new FormControl('', Validators.required),
-    phone: new FormControl('', Validators.required),
-    address: this.addressForm,
-    profileImage: new FormControl('', Validators.required),
+    fName: new FormControl(''),
+    lName: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl(''),
+    dob: new FormControl('',),
+    phone: new FormControl('',),
+    address: new FormGroup({
+      streetAddress: new FormControl(''),
+      city: new FormControl(''),
+      state: new FormControl(''),
+      zipcode: new FormControl(''),
+    }),
+    profileImage: new FormControl('',),
   });
 
+  patchedAddress: any
 
 
   constructor(
-    private route: ActivatedRoute,
     private userService: UsersService,
     private formBuilder: FormBuilder,
     private router: Router
   ) { }
 
-  id = this.route.snapshot.paramMap.get('id');
-
   ngOnInit(): void {
-    this.userService.getOneUser(this.id)
-      .subscribe(user => {
-        this.user = user;
-        this.addressForm.patchValue({
-          streetAddress: user.address.streetAddress,
-          city: user.address.city,
-          state: user.address.city,
-          zipcode: user.address.zipcode,
-        })
-        this.userForm.patchValue({
-          fName: user.fName,
-          lName: user.lName,
-          email: user.email,
-          password: user.password,
-          dob: user.dob,
-          phone: user.phone,
-          address: this.addressForm,
-          profileImage: user.profileImage
-        })
-      });
 
-
+    this.userService.getOneUser()
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.user = res;
+          }
+        },
+        error: () => {
+          alert('You are not authorized to visit this route.  No data is displayed.')
+        }
+      })
+      
+    this.userForm.patchValue({
+      fName: this.user.fName,
+      lName: this.user.lName,
+      email: this.user.email,
+      password: this.user.password,
+      dob: this.user.dob,
+      phone: this.user.phone,
+      address: {
+        streetAddress: this.user.address.streetAddress,
+        city: this.user.address.city,
+        state: this.user.address.state,
+        zipcode: this.user.address.zipcode,
+      },
+      profileImage: this.user.profileImage,
+    })
   }
+
 
   editUser() {
     if (this.userForm.valid) {
-      this.userService.editUser(this.user._id, this.userForm.value)
+      this.userService.editUser(this.userForm.value)
         .subscribe({
           next: (res) => {
             alert("User edited successfully")

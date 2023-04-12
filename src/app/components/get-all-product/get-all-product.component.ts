@@ -29,7 +29,7 @@ export class GetAllProductComponent implements OnInit {
     this.productService.getAllProducts()
       .subscribe(products => this.products = products);
     const uid = this.route.snapshot.paramMap.get('id');
-    this.userService.getOneUser(uid)
+    this.userService.getOneUser()
       .subscribe(user => this.user = user);
   }
 

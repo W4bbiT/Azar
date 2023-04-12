@@ -19,7 +19,7 @@ export class GetOneUserComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.userService.getOneUser(id)
+    this.userService.getOneUser()
     .subscribe(user => {
       this.user = user;
       this.isLoading = false;

@@ -1,38 +1,30 @@
 require('dotenv').config()
-require('./passport')
+
 const express = require('express')
 const router = express.Router()
 const User = require('../models/users')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const passport = require('passport')
-
+var passport = require('passport')
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 router.use(passport.initialize())
 
-//Gettign all
-router.get('/', async (req, res) => {
+//getting the user info
+router.get('/profile', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
-        const allUser = await User.find()
-        res.json(allUser)
+        const user = await User.findById({
+            _id: req.user._id
+        })
+        res.status(200).json(user)
     } catch (err) {
         res.status(500).json({ message: err.message })
     }
 })
 
-//getting one
-/**
- * router.get('/:id', getUser, async (req,res) => {
-    res.send(res.user)
-})
- * 
- */
-
-
 //creating one
-router.post('/', async (req, res) => {
+router.post('/signup', async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(req.body.password, salt)
     const user = new User({
@@ -42,16 +34,25 @@ router.post('/', async (req, res) => {
         password: hashedPassword
     })
 
+    emailExist = await User.findOne({
+        email: req.body.email
+    })
+
     try {
-        const newUser = await user.save()
-        res.status(201).json(newUser)
+        if (!emailExist) {
+            const newUser = await user.save()
+            res.status(201).json(newUser)
+        }
+        else{
+            res.send('Email already exist')
+        }
     } catch (err) {
         res.status(400).json({ message: err.message })
     }
 })
 
 //login
-router.post('/login', async (req, res) => {
+router.post('/signin', async (req, res) => {
     const user = await User.findOne({
         email: req.body.email
     })
@@ -66,7 +67,12 @@ router.post('/login', async (req, res) => {
                 expiresIn: "1d" // 1 day
             })
             console.log("Bearer " + accessToken)
-            res.status(200).json({ accessToken: "Bearer " + accessToken })
+            res.status(200).json({
+                accessToken: "Bearer " + accessToken,
+                username: user.fName,
+                role: user.role,
+                expiresIn : "1d"
+            })
         } else {
             res.send('Not Allowed!')
         }
@@ -77,51 +83,44 @@ router.post('/login', async (req, res) => {
 
 })
 
-
-router.get('/profile', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    return res.status(200).send(req.user)
-
-})
-
-
 //updating one
-router.patch('/:id', getUser, async (req, res) => {
+router.patch('/update-user', passport.authenticate('jwt', { session: false }), async (req, res) => {
     if (req.body.fName != null) {
-        res.user.fName = req.body.fName
+        req.user.fName = req.body.fName
     }
     if (req.body.lName != null) {
-        res.user.lName = req.body.lName
+        req.user.lName = req.body.lName
     }
     if (req.body.dob != null) {
-        res.user.dob = req.body.dob
+        req.user.dob = req.body.dob
     }
     if (req.body.address.streetAddress != null) {
-        res.user.address.streetAddress = req.body.address.streetAddress
+        req.user.address.streetAddress = req.body.address.streetAddress
     }
     if (req.body.address.city != null) {
-        res.user.address.city = req.body.address.city
+        req.user.address.city = req.body.address.city
     }
     if (req.body.address.state != null) {
-        res.user.address.state = req.body.address.state
+        req.user.address.state = req.body.address.state
     }
     if (req.body.address.zipcode != null) {
-        res.user.address.zipcode = req.body.address.zipcode
+        req.user.address.zipcode = req.body.address.zipcode
     }
     if (req.body.phone != null) {
-        res.user.phone = req.body.phone
+        req.user.phone = req.body.phone
     }
     if (req.body.email != null) {
-        res.user.email = req.body.email
+        req.user.email = req.body.email
     }
     if (req.body.password != null) {
-        res.user.password = req.body.password
+        req.user.password = req.body.password
     }
     if (req.body.profileImage != null) {
-        res.user.profileImage = req.body.profileImage
+        req.user.profileImage = req.body.profileImage
     }
 
     try {
-        const updatedUser = await res.user.save()
+        const updatedUser = await req.user.save()
         res.json(updatedUser)
 
     } catch (err) {
@@ -131,19 +130,6 @@ router.patch('/:id', getUser, async (req, res) => {
     }
 
 })
-//deleting one
-router.delete('/:id', getUser, async (req, res) => {
-    try {
-        await res.user.remove()
-        res.json({ message: 'User deleted!' })
-    }
-    catch (err) {
-        res.status(500).json({ message: err.message })
-    }
-})
-
-//Assigning cart items to User
-
 
 //id to the user
 async function getUser(req, res, next) {

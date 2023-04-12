@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,11 +19,18 @@ import { GetAllCartComponent } from './components/get-all-cart/get-all-cart.comp
 import { GetOneCartComponent } from './components/get-one-cart/get-one-cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+
+import { HttpRequestInterceptor } from './helper/auth.interceptor';
+import { AuthService } from './services/auth.service';
+import { UsersService } from './services/users.service';
 import { ProductsService } from './services/products.service';
 
-import { MaterialModule } from 'src/MaterialModule';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomePageComponent } from './components/home-page/home-page.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoggedInAuthGuard } from './guards/logged-in-auth.guard';
+import { AdminAuthGuard } from './guards/admin-auth.guard';
 
 @NgModule({
   declarations: [
@@ -40,7 +47,9 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     GetOneOrderComponent,
     GetAllCartComponent,
     GetOneCartComponent,
-    HomePageComponent  
+    HomePageComponent,
+    LoginComponent,
+    ProfileComponent  
   ],
   imports: [
     BrowserModule,
@@ -48,10 +57,17 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
-    BrowserAnimationsModule
   ],
-  providers: [ProductsService],
+  providers: [AuthService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpRequestInterceptor,
+    multi:true
+  },
+  UsersService,
+  ProductsService,
+  AuthGuard,LoggedInAuthGuard,AdminAuthGuard
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

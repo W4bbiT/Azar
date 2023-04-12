@@ -25,28 +25,28 @@ export class UsersService {
   }
 
   //get one user
-  getOneUser(id: String): Observable<User> {
-    return this.http.get<User>(`/api/user/${id}`)
+  getOneUser(): Observable<User> {
+    return this.http.get<User>(`/api/user/profile`)
   }
 
   //delete user
   deleteUser(id: String): Observable<any> {
-    return this.http.delete(`/api/user/${id}`)
+    return this.http.delete(`/api/admin/du/${id}`)
   }
 
   //create a user
   createUser(data: User): Observable<User> {
     return this.http.post<User>(
-      '/api/user',
+      '/api/user/register',
       data,
       httpOptions
     )
   }
 
   //edit user
-  editUser(id: String, data: User): Observable<User> {
+  editUser(data: User): Observable<User> {
     return this.http.patch<User>(
-      `/api/user/${id}`,
+      `/api/user/update-user`,
       data,
       httpOptions
     )

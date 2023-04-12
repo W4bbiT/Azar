@@ -1,16 +1,41 @@
-<div class="grid grid-cols-2 w-screen h-20 bg-black text-white border border-emerald-500 justify-center items-center">
+<div class="grid grid-cols-2 w-screen h-20 bg-black text-white border border-emerald-400 justify-center items-center">
     <div class="px-4 font-bold text-7xl">
-        Kada
+        Azar&Co
     </div>
     <div class="px-4 justify-self-end font-medium">
-        <div>
-            <a routerLink="/products">
+        <div class="px-2">
+            <a routerLink="/">
                 <button>
                     Products
                 </button>
             </a>
         </div>
-        <div>
+        <div class="px-2" *ngIf="isLoggedIn && currentUser">
+            <a routerLink="/profile">
+                <button>
+                    {{currentUser.fName | uppercase}}
+                </button>
+            </a>
+        </div>
+        <div class="px-2" *ngIf="isLoggedIn && currentUser">
+            <a (click)="logout()">
+                <button>
+                    Logout
+                </button>
+            </a>
+        </div>
+        <div class="px-2" *ngIf="!isLoggedIn">
+            <a routerLink="/signin">
+                <button>
+                    Sign-In
+                </button>
+            </a>
+            <br>
+            <a routerLink="/signup">
+                <button>
+                    Sign-Up
+                </button>
+            </a>
         </div>
     </div>
 </div>

@@ -11,29 +11,35 @@ import { GetAllUserComponent } from './components/get-all-user/get-all-user.comp
 import { GetOneCartComponent } from './components/get-one-cart/get-one-cart.component';
 import { GetOneOrderComponent } from './components/get-one-order/get-one-order.component';
 import { GetOneProductComponent } from './components/get-one-product/get-one-product.component';
-import { GetOneUserComponent } from './components/get-one-user/get-one-user.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AdminAuthGuard } from './guards/admin-auth.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { LoggedInAuthGuard } from './guards/logged-in-auth.guard';
 
 const routes: Routes = [
   //homepage
   { path: '', component: HomePageComponent, pathMatch: 'full' },
   //users
-  { path: 'adduser', component: CreateUserComponent },
-  { path: 'users', component: GetAllUserComponent },
-  { path: 'users/:id', component: GetOneUserComponent },
-  { path: 'users/:id/edit', component: EditUserComponent },
+  { path: 'signin', component: LoginComponent, canActivate:[LoggedInAuthGuard]},
+  { path: 'signup', component: CreateUserComponent, canActivate:[LoggedInAuthGuard]},
+  { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
+  { path: 'edit', component: EditUserComponent, canActivate:[AuthGuard] },
   
-  //products for Admin
-  { path: 'users/:id/products', component: GetAllProductComponent},
-  { path: 'users/:id/products/:pid', component: GetOneProductComponent },
-  { path: 'users/:id/products/:pid/edit', component: EditProductComponent },
-  { path: 'users/:id/addproduct', component: CreateProductComponent },
+  //paths for Admin
+  { path: 'users', component: GetAllUserComponent, canActivate:[AdminAuthGuard] },
+  { path: 'products/:pid', component: GetOneProductComponent, canActivate:[AdminAuthGuard] },
+  { path: 'products', component: GetAllProductComponent, canActivate:[AdminAuthGuard]},
+  { path: 'products/:pid', component: GetOneProductComponent, canActivate:[AdminAuthGuard]},
+  { path: 'products/:pid/edit', component: EditProductComponent, canActivate:[AdminAuthGuard] },
+  { path: 'addproduct', component: CreateProductComponent, canActivate:[AdminAuthGuard] },
   //orders
-  { path: 'users/:id/orders', component: GetAllOrderComponent },
-  { path: 'users/:id/orders/:oid', component: GetOneOrderComponent },
+  { path: 'orders', component: GetAllOrderComponent, canActivate:[AuthGuard] },
+  { path: 'orders/:oid', component: GetOneOrderComponent, canActivate:[AuthGuard] },
   //carts
-  { path: 'users/:id/carts', component: GetAllCartComponent },
-  { path: 'users/:id/carts/:cid', component: GetOneCartComponent },
+  { path: 'carts', component: GetAllCartComponent, canActivate:[AuthGuard] },
+  { path: 'carts/:cid', component: GetOneCartComponent, canActivate:[AuthGuard] },
 ];
 
 @NgModule({

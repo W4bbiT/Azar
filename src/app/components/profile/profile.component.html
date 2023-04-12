@@ -1,0 +1,27 @@
+
+<div class="w-screen h-screen" *ngIf="currentUser">
+        <div class="flex flex-row">
+            <div>
+                First Name: 
+            </div>
+            <div>
+                {{currentUser.fName}}
+            </div>
+        </div>
+        <div class="flex flex-row">
+            <div>
+                Last Name: 
+            </div>
+            <div>
+                {{currentUser.lName}}
+            </div>
+        </div>
+        <div class="flex flex-row">
+            <div>
+                Email: 
+            </div>
+            <div>
+                {{currentUser.email}}
+            </div>
+        </div>
+</div>

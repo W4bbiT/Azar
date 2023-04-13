@@ -34,8 +34,10 @@ export class LoginComponent implements OnInit {
       next:(data) => {
         console.log(data)
         this.tokenStorage.setLocalStorage(data)
-        window.location.reload()
-        this.router.navigateByUrl('/profile')
+        this.router.navigate(['/profile'])
+          .then(()=>{
+            window.location.reload()
+          })
       },
       error:(err)=>{
         alert(err)

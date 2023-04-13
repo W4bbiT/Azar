@@ -111,9 +111,17 @@ router.patch('/update-user', passport.authenticate('jwt', { session: false }), a
     }
     if (req.body.email != null) {
         req.user.email = req.body.email
+        emailExist = await User.findOne({
+            email: req.body.email
+        })
+        if(emailExist){
+            res.send('Email already exist')
+        }
     }
     if (req.body.password != null) {
-        req.user.password = req.body.password
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(req.body.password, salt)
+        req.user.password = hashedPassword
     }
     if (req.body.profileImage != null) {
         req.user.profileImage = req.body.profileImage

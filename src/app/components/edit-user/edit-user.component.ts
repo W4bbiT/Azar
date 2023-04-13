@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/userModel';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -16,8 +16,8 @@ export class EditUserComponent implements OnInit {
     lName: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
-    dob: new FormControl('',),
-    phone: new FormControl('',),
+    dob: new FormControl(''),
+    phone: new FormControl(''),
     address: new FormGroup({
       streetAddress: new FormControl(''),
       city: new FormControl(''),
@@ -26,9 +26,6 @@ export class EditUserComponent implements OnInit {
     }),
     profileImage: new FormControl('',),
   });
-
-  patchedAddress: any
-
 
   constructor(
     private userService: UsersService,
@@ -66,8 +63,7 @@ export class EditUserComponent implements OnInit {
       profileImage: this.user.profileImage,
     })
   }
-
-
+  
   editUser() {
     if (this.userForm.valid) {
       this.userService.editUser(this.userForm.value)

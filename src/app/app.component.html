@@ -3,17 +3,17 @@
         Azar&Co
     </div>
     <div class="px-4 justify-self-end font-medium">
-        <div class="px-2">
-            <a routerLink="/">
-                <button>
-                    Products
-                </button>
-            </a>
-        </div>
         <div class="px-2" *ngIf="isLoggedIn && currentUser">
             <a routerLink="/profile">
                 <button>
                     {{currentUser.fName | uppercase}}
+                </button>
+            </a>
+        </div>
+        <div class="px-2">
+            <a routerLink="/">
+                <button>
+                    Products
                 </button>
             </a>
         </div>

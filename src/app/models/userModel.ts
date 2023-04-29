@@ -2,7 +2,7 @@ export interface User {
     _id: string,
     fName: string,
     lName: string,
-    dob: string,
+    dob: Date,
     email: string,
     password: string,
     profileImage: string,

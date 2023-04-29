@@ -22,21 +22,20 @@ export class AppComponent implements OnInit {
     this.isLoggedIn = this.tokenStorageService.isLoggedIn()
     if (this.isLoggedIn) {
       this.userService.getOneUser()
-        .subscribe(
-          (response) => {
-            if (response) {
-              this.currentUser = response;
+        .subscribe({
+          next: (res) => {
+            if (res) {
+              this.currentUser = res;
             }
           },
-
-          (error) => {
-            if (error.status === 401) {
+          error:(err) => {
+            if (err.status === 401) {
               this.msg = 'You are not authorized to visit this route.  No data is displayed.';
             }
 
-            console.log(error);
+            console.log(err);
           }
-        );
+        });
     }
   }
   logout(): void {

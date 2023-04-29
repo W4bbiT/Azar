@@ -1,8 +1,8 @@
 <div class="w-screen h-screen bg-black flex justify-center items-center">
 
-    <div class="w-fit h-fit rounded-xl bg-gray-200 m-5">
+    <div class="w-fit h-fit rounded-xl bg-gray-200 m-5" *ngIf="user">
         <h2 class="m-5 p-3 w-full bg-black text-white">Edit User</h2>
-        <form *ngIf="user" (ngSubmit)="editUser()" [formGroup]="userForm">
+        <form (ngSubmit)="editUser()" [formGroup]="userForm">
             <div class="flex flex-row bg-black rounded-full m-8 w-fit">
                 <div class="w-48 p-2">
                     <label class="m-1 p-1 text-white rounded-l-full">First Name</label>
@@ -24,30 +24,11 @@
             </div>
             <div class="flex flex-row bg-black rounded-full m-8 w-fit">
                 <div class="w-48 p-2">
-                    <label class="m-1 p-1 text-white rounded-l-full">Email</label>
-                </div>
-                <div class="w-96 mr-2">
-                    <input class="w-full m-1 p-1 rounded-r-full" type="email" formControlName="email"
-                        placeholder="{{user.email}}" value="{{user.email}}">
-                </div>
-            </div>
-            <div class="flex flex-row bg-black rounded-full m-8 w-fit">
-                <div class="w-48 p-2">
                     <label class="m-1 p-1 text-white rounded-l-full">Password</label>
                 </div>
                 <div class="w-96 mr-2">
                     <input class="w-full m-1 p-1 rounded-r-full" type="password" formControlName="password"
                         placeholder="{{user.password}}" value="{{user.password}}">
-                </div>
-            </div>
-
-            <div class="flex flex-row bg-black rounded-full m-8 w-fit">
-                <div class="w-48 p-2">
-                    <label class="m-1 p-1 text-white rounded-l-full">Date of birth</label>
-                </div>
-                <div class="w-96 mr-2">
-                    <input class="w-full m-1 p-1 rounded-r-full" type="date" formControlName="dob"
-                        placeholder="{{user.dob}}" value="{{user.dob}}">
                 </div>
             </div>
             <div class="flex flex-row bg-black rounded-full m-8 w-fit">
@@ -109,14 +90,10 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="grid">
                 <button class="justify-self-stretch m-8 border hover:bg-black bg-gray-500 text-white rounded-full p-2"
                     type="submit">Edit User</button>
-
             </div>
-
         </form>
     </div>
 </div>

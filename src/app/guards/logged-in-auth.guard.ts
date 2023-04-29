@@ -10,7 +10,7 @@ export class LoggedInAuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.tokenStorage.isLoggedIn()) {
-      this.router.navigate(['/signin'])
+      this.router.navigate(['/profile'])
       return false
     } else {
       return true

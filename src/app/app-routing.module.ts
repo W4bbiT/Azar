@@ -26,20 +26,20 @@ const routes: Routes = [
   { path: 'signup', component: CreateUserComponent, canActivate:[LoggedInAuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   { path: 'edit', component: EditUserComponent, canActivate:[AuthGuard] },
+  { path: 'products', component: GetAllProductComponent, canActivate:[AuthGuard]},
+  { path: 'products/:pid', component: GetOneProductComponent, canActivate:[AuthGuard]},
   
   //paths for Admin
   { path: 'users', component: GetAllUserComponent, canActivate:[AdminAuthGuard] },
-  { path: 'products/:pid', component: GetOneProductComponent, canActivate:[AdminAuthGuard] },
-  { path: 'products', component: GetAllProductComponent, canActivate:[AdminAuthGuard]},
-  { path: 'products/:pid', component: GetOneProductComponent, canActivate:[AdminAuthGuard]},
   { path: 'products/:pid/edit', component: EditProductComponent, canActivate:[AdminAuthGuard] },
   { path: 'addproduct', component: CreateProductComponent, canActivate:[AdminAuthGuard] },
+  { path: 'all-carts', component: GetAllCartComponent, canActivate:[AdminAuthGuard] },
+  { path: 'all-orders', component: GetAllOrderComponent, canActivate:[AdminAuthGuard] },
+
   //orders
-  { path: 'orders', component: GetAllOrderComponent, canActivate:[AuthGuard] },
-  { path: 'orders/:oid', component: GetOneOrderComponent, canActivate:[AuthGuard] },
+  { path: 'order', component: GetOneOrderComponent, canActivate:[AuthGuard] },
   //carts
-  { path: 'carts', component: GetAllCartComponent, canActivate:[AuthGuard] },
-  { path: 'carts/:cid', component: GetOneCartComponent, canActivate:[AuthGuard] },
+  { path: 'cart', component: GetOneCartComponent, canActivate:[AuthGuard] },
 ];
 
 @NgModule({

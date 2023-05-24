@@ -1,5 +1,5 @@
 <h2>Product Listing</h2>
-<div class="bg-black w-screen h-full" *ngIf="products && user">
+<div class="bg-neutral-600 w-screen h-full" *ngIf="products">
     <table>
         <thead>
             <tr class="">     
@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let product of products">
-                <a routerLink="/products/{{product._id}}">
+                <a routerLink="/product/{{product._id}}">
                    <td>{{product._id}}</td> 
                 </a>
                 <td>{{product.ProductName}}</td>
@@ -34,9 +34,9 @@
                 <td>{{product.TopProduct}}</td>
                 <td>{{product.Ingredient}}</td>
                 <td> 
-                    <button routerLink="/users/{{user._id}}/products/{{product._id}}/edit" class="btnBlue" >Edit</button> 
+                    <button routerLink="/user/product/{{product._id}}/edit" class="btnBlue" >Edit</button> 
                     <button class="btnRed" (click)="deleteProduct(product._id)">Delete</button>
-                    <button class="btnGreen" (click)="addToCart(user._id, product._id)">Add to Cart</button>
+                    <button class="btnGreen" (click)="addToCart(product._id)">Add to Cart</button>
                 </td>
             </tr>
         </tbody>

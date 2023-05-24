@@ -14,23 +14,25 @@ import { Cart } from 'src/app/models/cartModel';
 })
 export class GetAllProductComponent implements OnInit {
   products: Product[];
-  user: User;
   cart: Cart;
-
+  
   constructor(
-    private route: ActivatedRoute,
     private productService: ProductsService,
     private userService: UsersService,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
-
     this.productService.getAllProducts()
-      .subscribe(products => this.products = products);
-    const uid = this.route.snapshot.paramMap.get('id');
-    this.userService.getOneUser()
-      .subscribe(user => this.user = user);
+      .subscribe(
+        {
+          next:(products)=>{
+            this.products = products
+          },
+          error:()=>{
+            alert("No products found!")
+          }
+        }
+      );
   }
 
   deleteProduct(productId: String){
@@ -47,8 +49,8 @@ export class GetAllProductComponent implements OnInit {
     )
   }
 
-  addToCart(userId: String, productId: String){
-    this.userService.addProductToMyCart(userId, productId, this.cart)
+  addToCart(productId: String){
+    this.userService.addProductToMyCart(productId, this.cart)
     .subscribe(
       {
         next: (res)=>{

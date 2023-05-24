@@ -13,26 +13,21 @@ const httpOptions= {
   providedIn: 'root'
 })
 export class ProductsService {
-
   constructor(
     private http: HttpClient,
   ) { }
-
   //get all products
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('/api/product')
+    return this.http.get<Product[]>('/api/product/')
   }
-
   //get a product by id
   getOneProduct(id: String): Observable<Product>{
     return this.http.get<Product>(`/api/product/${id}`)
   }
-
   //delete product
   deleteProduct(id: String): Observable<any>{
     return this.http.delete(`/api/product/${id}`)
   }
-
   //create a product listing
   createProduct(data: Product): Observable<Product>{
     return this.http.post<Product>(
@@ -41,7 +36,6 @@ export class ProductsService {
       httpOptions,
     )
   }
-
   //edit product
   editProduct(id: String, data: Product):Observable<Product>{
     return this.http.patch<Product>(
@@ -49,7 +43,5 @@ export class ProductsService {
       data,
       httpOptions
     )
-  }
-
-  
+  } 
 }

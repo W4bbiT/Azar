@@ -1,31 +1,22 @@
-<div class="w-screen h-screen bg-black flex justify-center items-center">
-    <div class="w-fit h-fit rounded-xl bg-gray-100">
+<div class="text-lg font-sans w-fit h-fit m-3 rounded-3xl justify-center items-center">
+    <div class="w-fit h-fit rounded-3xl bg-transparent">
         <form [formGroup]="loginForm">
-            <h2 class="w-full h-fit py-2 px-2 text-gray-100 bg-black">Login
-            </h2>
-            <div class="block bg-black rounded-full m-8 w-fit">
-                <label class="py-1 px-1 text-white m-1 rounded-l-full">Email :</label>
-                <input class="w-80 m-1 py-1 px-1 rounded-r-full" type="text" formControlName="email"
+            <div class="flex">
+                <label class="w-36 rounded-l-full p-2 text-white m-1 border text-center justify-end">Email</label>
+                <input class="w-64 rounded-r-full m-1 p-2 text-gray-200 bg-transparent border" type="text" formControlName="email"
                     placeholder="Enter email">
             </div>
 
-            <div class="block bg-black rounded-full m-8 w-fit">
-                <label class="py-1 px-1 text-white m-1 rounded-l-full">Password :</label>
-                <input class="w-80 m-1 py-1 px-1 rounded-r-full" type="text" formControlName="password"
+            <div class="flex">
+                <label class="w-36 rounded-l-full p-2 text-white m-1 border text-center justify-end">Password</label>
+                <input class="w-64 rounded-r-full m-1 p-2 text-gray-200 bg-transparent border" type="text" formControlName="password"
                     placeholder="Enter password">
             </div>
 
-            <div class="block m-8">
-                <button class="w-full h-12 text-gray-600 border border-gray-200 hover:text-white hover:bg-black
-                focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 
-                hover:border-transparent text-white py-1 px-2 
-                rounded-full" (click)="submitForm()">Login</button>
+            <div class="bg-transparent text-center p-2 border rounded-full">
+                <button class="hover:font-semibold" (click)="submitForm()">Sign-In</button>
             </div>
-
+            
         </form>
     </div>
-
-
-
-
 </div>

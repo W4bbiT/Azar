@@ -1,41 +1,11 @@
-<div class="grid grid-cols-2 w-screen h-20 bg-black text-white border border-emerald-400 justify-center items-center">
-    <div class="px-4 font-bold text-7xl">
-        Azar&Co
-    </div>
-    <div class="px-4 justify-self-end font-medium">
-        <div class="px-2" *ngIf="isLoggedIn && currentUser">
-            <a routerLink="/profile">
-                <button>
-                    {{currentUser.fName | uppercase}}
-                </button>
-            </a>
+<div class="bg-gray-800 p-2">
+    <div class="bg-gray-200 py-2 m-4 flex justify-between px-9 items-center rounded-full">  
+        <div class="flex justify-between items-center gap-5">
+            <div class="text-5xl font-bold font-sans">Azar</div>
+            <app-login-menu></app-login-menu>
         </div>
-        <div class="px-2">
-            <a routerLink="/">
-                <button>
-                    Products
-                </button>
-            </a>
-        </div>
-        <div class="px-2" *ngIf="isLoggedIn && currentUser">
-            <a (click)="logout()">
-                <button>
-                    Logout
-                </button>
-            </a>
-        </div>
-        <div class="px-2" *ngIf="!isLoggedIn">
-            <a routerLink="/signin">
-                <button>
-                    Sign-In
-                </button>
-            </a>
-            <br>
-            <a routerLink="/signup">
-                <button>
-                    Sign-Up
-                </button>
-            </a>
+        <div class="pr-8">
+            <app-profile-menu></app-profile-menu>
         </div>
     </div>
 </div>

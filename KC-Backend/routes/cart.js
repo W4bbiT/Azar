@@ -11,7 +11,7 @@ router.use(express.json());
 router.use(passport.initialize())
 
 //Gettign all
-router.get('/:id/cart', passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.get('/cart', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
         const cart = await Cart.findOne({
             'userId': req.user._id
@@ -23,8 +23,7 @@ router.get('/:id/cart', passport.authenticate('jwt', { session: false }), async 
 })
 
 //adding products to user cart
-router.post('/:id/addtocart/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
-
+router.post('/addtocart/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
     const userId = req.user._id;
     quantity = 1;
 
@@ -82,7 +81,7 @@ router.post('/:id/addtocart/:pId', passport.authenticate('jwt', { session: false
 
 })
 //updating one
-router.patch('/:id/editcart/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
+router.patch('/editcart/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
     const userId = req.user._id;
     try {
         const cart = await Cart.findOne({ userId });
@@ -119,7 +118,7 @@ router.patch('/:id/editcart/:pId', passport.authenticate('jwt', { session: false
 
 })
 //deleting one
-router.delete('/:id/delete-item/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
+router.delete('/delete-item/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
     const userId = req.user._id;
     try {
         const productId = res.item._id;

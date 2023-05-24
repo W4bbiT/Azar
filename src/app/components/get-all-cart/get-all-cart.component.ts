@@ -23,7 +23,7 @@ export class GetAllCartComponent implements OnInit {
     .subscribe(user => {
       this.user = user;
     });
-    this.userService.getCartForUser(id)
+    this.userService.getCartForUser()
     .subscribe(data => {
       this.cart = data;
       console.log(this.cart)

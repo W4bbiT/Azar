@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { User } from './models/userModel';
 import { TokenStorageService } from './services/token-storage.service';
 import { UsersService } from './services/users.service';
@@ -10,37 +10,9 @@ import { UsersService } from './services/users.service';
 })
 export class AppComponent implements OnInit {
   title = 'Azar&Co';
-  isLoggedIn = false;
-  isLoggedOut = false;
-  email: string
-  currentUser: User
-  msg: String
-  constructor(private tokenStorageService: TokenStorageService,
-    private userService: UsersService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.tokenStorageService.isLoggedIn()
-    if (this.isLoggedIn) {
-      this.userService.getOneUser()
-        .subscribe({
-          next: (res) => {
-            if (res) {
-              this.currentUser = res;
-            }
-          },
-          error:(err) => {
-            if (err.status === 401) {
-              this.msg = 'You are not authorized to visit this route.  No data is displayed.';
-            }
-
-            console.log(err);
-          }
-        });
-    }
-  }
-  logout(): void {
-    this.tokenStorageService.logout()
-    window.location.reload()
   }
 
 }

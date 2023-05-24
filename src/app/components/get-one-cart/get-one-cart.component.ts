@@ -12,17 +12,20 @@ export class GetOneCartComponent implements OnInit {
   cart: Cart;
 
   constructor(
-    private route: ActivatedRoute,
     private userService: UsersService
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.userService.getCartForUser(id)
-    .subscribe(data => {
-      this.cart = data;
-      console.log(this.cart)
-    });
+    this.userService.getCartForUser()
+    .subscribe(
+      {
+        next:(cart)=>{
+          this.cart = cart
+        },
+        error:()=>{
+          alert("No cart found!")
+        }
+      }
+    );
   }
-
 }

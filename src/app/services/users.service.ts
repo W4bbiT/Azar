@@ -53,14 +53,14 @@ export class UsersService {
   }
 
   //getting cart for User
-  getCartForUser(id: String): Observable<any> {
-    return this.http.get<any>(`/api/user/${id}/cart`)
+  getCartForUser(): Observable<any> {
+    return this.http.get<Cart>(`/api/user/cart`)
   }
 
   //adding a product to cart
-  addProductToMyCart(id: String, pid: String, data: Cart): Observable<Cart> {
+  addProductToMyCart(pid: String, data: Cart): Observable<Cart> {
     return this.http.post<Cart>(
-      `/api/user/${id}/addtocart/${pid}`,
+      `/api/user/addtocart/${pid}`,
       data,
       httpOptions
     )

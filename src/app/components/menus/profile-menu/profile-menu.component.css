@@ -1,0 +1,27 @@
+.dropDown {
+    animation-name: my-animation;
+    animation-duration: 300ms;
+    animation-timing-function: ease;
+}
+.triangle-up {
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid black;
+    transform: translate(64px, 10px);
+  }
+
+
+@keyframes my-animation {
+    from {
+        transform: scaleY(0);
+    }
+    80%{
+        transform: scaleY(1.1);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}

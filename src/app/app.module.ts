@@ -31,6 +31,9 @@ import { ProductsService } from './services/products.service';
 import { AuthGuard } from './guards/auth.guard';
 import { LoggedInAuthGuard } from './guards/logged-in-auth.guard';
 import { AdminAuthGuard } from './guards/admin-auth.guard';
+import { ProfileMenuComponent } from './components/menus/profile-menu/profile-menu.component';
+import { LoginMenuComponent } from './components/menus/login-menu/login-menu.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { AdminAuthGuard } from './guards/admin-auth.guard';
     GetOneCartComponent,
     HomePageComponent,
     LoginComponent,
-    ProfileComponent  
+    ProfileComponent,
+    ProfileMenuComponent,
+    LoginMenuComponent,
+    ClickOutsideDirective  
   ],
   imports: [
     BrowserModule,

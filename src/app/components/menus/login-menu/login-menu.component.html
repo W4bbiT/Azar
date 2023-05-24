@@ -1,0 +1,21 @@
+<div class="px-5 text-black bg-transparent">
+    <div class="text-lg flex gap-2" *ngIf="!isLoggedIn" clickOutside (clickOutside)="clickedOutside()">
+
+        <div class="cursor-pointer hover:font-semibold transition-all" (click)="toggleMenu()">
+                Sign-In
+        </div>
+
+        <div class="absolute origin-top-left bg-black bg-opacity-80 rounded-3xl text-white mt-10 -ml-48 dropDownSignIn z-50"
+            *ngIf="isMenuOpened">
+            <div class="absolute triangle-up -top-4 right-48 opacity-80"></div>
+            <app-login></app-login>
+        </div>
+
+        <div>
+            <a routerLink="/signup" class="hover:font-semibold transition-all">
+                    Sign-Up          
+            </a>
+        </div>
+
+    </div>
+</div>

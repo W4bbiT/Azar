@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { CreateProductComponent } from './components/create-product/create-product.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
@@ -17,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { LoggedInAuthGuard } from './guards/logged-in-auth.guard';
+import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   //homepage

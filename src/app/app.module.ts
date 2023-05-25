@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -27,14 +26,11 @@ import { HttpRequestInterceptor } from './helper/auth.interceptor';
 import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
 import { ProductsService } from './services/products.service';
-
-import { AuthGuard } from './guards/auth.guard';
-import { LoggedInAuthGuard } from './guards/logged-in-auth.guard';
-import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { ProfileMenuComponent } from './components/menus/profile-menu/profile-menu.component';
 import { LoginMenuComponent } from './components/menus/login-menu/login-menu.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { CartMenuComponent } from './components/menus/cart-menu/cart-menu.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -73,8 +69,7 @@ import { CartMenuComponent } from './components/menus/cart-menu/cart-menu.compon
     multi:true
   },
   UsersService,
-  ProductsService,
-  AuthGuard,LoggedInAuthGuard,AdminAuthGuard
+  ProductsService
 ],
   bootstrap: [AppComponent]
 })

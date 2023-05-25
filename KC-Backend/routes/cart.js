@@ -148,21 +148,6 @@ router.delete('/delete-item/:pId', passport.authenticate('jwt', { session: false
     }
 })
 
-async function getCart(req, res, next) {
-    let cart
-    try {
-        cart = await Cart.findById(req.params.cartId)
-        if (cart == null) {
-            return res.status(404).json({ message: 'Couldn\'t find cart item' })
-        }
-    } catch (err) {
-        return res.status(500).json({ message: err.message })
-    }
-    res.cart = cart
-
-    next()
-}
-
 async function getItem(req, res, next) {
     let item
     try {

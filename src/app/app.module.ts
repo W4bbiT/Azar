@@ -34,6 +34,7 @@ import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { ProfileMenuComponent } from './components/menus/profile-menu/profile-menu.component';
 import { LoginMenuComponent } from './components/menus/login-menu/login-menu.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { CartMenuComponent } from './components/menus/cart-menu/cart-menu.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     ProfileComponent,
     ProfileMenuComponent,
     LoginMenuComponent,
-    ClickOutsideDirective  
+    ClickOutsideDirective,
+    CartMenuComponent  
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
-.dropDown {
-    animation-name: my-animation;
+.dropDownProfile {
+    animation-name: profile-animation;
     animation-duration: 300ms;
     animation-timing-function: ease;
 }
@@ -7,14 +7,14 @@
     width: 0;
     height: 0;
     border-radius: 50%;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 20px solid black;
-    transform: translate(64px, 10px);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid black;
+    transform: translate(26px, 10px);
   }
 
 
-@keyframes my-animation {
+@keyframes profile-animation {
     from {
         transform: scaleY(0);
     }

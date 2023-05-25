@@ -33,12 +33,12 @@ const routes: Routes = [
   { path: 'users', component: GetAllUserComponent, canActivate:[AdminAuthGuard] },
   { path: 'products/:pid/edit', component: EditProductComponent, canActivate:[AdminAuthGuard] },
   { path: 'addproduct', component: CreateProductComponent, canActivate:[AdminAuthGuard] },
-  { path: 'all-carts', component: GetAllCartComponent, canActivate:[AdminAuthGuard] },
   { path: 'all-orders', component: GetAllOrderComponent, canActivate:[AdminAuthGuard] },
 
   //orders
   { path: 'order', component: GetOneOrderComponent, canActivate:[AuthGuard] },
   //carts
+  { path: 'all-carts', component: GetAllCartComponent, canActivate:[AuthGuard] },
   { path: 'cart', component: GetOneCartComponent, canActivate:[AuthGuard] },
 ];
 

@@ -8,27 +8,31 @@ export class TokenStorageService {
 
   constructor() { }
 
-  public setLocalStorage(responseObj:any) {
-    const expiresIn = moment().add(responseObj.expiresIn)
-  
+  public setLocalStorage(responseObj: any) {
+    const expiresAt = moment().add(responseObj.expiresIn, 'second')
+
     localStorage.setItem('accessToken', responseObj.accessToken)
-    localStorage.setItem('expiresIn', JSON.stringify(expiresIn.valueOf()))
+    localStorage.setItem('expiresIn', JSON.stringify(expiresAt.valueOf()))
     localStorage.setItem('role', responseObj.role)
   }
 
   public logout(): void {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('expiresIn')
-  }
-  
-  public isLoggedIn(): boolean {
-    let authToken = localStorage.getItem('accessToken');
-    return authToken !== null ? true : false;
+    localStorage.removeItem('role')
   }
 
-  public isAdmin(): boolean{
-    if(this.isLoggedIn){
-      if(localStorage.getItem('role') == 'Star'){
+  public isLoggedIn(): boolean {
+    let authToken = localStorage.getItem('accessToken');
+    if (authToken) {
+      return true
+    }
+    return false
+  }
+
+  public isAdmin(): boolean {
+    if (this.isLoggedIn) {
+      if (localStorage.getItem('role') == 'Star') {
         return true
       }
     }

@@ -66,16 +66,16 @@ export class UsersService {
     )
   }
 
-  updateCart(id: String, pid: String, data: any): Observable<any> {
+  updateCart(pid: String, data: any): Observable<any> {
     return this.http.patch<any>(
-      `/api/user/${id}/editcart/${pid}`,
+      `/api/user/editcart/${pid}`,
       data,
       httpOptions
     )
   }
 
-  pullProductFromCart(id: String, pid: String): Observable<any>{
-    return this.http.delete(`/api/user/${id}/delete-item/${pid}`)
+  pullProductFromCart(pid: String): Observable<any>{
+    return this.http.delete(`/api/user/delete-item/${pid}`)
   }
 
 

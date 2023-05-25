@@ -4,8 +4,8 @@ export interface Cart{
     products: [{
         productId: String,
         name: String,
-        quantity: Number,
-        price: Number
+        quantity: number,
+        price: number
     }]
-    total: Number
+    total: number
 }

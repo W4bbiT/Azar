@@ -1,12 +1,15 @@
 <div class="bg-gray-800 p-2">
-    <div class="bg-gray-200 py-2 m-4 flex justify-between px-9 items-center rounded-full">  
-        <div class="flex justify-between items-center gap-5">
-            <div class="text-5xl font-bold font-sans">Azar</div>
-            <app-login-menu></app-login-menu>
-        </div>
-        <div class="pr-8">
-            <app-profile-menu></app-profile-menu>
-        </div>
+  <div
+    class="bg-gray-200 py-2 m-4 flex justify-between px-9 items-center rounded-full"
+  >
+    <div class="flex justify-between items-center gap-5">
+      <div class="text-5xl font-bold font-sans">Azar</div>
+      <app-login-menu></app-login-menu>
     </div>
+    <div class="flex items-center gap-5" *ngIf="cart">
+      <app-profile-menu></app-profile-menu>
+      <app-cart-menu quantity="{{totalQuantity}}"></app-cart-menu>
+    </div>
+  </div>
 </div>
 <router-outlet></router-outlet>

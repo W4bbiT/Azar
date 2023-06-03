@@ -1,7 +1,10 @@
 .dropDownProfile {
-    animation-name: profile-animation;
-    animation-duration: 300ms;
-    animation-timing-function: ease;
+    -webkit-animation-name: profile-animation;
+            animation-name: profile-animation;
+    -webkit-animation-duration: 300ms;
+            animation-duration: 300ms;
+    -webkit-animation-timing-function: ease;
+            animation-timing-function: ease;
 }
 .triangle-up {
     width: 0;
@@ -9,9 +12,22 @@
     border-radius: 50%;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-bottom: 15px solid black;
-    transform: translate(26px, 10px);
+    border-bottom: 15px solid white;
+    transform: translate(-10px, -32px);
   }
+
+
+@-webkit-keyframes profile-animation {
+    from {
+        transform: scaleY(0);
+    }
+    80%{
+        transform: scaleY(1.1);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
 
 
 @keyframes profile-animation {

@@ -14,7 +14,9 @@ router.get('/orders', passport.authenticate('jwt', { session: false }), async (r
     try {
         const orders = await Order.findById({
             'userId': req.user._id
-        }).exec()
+        })
+        .populate('cart')
+        .exec()
         res.json(orders)
     } catch (err) {
         res.status(500).json({ message: err.message })

@@ -2,12 +2,12 @@ export interface Product{
     _id : String,
     ProductName: String,
     Category: String,
-    Price: Number,
-    Discount: Number,
+    Price: number,
+    Discount: number,
     Description: String,
     ProductImage: String,
     CreatedOn: Date,
-    inStock: Number,
+    inStock: number,
     TopProduct: Boolean,
     Ingredient: String
 }

@@ -8,33 +8,46 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 router.use(passport.initialize())
 
+const { validationResult } = require('express-validator');
+
+
 //Gettign all
-router.get('/', async (req,res) => {  
-    try{
+router.get('/', async (req, res) => {
+    try {
         const allProduct = await Product.find()
         res.json(allProduct)
-    }catch (err){
+    } catch (err) {
         res.status(500).json({ message: err.message })
     }
 })
 //getting one
-router.get('/:id', getProduct, (req,res) => {
-    res.send(res.product)
+router.get('/:pId', getProduct, (req, res) => {
+    try {
+        res.json(res.product)
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
 })
 
-async function getProduct(req,res,next){
-    let product
-    try{
-        product = await Product.findById(req.params.id)
-        if(product == null){
-            return res.status(404).json({message:'Couldn\'t find product'})
-        }
-    }catch(err){
-        return res.status(500).json({ message: err.message })
+async function getProduct(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        // If there are validation errors, return a 400 Bad Request response
+        return res.status(400).json({ errors: errors.array() });
     }
-    res.product = product
 
-    next()
+    try {
+        const product = await Product.findById(req.params.pId);
+        if (!product) {
+            // If the product is not found, throw an error
+            throw new Error('Product not found');
+        }
+        res.product = product;
+        next();
+    } catch (err) {
+        // Handle the error and pass it to the error-handling middleware
+        next(err);
+    }
 }
 
 module.exports = router

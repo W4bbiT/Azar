@@ -15,10 +15,28 @@ app.use(cors());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, HEAD, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+
+// const path = require('path');
+
+// // Serve static files from the 'dist' directory
+// app.use(express.static(path.join(__dirname, 'dist')));
+
+// // Serve JavaScript files with the appropriate Content-Type
+// app.use('/api/product', express.static(path.join(__dirname, 'routes'), { setHeaders: setContentType }));
+// app.use('/api/product', express.static(path.join(__dirname, 'models'), { setHeaders: setContentType }));
+
+// function setContentType(res, filePath) {
+//   if (path.extname(filePath) === '.js') {
+//     res.setHeader('Content-Type', 'application/javascript;charset=utf-8');
+//   }
+// }
+
+
 
 const AdminRoute = require('./routes/admin')
 app.use('/api/admin', AdminRoute)

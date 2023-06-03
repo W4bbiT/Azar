@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Cart } from 'src/app/models/cartModel';
 import { User } from 'src/app/models/userModel';
 import { UsersService } from 'src/app/services/users.service';
@@ -12,18 +11,18 @@ import { UsersService } from 'src/app/services/users.service';
 export class GetAllCartComponent implements OnInit {
   cart: Cart;
   user: User;
+  id: String;
 
   constructor(
-    private userService: UsersService
-  ) {}
+    private userService: UsersService  ) {}
 
   ngOnInit(): void {
     this.userService.getCartForUser().subscribe((data) => {
+      console.log('Received data:', data);
       this.cart = data;
-      console.log(this.cart);
-    });
+      console.log('Cart object:', this.cart);
+    });    
   }
-
   updateQuantity(pId: String) {
     this.userService.updateCart(pId, this.cart).subscribe({
       next: (res) => {
@@ -31,7 +30,7 @@ export class GetAllCartComponent implements OnInit {
         this.ngOnInit();
       },
       error: () => {
-        alert('Check whats missing!');
+        alert('Sorry there was an error updating the cart!');
       },
     });
     console.log(this.cart);

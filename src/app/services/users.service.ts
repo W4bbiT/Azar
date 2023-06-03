@@ -53,7 +53,7 @@ export class UsersService {
   }
 
   //getting cart for User
-  getCartForUser(): Observable<any> {
+  getCartForUser(): Observable<Cart> {
     return this.http.get<Cart>(`/api/user/cart`)
   }
 
@@ -66,8 +66,8 @@ export class UsersService {
     )
   }
 
-  updateCart(pid: String, data: any): Observable<any> {
-    return this.http.patch<any>(
+  updateCart(pid: String, data: Cart): Observable<Cart> {
+    return this.http.patch<Cart>(
       `/api/user/editcart/${pid}`,
       data,
       httpOptions

@@ -13,12 +13,14 @@ import { Cart } from 'src/app/models/cartModel';
   styleUrls: ['./get-all-product.component.css']
 })
 export class GetAllProductComponent implements OnInit {
+
   products: Product[];
   cart: Cart;
   
   constructor(
     private productService: ProductsService,
     private userService: UsersService,
+    private route: Router,
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +35,10 @@ export class GetAllProductComponent implements OnInit {
           }
         }
       );
+  }
+
+  goToProduct(productId: String) {
+    this.route.navigateByUrl("/products/" + productId)
   }
 
   deleteProduct(productId: String){

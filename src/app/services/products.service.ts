@@ -21,25 +21,26 @@ export class ProductsService {
     return this.http.get<Product[]>('/api/product/')
   }
   //get a product by id
-  getOneProduct(id: String): Observable<Product>{
-    return this.http.get<Product>(`/api/product/${id}`)
+  getOneProduct(pId: String): Observable<Product>{
+    return this.http.get<Product>(`/api/product/${pId}`,
+    httpOptions)
   }
   //delete product
-  deleteProduct(id: String): Observable<any>{
-    return this.http.delete(`/api/product/${id}`)
+  deleteProduct(pId: String): Observable<any>{
+    return this.http.delete(`/api/admin/dp/${pId}`)
   }
   //create a product listing
   createProduct(data: Product): Observable<Product>{
     return this.http.post<Product>(
-      '/api/product',
+      '/api/admin/ap',
       data,
       httpOptions,
     )
   }
   //edit product
-  editProduct(id: String, data: Product):Observable<Product>{
+  editProduct(pId: String, data: Product):Observable<Product>{
     return this.http.patch<Product>(
-      `/api/product/${id}`,
+      `/api/admin/up/${pId}`,
       data,
       httpOptions
     )

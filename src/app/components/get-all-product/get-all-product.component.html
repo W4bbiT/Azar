@@ -1,8 +1,8 @@
 <h2>Product Listing</h2>
-<div class="bg-neutral-600 w-screen h-full" *ngIf="products">
+<div class="bg-black text-white" *ngIf="products">
     <table>
         <thead>
-            <tr class="">     
+            <tr class="">
                 <th>ID</th>
                 <th>Name</th>
                 <th>Category</th>
@@ -20,8 +20,8 @@
         </thead>
         <tbody>
             <tr *ngFor="let product of products">
-                <a routerLink="/product/{{product._id}}">
-                   <td>{{product._id}}</td> 
+                <a routerLink="/products/{{product._id}}">
+                    <td>{{product._id}}</td>
                 </a>
                 <td>{{product.ProductName}}</td>
                 <td>{{product.Category}}</td>
@@ -33,8 +33,8 @@
                 <td>{{product.inStock}}</td>
                 <td>{{product.TopProduct}}</td>
                 <td>{{product.Ingredient}}</td>
-                <td> 
-                    <button routerLink="/user/product/{{product._id}}/edit" class="btnBlue" >Edit</button> 
+                <td>
+                    <button routerLink="/products/{{product._id}}/edit" class="btnBlue">Edit</button>
                     <button class="btnRed" (click)="deleteProduct(product._id)">Delete</button>
                     <button class="btnGreen" (click)="addToCart(product._id)">Add to Cart</button>
                 </td>

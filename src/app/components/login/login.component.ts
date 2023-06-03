@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           })
       },
       error:(err)=>{
-        alert(err)
+        alert("Sign In with correct credentials")
       }
     })
   }

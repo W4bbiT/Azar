@@ -1,19 +1,19 @@
-<div class="text-lg font-sans w-fit h-fit m-3 rounded-3xl justify-center items-center">
+<div class="w-fit h-fit m-3 rounded-3xl">
     <div class="w-fit h-fit rounded-3xl bg-transparent">
         <form [formGroup]="loginForm">
-            <div class="flex">
-                <label class="w-36 rounded-l-full p-2 text-white m-1 border text-center justify-end">Email</label>
-                <input class="w-64 rounded-r-full m-1 p-2 text-gray-200 bg-transparent border" type="text" formControlName="email"
+            <div class="md:flex">
+                <label class="block p-2 text-white m-1">Email</label>
+                <input class="block m-1 p-2 text-white bg-transparent border-s-2" type="text" formControlName="email"
                     placeholder="Enter email">
             </div>
 
-            <div class="flex">
-                <label class="w-36 rounded-l-full p-2 text-white m-1 border text-center justify-end">Password</label>
-                <input class="w-64 rounded-r-full m-1 p-2 text-gray-200 bg-transparent border" type="text" formControlName="password"
+            <div class="md:flex">
+                <label class="block p-2 text-white m-1">Password</label>
+                <input class="block m-1 p-2 text-white bg-transparent border-s-2" type="text" formControlName="password"
                     placeholder="Enter password">
             </div>
 
-            <div class="bg-transparent text-center p-2 border rounded-full">
+            <div class="bg-transparent p-2 text-right">
                 <button class="hover:font-semibold" (click)="submitForm()">Sign-In</button>
             </div>
             

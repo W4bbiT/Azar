@@ -1,7 +1,9 @@
+import { Cart } from "./cartModel";
+
 export interface Order{
     _id : String,
     userId: String,
-    cartId: String,
+    cart: Cart,
     orderDate: Date,
     verified: Boolean,
     trackingInfo: String

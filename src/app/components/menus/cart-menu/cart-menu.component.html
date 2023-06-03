@@ -1,10 +1,10 @@
 <div clickOutside (clickOutside)="clickedOutside()">
   <div
-    class="absolute text-red-500 text-center -translate-y-2 translate-x-3 rounded-full"
+    class="absolute -translate-y-3 translate-x-2 w-4 h-4 bg-red-600 rounded-full text-center text-sm"
     *ngIf="qty > 0"
     (click)="toggleMenu()"
   >
-    <p class="animate-bounce font-bold text-xl">{{ qty }}</p>
+    <p class="text-slate-300">{{ qty }}</p>
   </div>
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,7 @@
     viewBox="0 0 24 24"
     stroke-width="2.0"
     stroke="currentColor"
-    class="w-7 h-7 cursor-pointer z-20"
+    class="w-7 h-7 cursor-pointer z-20 stroke-white hover:stroke-red-500 hover:fill-red-500"
     (click)="toggleMenu()"
   >
     <path
@@ -22,7 +22,7 @@
     />
   </svg>
   <div
-    class="absolute bg-white p-5 flex-row-reverse right-0 origin-right mt-8 border rounded-l-3xl w-96 shadow-xl dropDownCart z-50"
+    class="absolute bg-white p-5 flex-row-reverse inset-y-0 right-0 mt-24 border rounded-l-3xl w-96 shadow-xl dropDownCart z-50"
     *ngIf="isMenuOpened"
   >
     <app-get-all-cart></app-get-all-cart>

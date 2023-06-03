@@ -27,11 +27,11 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   { path: 'edit', component: EditUserComponent, canActivate:[AuthGuard] },
   { path: 'products', component: GetAllProductComponent, canActivate:[AuthGuard]},
-  { path: 'products/:pid', component: GetOneProductComponent, canActivate:[AuthGuard]},
+  { path: 'products/:pId', component: GetOneProductComponent, canActivate:[AuthGuard]},
   
   //paths for Admin
   { path: 'users', component: GetAllUserComponent, canActivate:[AdminAuthGuard] },
-  { path: 'products/:pid/edit', component: EditProductComponent, canActivate:[AdminAuthGuard] },
+  { path: 'products/:pId/edit', component: EditProductComponent, canActivate:[AdminAuthGuard] },
   { path: 'addproduct', component: CreateProductComponent, canActivate:[AdminAuthGuard] },
   { path: 'all-orders', component: GetAllOrderComponent, canActivate:[AdminAuthGuard] },
 

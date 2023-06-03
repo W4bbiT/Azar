@@ -1,11 +1,14 @@
+import { Product } from "./productModel"
+
 export interface Cart{
     _id : String,
     userId: String,
     products: [{
-        productId: String,
-        name: String,
+        productId: Product,
+        price: number,
+        discount: number,
         quantity: number,
-        price: number
-    }]
+
+    }],
     total: number
 }

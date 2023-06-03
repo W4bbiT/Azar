@@ -1,3 +1,6 @@
+import { Cart } from "./cartModel";
+import { Order } from "./orderModel";
+
 export interface User {
     _id: string,
     fName: string,
@@ -14,6 +17,6 @@ export interface User {
         state: string,
         zipcode: string,
     },
-    orders: string,
-    cart: string
+    orders: Order,
+    cart: Cart
 }

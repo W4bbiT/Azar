@@ -15,7 +15,9 @@ router.get('/cart', passport.authenticate('jwt', { session: false }), async (req
     try {
         const cart = await Cart.findOne({
             'userId': req.user._id
-        }).exec()
+        })
+        .populate('products.productId')
+        .exec()
         res.json(cart)
     } catch (err) {
         res.status(500).json({ message: err.message })
@@ -35,14 +37,14 @@ router.post('/addtocart/:pId', passport.authenticate('jwt', { session: false }),
             res.status(404).send({ message: "item not found" });
             return;
         }
-        const productId = item._id;
+        const productId = item;
         const price = item.Price;
-        const name = item.ProductName;
+        const discount = item.Discount
         //If cart already exists for user,
         if (cart) {
             //getting the index of the product from the cart
             const itemIndex = cart.products.findIndex((p) => {
-                return p.productId.toString() === productId.toString()
+                return p.productId._id.toString() === productId._id.toString()
             })
             //check if product exists or not
             if (itemIndex > -1) {
@@ -50,27 +52,28 @@ router.post('/addtocart/:pId', passport.authenticate('jwt', { session: false }),
                 product.quantity = product.quantity + 1;
 
                 cart.total = cart.products.reduce((acc, curr) => {
-                    return acc + curr.quantity * curr.price;
-                }, 0)
+                    return acc + curr.quantity * curr.price * curr.discount;
+                }, 0).toFixed(2)
 
                 cart.products[itemIndex] = product;
                 await cart.save();
                 res.status(200).send(cart);
             } else {
-                cart.products.push({ productId, name, quantity, price });
+                cart.products.push({ productId, quantity, price, discount });
                 cart.total = cart.products.reduce((acc, curr) => {
-                    return acc + curr.quantity * curr.price;
-                }, 0)
+                    return acc + curr.quantity * curr.price * curr.discount;
+                }, 0).toFixed(2)
 
                 await cart.save();
                 res.status(200).send(cart);
             }
         } else {
             //no cart exists, create one
+            const total = (quantity * price * discount).toFixed(2);
             const newCart = await Cart.create({
                 userId,
-                products: [{ productId, name, quantity, price }],
-                total: quantity * price,
+                products: [{ productId, discount, quantity, price }],
+                total: parseFloat(total),
             });
             return res.status(201).send(newCart);
         }
@@ -78,8 +81,8 @@ router.post('/addtocart/:pId', passport.authenticate('jwt', { session: false }),
         console.log(error);
         res.status(500).send("something went wrong");
     }
-
 })
+
 //updating one
 router.patch('/editcart/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
     const userId = req.user._id;
@@ -91,11 +94,11 @@ router.patch('/editcart/:pId', passport.authenticate('jwt', { session: false }),
             res.status(404).send({ message: "item not found" });
             return;
         }
-        const productId = item._id;
+        const productId = item;
         //If cart already exists for user,
         if (cart) {
             const itemIndex = cart.products.findIndex((p) => {
-                return p.productId.toString() === productId.toString()
+                return p.productId._id.toString() === productId._id.toString()
             })
 
             if (itemIndex > -1) {
@@ -103,8 +106,8 @@ router.patch('/editcart/:pId', passport.authenticate('jwt', { session: false }),
                 product.quantity = req.body.products[itemIndex].quantity;
 
                 cart.total = cart.products.reduce((acc, curr) => {
-                    return acc + curr.quantity * curr.price;
-                }, 0)
+                    return acc + curr.quantity * curr.price * curr.discount;
+                }, 0).toFixed(2)
 
                 cart.products[itemIndex] = product;
                 await cart.save();
@@ -117,6 +120,7 @@ router.patch('/editcart/:pId', passport.authenticate('jwt', { session: false }),
     }
 
 })
+
 //deleting one
 router.delete('/delete-item/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
     const userId = req.user._id;
@@ -124,19 +128,19 @@ router.delete('/delete-item/:pId', passport.authenticate('jwt', { session: false
         const productId = res.item._id;
         let cart = await Cart.findOne({ userId });
         const itemIndex = cart.products.findIndex((p) => {
-            return p.productId.toString() === productId.toString()
+            return p.productId._id.toString() === productId.toString()
         })
         if (itemIndex > -1) {
             let item = cart.products[itemIndex];
-            cart.total -= item.quantity * item.price;
+            cart.total -= item.quantity * item.price * item.discount;
 
             if (cart.total < 0) {
                 cart.total = 0;
             }
             cart.products.splice(itemIndex, 1);
             cart.total = cart.products.reduce((acc, curr) => {
-                return acc + curr.quantity * curr.price;
-            }, 0)
+                return acc + curr.quantity * curr.price * curr.discount;
+            }, 0).toFixed(2)
             cart = await cart.save();
             res.status(200).send(cart);
         } else {

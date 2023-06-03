@@ -28,7 +28,7 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "moment"
-           ]
+            ]
           },
           "configurations": {
             "production": {

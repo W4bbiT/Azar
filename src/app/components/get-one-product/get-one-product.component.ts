@@ -6,30 +6,30 @@ import { ProductsService } from 'src/app/services/products.service';
 @Component({
   selector: 'app-get-one-product',
   templateUrl: './get-one-product.component.html',
-  styleUrls: ['./get-one-product.component.css']
+  styleUrls: ['./get-one-product.component.css'],
 })
 export class GetOneProductComponent implements OnInit {
   product: Product;
-  
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductsService
-      ) { }
+  ) {}
 
   ngOnInit(): void {
     const pId = this.route.snapshot.paramMap.get('pId');
-    this.productService.getOneProduct(pId)
-    .subscribe(
-      {
-        next:(product)=>{
-          this.product = product
-          console.log(this.product)
-        },
-        error:()=>{
-          alert("No products found!")
+    this.productService.getOneProduct(pId).subscribe({
+      next: (res) => {
+        if (res) {
+          this.product = res;
         }
-      }
-    );
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          alert('No products found!');
+        }
+        console.log(err);
+      },
+    });
   }
-
 }

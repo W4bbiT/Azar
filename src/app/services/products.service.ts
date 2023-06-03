@@ -22,8 +22,7 @@ export class ProductsService {
   }
   //get a product by id
   getOneProduct(pId: String): Observable<Product>{
-    return this.http.get<Product>(`/api/product/${pId}`,
-    httpOptions)
+    return this.http.get<Product>(`/api/product/${pId}`)
   }
   //delete product
   deleteProduct(pId: String): Observable<any>{

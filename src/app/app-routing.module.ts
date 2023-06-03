@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   { path: 'edit', component: EditUserComponent, canActivate:[AuthGuard] },
   { path: 'products', component: GetAllProductComponent, canActivate:[AuthGuard]},
-  { path: 'products/:pId', component: GetOneProductComponent, canActivate:[AuthGuard]},
+  { path: 'products/:pId', component: GetOneProductComponent},
   
   //paths for Admin
   { path: 'users', component: GetAllUserComponent, canActivate:[AdminAuthGuard] },

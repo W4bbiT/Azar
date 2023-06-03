@@ -28,17 +28,20 @@
                 <td>{{product.Price}}</td>
                 <td>{{product.Discount}}</td>
                 <td>{{product.Description}}</td>
-                <td>{{product.ProductImage}}</td>
+                <td>
+                    <img src={{product.ProductImage}} class="w-20 h-20 object-contain">
+                </td>
                 <td>{{product.CreatedOn}}</td>
                 <td>{{product.inStock}}</td>
                 <td>{{product.TopProduct}}</td>
                 <td>{{product.Ingredient}}</td>
-                <td>
-                    <button routerLink="/products/{{product._id}}/edit" class="btnBlue">Edit</button>
-                    <button class="btnRed" (click)="deleteProduct(product._id)">Delete</button>
-                    <button class="btnGreen" (click)="addToCart(product._id)">Add to Cart</button>
+                <td class="grid">
+                    <button routerLink="/products/{{product._id}}/edit">Edit</button>
+                    <button (click)="deleteProduct(product._id)">Delete</button>
+                    <button (click)="addToCart(product._id)">Add to Cart</button>
                 </td>
             </tr>
+            <br>
         </tbody>
     </table>
 </div>

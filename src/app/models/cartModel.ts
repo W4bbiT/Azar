@@ -1,8 +1,9 @@
 import { Product } from "./productModel"
+import { User } from "./userModel"
 
 export interface Cart{
-    _id : String,
-    userId: String,
+    _id : string,
+    userId: User,
     products: [{
         productId: Product,
         price: number,

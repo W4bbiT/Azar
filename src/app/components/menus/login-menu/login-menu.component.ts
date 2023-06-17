@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/userModel';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -6,7 +6,7 @@ import { UsersService } from 'src/app/services/users.service';
 @Component({
   selector: 'app-login-menu',
   templateUrl: './login-menu.component.html',
-  styleUrls: ['./login-menu.component.css']
+  styleUrls: ['./login-menu.component.css'],
 })
 export class LoginMenuComponent implements OnInit {
   isLoggedIn = false;

@@ -1,0 +1,36 @@
+<div *ngIf="order" class="m-5">
+    <h2 class="text-2xl font-bold">Order Details</h2>
+    <p>Order Date: {{ order.orderDate | date }}</p>
+    <div class="flex justify-end">
+        <button class="shadow-sm shadow-reddish p-1 rounded-full mr-5">Cancel Request</button>
+    </div>
+    <div *ngFor="let item of order.orderDetails.products" class="my-4">
+
+        <div class="h-48 rounded-3xl flex items-center shadow-md shadow-reddish m-5">
+            <ng-container class="" *ngIf="item.product; else deletedProduct">
+                <div class="h-full w-36 shadow-lg rounded-l-3xl">
+                    <img class="h-full object-cover rounded-l-3xl" [src]="item.product.ProductImage"
+                        alt="Product Image" />
+
+                </div>
+                <div class="rounded-r-3xl w-full h-full p-2">
+                    <a routerLink="/products/{{item.product._id}}" class="text-xl font-bold">{{ item.product.ProductName }}</a>
+                    <p>Category: {{ item.product.Category }}</p>
+                    <p>Description: {{ item.product.Description }}</p>
+                    <p>Price: {{ item.product.Price | currency }}</p>
+                    <p>Discount: {{ item.product.Discount }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <p>Total: {{ ((item.product.Price - ((item.product.Discount/100)*item.product.Price)) * item.quantity) | currency }}</p>
+                </div>
+            </ng-container>
+            <ng-template #deletedProduct class="rounded-3xl p-2">
+                <p class="font-bold">This product is no longer in the store</p>
+            </ng-template>
+
+        </div>
+    </div>
+
+    <h3 class="text-xl font-bold mt-4">Total: {{ order.orderDetails.total | currency }}</h3>
+
+    <p class="mt-4">Tracking Info: {{ order.trackingInfo }}</p>
+</div>

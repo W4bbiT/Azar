@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../models/productModel'
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 const httpOptions= {
   headers: new HttpHeaders({
@@ -44,4 +44,8 @@ export class ProductsService {
       httpOptions
     )
   } 
+  // search products by name
+  searchProduct(productName: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`/api/product/search?name=${productName}`);
+  }
 }

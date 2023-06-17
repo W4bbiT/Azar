@@ -17,6 +17,8 @@ export interface User {
         state: string,
         zipcode: string,
     },
-    orders: Order,
+    orders: [
+        Order
+    ],
     cart: Cart
 }

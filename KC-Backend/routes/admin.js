@@ -12,12 +12,13 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 router.use(passport.initialize())
 
+const admin = "STAR"
 
 
 //Gettign all users 
 router.get('/gau', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
-        if (req.user.admin != true) {
+        if (req.user.role != admin) {
             res.send("You don't have admin acces!")
         } else {
             res.send("You are admin!")
@@ -30,7 +31,7 @@ router.get('/gau', passport.authenticate('jwt', { session: false }), async (req,
 //Gettign all
 router.get('/', async (req, res) => {
     try {
-        if (!req.user.admin) {
+        if (req.user.role != admin) {
             res.send.json({message : 'you are not authorized to access this page!'})
         } else {
             const allUser = await User.find()
@@ -44,7 +45,7 @@ router.get('/', async (req, res) => {
 //deleting one
 router.delete('/du', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
-        if (!req.user.admin) {
+        if (req.user.role != admin) {
             res.send.json({message : 'you are not authorized to access this page!'})
         } else {
             await req.user.remove()
@@ -72,7 +73,8 @@ router.post('/ap', passport.authenticate('jwt', { session: false }), async (req,
         TopProduct: req.body.TopProduct
     })
     try {
-        if (!req.user.admin) {
+        if (req.user.role != admin) {
+
             res.send.json({message : 'you are not authorized to access this page!'})
         } else {
             const newProduct = await product.save()
@@ -112,7 +114,7 @@ router.patch('/up/:id', passport.authenticate('jwt', { session: false }), getPro
         res.product.Ingredient = req.body.Ingredient
     }
     try {
-        if (!req.user.admin) {
+        if (req.user.role != admin) {
             res.send.json({message : 'you are not authorized to access this page!'})
         } else {
             const updatedProduct = await res.product.save()
@@ -127,7 +129,7 @@ router.patch('/up/:id', passport.authenticate('jwt', { session: false }), getPro
 //deleting a product
 router.delete('/dp/:id', passport.authenticate('jwt', { session: false }), getProduct, async (req, res) => {
     try {
-        if (!req.user.admin) {
+        if (req.user.role != admin) {
             res.send.json({message : 'you are not authorized to access this page!'})
         } else {
             await res.product.remove()
@@ -143,7 +145,8 @@ router.delete('/dp/:id', passport.authenticate('jwt', { session: false }), getPr
 //getting all orders
 router.get('/orders', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
-        if (!req.user.admin) {
+        if (req.user.role != admin) {
+
             res.send.json({message : 'you are not authorized to access this page!'})
         } else {
             const orders = await Order.find().exec()
@@ -158,7 +161,7 @@ router.get('/orders', passport.authenticate('jwt', { session: false }), async (r
 router.patch('/up/:oId', passport.authenticate('jwt', { session: false }), getOrder, async (req, res) => {
     if (req.body.trackingInfo != null || req.body.verified != null) {
         try {
-            if (!req.user.admin) {
+            if (req.user.role != admin) {
                 res.send.json({message : 'you are not authorized to access this page!'})
             } else {
                 const updatedOrder = await Order.updateOne({
@@ -184,7 +187,7 @@ router.patch('/up/:oId', passport.authenticate('jwt', { session: false }), getOr
 //deleting an order
 router.delete('/do/:oId', passport.authenticate('jwt', { session: false }), getOrder, async (req, res) => {
     try {
-        if (!req.user.admin) {
+        if (req.user.role != admin) {
             res.send.json({message : 'you are not authorized to access this page!'})
         } else {
             const deletedOrder = await Order.deleteOne({

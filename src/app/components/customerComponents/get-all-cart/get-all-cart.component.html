@@ -1,0 +1,42 @@
+<div *ngIf="cart" class="glass rounded-l-3xl p-5 text-whiteish">
+    <div class="text-right">
+        <button class="px-2 shadow-sm shadow-blackish rounded-full active:shadow-inner active:shadow-blackish" (click)="emptyTheCart()">Empty Cart</button>
+    </div>
+    <table>
+        <thead>
+            <tr class="shadow-sm">
+                <th class="py-2 px-2">Product Name</th>
+                <th class="py-2 px-2">Quantity</th>
+                <th class="py-2 px-2">Unit Price</th>
+                <th class="py-2 px-2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of cart.products" class="my-2 shadow-md">
+                <td class="py-4">
+                    <a href="/products/{{c.productId._id}}">
+                        <img src="{{c.productId.ProductImage}}" class="w-20 h-20 object-contain rounded-lg">
+                    </a>
+                </td>
+                <td class="p-4 items-center">
+                    <input type="number" [(ngModel)]="c.quantity" class="shadow-inner shadow-blackish rounded-full w-16 px-2 py-1 text-black ">
+                    <button class="shadow-blackish shadow-sm bg-cyan-500 rounded-full p-1 ml-2  active:shadow-inner active:shadow-blackish" (click)="updateQuantity(c.productId._id)">Update</button>
+                </td>
+                <td class="py-4">${{(c.quantity * (c.price- (c.discount/100)*c.price)).toFixed(2)}}</td>
+                <td class="py-4">
+                    <button class="shadow-blackish shadow-sm bg-red-500 rounded-full p-1  active:shadow-inner active:shadow-blackish" (click)="pullProduct(c.productId._id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2" class="font-bold">Total:</td>
+                <td class="font-bold">{{cart.total}}</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="text-right text-lg">
+        <button class="shadow-sm shadow-blackish p-1 rounded-full bg-emerald-500 active:shadow-inner active:shadow-blackish" (click)="checkingOut()">Place Order</button>
+    </div>
+</div>

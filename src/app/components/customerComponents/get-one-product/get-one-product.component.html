@@ -1,0 +1,21 @@
+<div class="shadow-inner shadow-reddish m-10 rounded-3xl">
+    <div *ngIf="product" class="flex justify-start p-5">
+        <div>
+            <img class="w-96 h-96 object-contain shadow-sm shadow-reddish rounded-3xl" [src]="product.ProductImage"
+                alt="Product Image">
+        </div>
+        <div class="px-5">
+            <h2 class="text-2xl font-bold shadow-sm shadow-reddish text-center rounded-full mb-4">{{ product.ProductName }}</h2>
+            <p class="mb-4">Description: {{ product.Description }}</p>
+            <p class="text-lg font-bold mb-2">Price: {{ product.Price | currency }}</p>
+            <p class="mb-4">Category: {{ product.Category }}</p>
+            <p class="mb-4">In Stock: {{ product.inStock }}</p>
+            <p class="mb-4">Ingredients: {{ product.Ingredient }}</p>
+            <div class="float-right">
+                <button class="shadow-sm shadow-reddish font-bold py-2 px-4 rounded-full">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

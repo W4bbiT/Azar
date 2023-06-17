@@ -1,10 +1,10 @@
-<div class="px-5 text-white bg-transparent">
-  <div class="md:text-lg flex gap-2" clickOutside (clickOutside)="clickedOutside()">
-    <div class="cursor-pointer hover:font-semibold transition-all" (click)="toggleMenu()">
+<div class="px-5 text-whiteish">
+  <div class="flex gap-2" clickOutside (clickOutside)="clickedOutside()">
+    <div class="cursor-pointer" (click)="toggleMenu()">
       Sign-In
     </div>
 
-    <div class="absolute origin-top-left bg-slate-900 rounded-3xl mt-10 -ml-24 dropDownSignIn z-50"
+    <div class="absolute origin-top rounded-3xl mt-12 -ml-24 dropDownSignIn z-20 shadow-blackish shadow-sm"
       *ngIf="isMenuOpened">
       <div class="static">
         <div class="absolute triangle-up"></div>

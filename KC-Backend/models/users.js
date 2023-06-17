@@ -25,17 +25,19 @@ const UserSchema = new mongoose.Schema({
         state: String,
         zipcode: String
     },
-    orders: {
+    orders: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Order'
-    },
+    }],
     cart: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Cart',
         index: true,
         required: true,
         auto: true,
-    }
+    },
+    createDate: Date
+
 }, { versionKey: false })
 
 module.exports = mongoose.model('User', UserSchema)

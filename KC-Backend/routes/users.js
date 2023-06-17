@@ -31,7 +31,14 @@ router.post('/signup', async (req, res) => {
         fName: req.body.fName,
         lName: req.body.lName,
         email: req.body.email,
-        password: hashedPassword
+        password: hashedPassword,
+        createDate: Date.now(),
+        address: {
+            streetAddress: "N/A",
+            city: "N/A",
+            state: "N/A",
+            zipcode: "N/A",
+        }
     })
 
     emailExist = await User.findOne({
@@ -39,12 +46,12 @@ router.post('/signup', async (req, res) => {
     })
 
     try {
-        if (!emailExist) {
+        if (emailExist) {
+            return res.status(400).json({ message: 'Email already exists' });
+        }
+        else {
             const newUser = await user.save()
             res.status(201).json(newUser)
-        }
-        else{
-            res.send('Email already exist')
         }
     } catch (err) {
         res.status(400).json({ message: err.message })
@@ -57,30 +64,32 @@ router.post('/signin', async (req, res) => {
         email: req.body.email
     })
     if (!user) {
-        return res.status(400).send({
-            message: "User not found"
-        })
+        return res.status(400).json({ message: 'User not found' });
     }
     try {
         if (await bcrypt.compare(req.body.password, user.password)) {
-            const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: "1d" // 1 day
+            const payload = {
+                _id: user._id,
+                email: user.email,
+                role: user.role
+            };
+            const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+                expiresIn: 24 * 60 * 60, // 1 day in seconds
             })
             console.log("Bearer " + accessToken)
             res.status(200).json({
                 accessToken: "Bearer " + accessToken,
                 username: user.fName,
                 role: user.role,
-                expiresIn : "1d"
+                expiresIn: 24 * 60 * 60 // 1 day in seconds
             })
         } else {
-            res.send('Not Allowed!')
+            res.send('Please sign in!')
         }
     }
     catch (err) {
         res.status(500).send({ message: err.message })
     }
-
 })
 
 //updating one
@@ -114,7 +123,7 @@ router.patch('/update-user', passport.authenticate('jwt', { session: false }), a
         emailExist = await User.findOne({
             email: req.body.email
         })
-        if(emailExist){
+        if (emailExist) {
             res.send('Email already exist')
         }
     }
@@ -129,6 +138,7 @@ router.patch('/update-user', passport.authenticate('jwt', { session: false }), a
 
     try {
         const updatedUser = await req.user.save()
+        console.log(updatedUser)
         res.json(updatedUser)
 
     } catch (err) {
@@ -138,43 +148,5 @@ router.patch('/update-user', passport.authenticate('jwt', { session: false }), a
     }
 
 })
-
-//id to the user
-async function getUser(req, res, next) {
-    let user
-    try {
-        user = await User.findById(req.params.id)
-        if (user == null) {
-            return res.status(404).json({ message: 'Couldn\'t find user' })
-        }
-    } catch (err) {
-        return res.status(500).json({ message: err.message })
-    }
-    res.user = user
-
-    next()
-}
-
-
-/**
- * function authenticateToken(req, res, next) {
-    const authHeader = req.headers['Authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-    if (token == null) {
-        return res.sendStatus(401)
-    }
-
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) {
-            return res.sendStatus(403)
-        }
-        req.user = user
-        next()
-    })
-}
-
- */
-
-
 
 module.exports = router

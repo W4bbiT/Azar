@@ -1,0 +1,27 @@
+<div class="flex flex-wrap" *ngIf="products">
+  <div class="m-5" *ngFor="let product of products">
+    <div class="card w-64 h-fit p-2 rounded-3xl shadow-sm shadow-reddish bg-whiteish">
+      <div class="card-img rounded-3xl">
+        <a href="/products/{{product._id}}">
+          <img class="rounded-3xl w-64 h-40 object-cover" [src]="product.ProductImage" alt="Product Image">
+        </a>
+      </div>
+
+      <h2 class="text-xl font-semibold mt-5">{{product.ProductName}}</h2>
+      <p class="h-7 overflow-hidden text-ellipsis">{{product.Description}}</p>
+      <div class="text-right">
+        <p *ngIf="product.inStock < 20 && product.inStock > 0" class="text-red-600">Only {{product.inStock}} in stock
+        </p>
+        <p *ngIf="product.inStock < 1" class="text-red-500">Out of stock</p>
+      </div>
+      <div class="card-footer">
+        <p class="">{{product.Price | currency}}</p>
+        <button class="card-button shadow-sm shadow-reddish p-1 px-4 active:shadow-inner"
+          (click)="addToCart(product._id)">
+          <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M465-613v-123H341v-60h124v-123h60v123h123v60H525v123h-60ZM289.788-80Q260-80 239-101.212q-21-21.213-21-51Q218-182 239.212-203q21.213-21 51-21Q320-224 341-202.788q21 21.213 21 51Q362-122 340.788-101q-21.213 21-51 21Zm404 0Q664-80 643-101.212q-21-21.213-21-51Q622-182 643.212-203q21.213-21 51-21Q724-224 745-202.788q21 21.213 21 51Q766-122 744.788-101q-21.213 21-51 21ZM290-287q-42 0-61.5-34t.5-69l61-111-150-319H62v-60h116l170 364h292l156-280 52 28-153 277q-9.362 16.667-24.681 25.833Q655-456 634-456H334l-62 109h494v60H290Z"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

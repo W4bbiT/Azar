@@ -1,13 +1,13 @@
 export interface Product{
-    _id : String,
-    ProductName: String,
-    Category: String,
+    _id : string,
+    ProductName: string,
+    Category: string,
     Price: number,
     Discount: number,
-    Description: String,
-    ProductImage: String,
+    Description: string,
+    ProductImage: string,
     CreatedOn: Date,
     inStock: number,
     TopProduct: Boolean,
-    Ingredient: String
+    Ingredient: string
 }

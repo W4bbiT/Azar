@@ -1,169 +1,224 @@
-require('./passport')
+require('./passport');
 const express = require('express');
-const router = express.Router()
+const router = express.Router();
 const Cart = require('../models/cart');
 const Product = require('../models/products');
-const User = require('../models/users')
-const passport = require('passport')
+const passport = require('passport');
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
-router.use(passport.initialize())
+router.use(passport.initialize());
 
-//Gettign all
+// Get all items in the cart
 router.get('/cart', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
-        const cart = await Cart.findOne({
-            'userId': req.user._id
-        })
-        .populate('products.productId')
-        .exec()
-        res.json(cart)
+        const cart = await Cart.findOne({ userId: req.user._id })
+            .populate('products.productId')
+            .exec();
+        res.json(cart);
     } catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json({ message: err.message });
     }
-})
+});
 
-//adding products to user cart
+// Add a product to the cart
 router.post('/addtocart/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
     const userId = req.user._id;
-    quantity = 1;
-
+    const quantity = 1;
     try {
         const cart = await Cart.findOne({ userId });
         const item = res.item;
-
         if (!item) {
-            res.status(404).send({ message: "item not found" });
-            return;
+            return res.status(404).send({ message: 'Item not found' });
         }
         const productId = item;
         const price = item.Price;
-        const discount = item.Discount
-        //If cart already exists for user,
+        const discount = item.Discount;
+        const inStock = item.inStock;
+        if (inStock < quantity) {
+            return res.status(400).send({ message: 'Insufficient stock' });
+        }
         if (cart) {
-            //getting the index of the product from the cart
             const itemIndex = cart.products.findIndex((p) => {
-                return p.productId._id.toString() === productId._id.toString()
-            })
-            //check if product exists or not
+                return p.productId._id.toString() === productId._id.toString();
+            });
+
             if (itemIndex > -1) {
                 let product = cart.products[itemIndex];
-                product.quantity = product.quantity + 1;
+                const newQuantity = product.quantity + quantity;
 
-                cart.total = cart.products.reduce((acc, curr) => {
-                    return acc + curr.quantity * curr.price * curr.discount;
-                }, 0).toFixed(2)
+                if (inStock < newQuantity) {
+                    return res.status(400).send({ message: 'Insufficient stock' });
+                }
 
+                product.quantity = newQuantity;
                 cart.products[itemIndex] = product;
-                await cart.save();
-                res.status(200).send(cart);
             } else {
                 cart.products.push({ productId, quantity, price, discount });
-                cart.total = cart.products.reduce((acc, curr) => {
-                    return acc + curr.quantity * curr.price * curr.discount;
-                }, 0).toFixed(2)
-
-                await cart.save();
-                res.status(200).send(cart);
             }
+
+            cart.total = calculateCartTotal(cart.products);
+
+            await cart.save();
+            res.status(200).send(cart);
         } else {
-            //no cart exists, create one
-            const total = (quantity * price * discount).toFixed(2);
+            if (inStock < quantity) {
+                return res.status(400).send({ message: 'Insufficient stock' });
+            }
+
+            const total = calculateTotal(quantity, price, discount);
             const newCart = await Cart.create({
                 userId,
                 products: [{ productId, discount, quantity, price }],
                 total: parseFloat(total),
             });
-            return res.status(201).send(newCart);
+            res.status(201).send(newCart);
         }
     } catch (error) {
         console.log(error);
-        res.status(500).send("something went wrong");
+        res.status(500).send('Something went wrong');
     }
-})
+});
 
-//updating one
+// Update a product in the cart
 router.patch('/editcart/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
     const userId = req.user._id;
+
     try {
         const cart = await Cart.findOne({ userId });
         const item = res.item;
 
         if (!item) {
-            res.status(404).send({ message: "item not found" });
-            return;
+            return res.status(404).send({ message: 'Item not found' });
         }
+
         const productId = item;
-        //If cart already exists for user,
-        if (cart) {
-            const itemIndex = cart.products.findIndex((p) => {
-                return p.productId._id.toString() === productId._id.toString()
-            })
+        const inStock = item.inStock;
 
-            if (itemIndex > -1) {
-                let product = cart.products[itemIndex];
-                product.quantity = req.body.products[itemIndex].quantity;
+        if (!cart) {
+            return res.status(404).send({ message: 'Cart not found' });
+        }
 
-                cart.total = cart.products.reduce((acc, curr) => {
-                    return acc + curr.quantity * curr.price * curr.discount;
-                }, 0).toFixed(2)
+        const itemIndex = cart.products.findIndex((p) => {
+            return p.productId._id.toString() === productId._id.toString();
+        });
 
-                cart.products[itemIndex] = product;
-                await cart.save();
-                res.status(200).send(cart);
+        if (itemIndex > -1) {
+            let product = cart.products[itemIndex];
+            const newQuantity = req.body.products[itemIndex].quantity;
+
+            if (inStock < newQuantity) {
+                return res.status(400).send({ message: 'Insufficient stock' });
             }
+
+            product.quantity = newQuantity;
+            cart.products[itemIndex] = product;
+            cart.total = calculateCartTotal(cart.products);
+
+            await cart.save();
+            res.status(200).send(cart);
+        } else {
+            res.status(404).send({ message: 'Product not found in cart' });
         }
     } catch (error) {
         console.log(error);
-        res.status(500).send("something went wrong");
+        res.status(500).send('Something went wrong');
     }
+});
 
-})
-
-//deleting one
+// Delete a product from the cart
 router.delete('/delete-item/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
     const userId = req.user._id;
+    const productId = res.item ? res.item._id : null;
+    
     try {
-        const productId = res.item._id;
         let cart = await Cart.findOne({ userId });
-        const itemIndex = cart.products.findIndex((p) => {
-            return p.productId._id.toString() === productId.toString()
-        })
+        let itemIndex = -1;
+
+        if (productId) {
+            itemIndex = cart.products.findIndex((p) => {
+                return p.productId._id.toString() === productId.toString();
+            });
+        }
+
         if (itemIndex > -1) {
             let item = cart.products[itemIndex];
-            cart.total -= item.quantity * item.price * item.discount;
+            cart.total -= calculateItemTotal(item);
 
             if (cart.total < 0) {
                 cart.total = 0;
             }
+
             cart.products.splice(itemIndex, 1);
-            cart.total = cart.products.reduce((acc, curr) => {
-                return acc + curr.quantity * curr.price * curr.discount;
-            }, 0).toFixed(2)
-            cart = await cart.save();
-            res.status(200).send(cart);
-        } else {
-            res.status(404).send("item not found")
         }
+
+        cart.total = calculateCartTotal(cart.products);
+
+        cart = await cart.save();
+        res.status(200).send(cart);
     } catch (error) {
         console.log(error);
         res.status(400).send();
     }
-})
+});
+
+// Empty the cart
+router.delete('/empty-cart', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    const userId = req.user._id;
+    
+    try {
+        let cart = await Cart.findOne({ userId });
+        
+        if (cart) {
+            cart.products = [];
+            cart.total = 0;
+            cart = await cart.save();
+            res.status(200).send(cart);
+        } else {
+            res.status(404).send('Cart not found');
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Something went wrong');
+    }
+});
+
 
 async function getItem(req, res, next) {
-    let item
+    let item;
     try {
-        item = await Product.findById(req.params.pId)
+        item = await Product.findById(req.params.pId);
         if (item == null) {
-            return res.status(404).json({ message: 'Couldn\'t find Product' })
+            return res.status(404).json({ message: "Couldn't find Product" });
         }
     } catch (err) {
-        return res.status(500).json({ message: err.message })
+        return res.status(500).json({ message: err.message });
     }
-    res.item = item
-
-    next()
+    res.item = item;
+    next();
 }
-module.exports = router
+
+function calculateTotal(quantity, price, discount) {
+    const discountedPrice = price - (discount / 100) * price;
+    const total = quantity * discountedPrice;
+    return total.toFixed(2);
+}
+
+function calculateItemTotal(item) {
+    const price = item.price;
+    const discount = item.discount;
+    const quantity = item.quantity;
+    const discountedPrice = price - (discount / 100) * price;
+    const itemTotal = quantity * discountedPrice;
+    return itemTotal;
+}
+
+function calculateCartTotal(products) {
+    const cartTotal = products.reduce((acc, curr) => {
+        const itemTotal = calculateItemTotal(curr);
+        return acc + itemTotal;
+    }, 0);
+    return cartTotal.toFixed(2);
+}
+
+module.exports = router;

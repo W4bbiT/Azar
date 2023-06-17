@@ -20,6 +20,21 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: err.message })
     }
 })
+// Search by product name
+router.get('/search', async (req, res) => {
+    const productName = req.query.name;
+    if (!productName) {
+        return res.status(400).json({ message: 'Invalid product name' });
+    }
+    try {
+        const products = await Product.find({
+            ProductName: { $regex: productName, $options: 'i' }
+        });
+        res.json(products);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 //getting one
 router.get('/:pId', getProduct, (req, res) => {
     try {
@@ -29,13 +44,14 @@ router.get('/:pId', getProduct, (req, res) => {
     }
 })
 
+
+
 async function getProduct(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         // If there are validation errors, return a 400 Bad Request response
         return res.status(400).json({ errors: errors.array() });
     }
-
     try {
         const product = await Product.findById(req.params.pId);
         if (!product) {

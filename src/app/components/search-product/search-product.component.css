@@ -1,0 +1,36 @@
+.dropDownSearch {
+    -webkit-animation-name: search;
+            animation-name: search;
+    -webkit-animation-duration: 200ms;
+            animation-duration: 200ms;
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+            background: rgba(255, 200, 200, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+}
+
+@-webkit-keyframes search {
+    from {
+        transform: scaleY(0);
+    }
+    80%{
+        transform: scaleY(1.1);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
+
+@keyframes search {
+    from {
+        transform: scaleY(0);
+    }
+    80%{
+        transform: scaleY(1.1);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}

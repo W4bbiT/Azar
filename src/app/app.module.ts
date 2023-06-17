@@ -4,23 +4,21 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CreateProductComponent } from './components/create-product/create-product.component';
-import { EditProductComponent } from './components/edit-product/edit-product.component';
-import { GetAllProductComponent } from './components/get-all-product/get-all-product.component';
-import { GetOneProductComponent } from './components/get-one-product/get-one-product.component';
-import { CreateUserComponent } from './components/create-user/create-user.component';
-import { GetAllUserComponent } from './components/get-all-user/get-all-user.component';
-import { EditUserComponent } from './components/edit-user/edit-user.component';
-import { GetOneUserComponent } from './components/get-one-user/get-one-user.component';
-import { GetAllOrderComponent } from './components/get-all-order/get-all-order.component';
-import { GetOneOrderComponent } from './components/get-one-order/get-one-order.component';
-import { GetAllCartComponent } from './components/get-all-cart/get-all-cart.component';
-import { GetOneCartComponent } from './components/get-one-cart/get-one-cart.component';
+import { CreateProductComponent } from './components/adminComponents/create-product/create-product.component';
+import { EditProductComponent } from './components/adminComponents/edit-product/edit-product.component';
+import { GetAllProductComponent } from './components/adminComponents/get-all-product/get-all-product.component';
+import { GetOneProductComponent } from './components/customerComponents/get-one-product/get-one-product.component';
+import { CreateUserComponent } from './components/customerComponents/create-user/create-user.component';
+import { GetAllUserComponent } from './components/adminComponents/get-all-user/get-all-user.component';
+import { EditUserComponent } from './components/customerComponents/edit-user/edit-user.component';
+import { GetAllOrderComponent } from './components/customerComponents/get-all-order/get-all-order.component';
+import { GetOneOrderComponent } from './components/customerComponents/get-one-order/get-one-order.component';
+import { GetAllCartComponent } from './components/customerComponents/get-all-cart/get-all-cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { LoginComponent } from './components/login/login.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { HomePageComponent } from './components/customerComponents/home-page/home-page.component';
+import { LoginComponent } from './components/customerComponents/login/login.component';
+import { ProfileComponent } from './components/customerComponents/profile/profile.component';
 
 import { HttpRequestInterceptor } from './helper/auth.interceptor';
 import { AuthService } from './services/auth.service';
@@ -31,6 +29,9 @@ import { LoginMenuComponent } from './components/menus/login-menu/login-menu.com
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { CartMenuComponent } from './components/menus/cart-menu/cart-menu.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { SearchProductComponent } from './components/search-product/search-product.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -42,18 +43,19 @@ import { BrowserModule } from '@angular/platform-browser';
     CreateUserComponent,
     GetAllUserComponent,
     EditUserComponent,
-    GetOneUserComponent,
     GetAllOrderComponent,
     GetOneOrderComponent,
     GetAllCartComponent,
-    GetOneCartComponent,
     HomePageComponent,
     LoginComponent,
     ProfileComponent,
     ProfileMenuComponent,
     LoginMenuComponent,
     ClickOutsideDirective,
-    CartMenuComponent  
+    CartMenuComponent,
+    SearchProductComponent,
+    HeaderComponent,
+    FooterComponent  
   ],
   imports: [
     BrowserModule,

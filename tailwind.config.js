@@ -2,7 +2,17 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'blackish': '#212121',
+        'whiteish': '#FCF6F5FF',
+        'reddish':'#990011FF',
+      }
+    },
   },
-  plugins: [require("tw-elements/dist/plugin.cjs")],
+  plugins: [{
+    'postcss-import': {},
+    tailwindcss: {},
+    autoprefixer: {},
+  }],
 };

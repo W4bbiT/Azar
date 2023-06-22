@@ -22,18 +22,18 @@
                 <a routerLink="/products/{{product._id}}">
                     <td>{{product._id}}</td>
                 </a>
-                <td>{{product.ProductName}}</td>
-                <td>{{product.Category}}</td>
-                <td>{{product.Price}}</td>
-                <td>{{product.Discount}}</td>
-                <td>{{product.Description}}</td>
+                <td>{{product.productName}}</td>
+                <td>{{product.category}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.discount}}</td>
+                <td>{{product.description}}</td>
                 <td>
-                    <img src={{product.ProductImage}} class="w-20 h-20 object-contain mix-blend-multiply">
+                    <img src={{product.productImage}} class="w-20 h-20 object-contain mix-blend-multiply">
                 </td>
-                <td>{{product.CreatedOn}}</td>
+                <td>{{product.createdOn}}</td>
                 <td>{{product.inStock}}</td>
-                <td>{{product.TopProduct}}</td>
-                <td>{{product.Ingredient}}</td>
+                <td>{{product.featureProduct}}</td>
+                <td>{{product.ingredient}}</td>
                 <td class="grid">
                     <button class="border hover:bg-orange-600" routerLink="/products/{{product._id}}/edit">Edit</button>
                     <button class="border hover:bg-red-600" (click)="deleteProduct(product._id)">Delete</button>

@@ -10,16 +10,20 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 router.use(passport.initialize())
 
-//Gettign user orders
+// Getting user orders
 router.get('/orders', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
         const orders = await Order.find({
             userId: req.user._id
         })
             .populate('orderDetails.products.product')
+            .sort({ orderDate: -1 })
+            .skip((page - 1) * limit)
+            .limit(limit)
             .exec();
-        const reversedOrders = orders.reverse(); // Reverse the order list
-        res.json(reversedOrders);
+        res.json(orders);
     } catch (err) {
         res.status(500).json({ message: err.message })
     }

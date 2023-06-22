@@ -1,19 +1,19 @@
     <div class="m-3">
-        <form [formGroup]="loginForm">
+        <form [formGroup]="loginForm" class="md:flex">
             <div class="md:flex">
                 <label class="block p-2 m-1">Email</label>
-                <input class="block m-1 p-2 shadow-reddish shadow-inner border-s-2 rounded-full" type="text" formControlName="email"
+                <input class="bg-transparent block m-1 p-2 shadow-blackish shadow-inner rounded-full" type="text" formControlName="email"
                     placeholder="Enter email">
             </div>
 
             <div class="md:flex">
                 <label class="block p-2 m-1">Password</label>
-                <input class="block m-1 p-2 shadow-reddish shadow-inner border-s-2 rounded-full" type="text" formControlName="password"
+                <input class="bg-transparent block m-1 p-2 shadow-blackish shadow-inner rounded-full" type="text" formControlName="password"
                     placeholder="Enter password">
             </div>
 
-            <div class="p-2 text-right">
-                <button class="shadow-reddish shadow-sm rounded-full p-2 w-20" (click)="submitForm()">Sign-In</button>
+            <div class="md:block p-2 text-right">
+                <button class="shadow-blackish shadow-sm rounded-full p-2 w-20 active:shadow-inner active:shadow-blackish" (click)="submitForm()">Sign-In</button>
             </div>
             
         </form>

@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^16.1.2",
     "@angular/cdk": "^16.0.3",
     "@angular/common": "^16.0.4",
     "@angular/compiler": "^16.0.4",
@@ -20,6 +21,7 @@
     "@angular/router": "^16.0.4",
     "@popperjs/core": "^2.11.7",
     "moment": "^2.29.4",
+    "ngx-owl-carousel-o": "^16.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "tw-elements": "^1.0.0-beta2",

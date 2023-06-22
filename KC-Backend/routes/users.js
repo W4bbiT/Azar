@@ -40,11 +40,9 @@ router.post('/signup', async (req, res) => {
             zipcode: "N/A",
         }
     })
-
     emailExist = await User.findOne({
         email: req.body.email
     })
-
     try {
         if (emailExist) {
             return res.status(400).json({ message: 'Email already exists' });
@@ -146,7 +144,6 @@ router.patch('/update-user', passport.authenticate('jwt', { session: false }), a
             message: err.message
         })
     }
-
 })
 
 module.exports = router

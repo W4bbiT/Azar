@@ -12,9 +12,18 @@ router.use(passport.initialize());
 // Get all items in the cart
 router.get('/cart', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
         const cart = await Cart.findOne({ userId: req.user._id })
-            .populate('products.productId')
+            .populate({
+                path: 'products.productId',
+                options: {
+                    skip: (page - 1) * limit,
+                    limit: limit
+                }
+            })
             .exec();
+
         res.json(cart);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -87,26 +96,20 @@ router.patch('/editcart/:pId', passport.authenticate('jwt', { session: false }),
     try {
         const cart = await Cart.findOne({ userId });
         const item = res.item;
-
         if (!item) {
             return res.status(404).send({ message: 'Item not found' });
         }
-
         const productId = item;
         const inStock = item.inStock;
-
         if (!cart) {
             return res.status(404).send({ message: 'Cart not found' });
         }
-
         const itemIndex = cart.products.findIndex((p) => {
             return p.productId._id.toString() === productId._id.toString();
         });
-
         if (itemIndex > -1) {
             let product = cart.products[itemIndex];
             const newQuantity = req.body.products[itemIndex].quantity;
-
             if (inStock < newQuantity) {
                 return res.status(400).send({ message: 'Insufficient stock' });
             }
@@ -130,7 +133,7 @@ router.patch('/editcart/:pId', passport.authenticate('jwt', { session: false }),
 router.delete('/delete-item/:pId', passport.authenticate('jwt', { session: false }), getItem, async (req, res) => {
     const userId = req.user._id;
     const productId = res.item ? res.item._id : null;
-    
+
     try {
         let cart = await Cart.findOne({ userId });
         let itemIndex = -1;
@@ -165,10 +168,10 @@ router.delete('/delete-item/:pId', passport.authenticate('jwt', { session: false
 // Empty the cart
 router.delete('/empty-cart', passport.authenticate('jwt', { session: false }), async (req, res) => {
     const userId = req.user._id;
-    
+
     try {
         let cart = await Cart.findOne({ userId });
-        
+
         if (cart) {
             cart.products = [];
             cart.total = 0;

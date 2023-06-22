@@ -2,31 +2,31 @@
     <h2>Edit Product</h2>
     <form class="grid grid-cols-2" [formGroup]="productForm">
             <label>Product Name</label>
-            <input type="text" formControlName="ProductName" placeholder="{{product.ProductName}}">
+            <input type="text" formControlName="productName" placeholder="{{product.productName}}">
 
             <label>Product Category</label>
-            <input type="text" formControlName="Category" placeholder="{{product.Category}}">
+            <input type="text" formControlName="category" placeholder="{{product.category}}">
 
             <label>Price</label>
-            <input type="number" formControlName="Price" placeholder="{{product.Price}}">
+            <input type="number" formControlName="price" placeholder="{{product.price}}">
 
             <label>Discount</label>
-            <input type="number" formControlName="Discount" placeholder="{{product.Discount}}">
+            <input type="number" formControlName="discount" placeholder="{{product.discount}}">
 
             <label>Description</label>
-            <input type="text" formControlName="Description" placeholder="{{product.Description}}">
+            <input type="text" formControlName="description" placeholder="{{product.description}}">
 
             <label>Product Image URL</label>
-            <input type="text" formControlName="ProductImage" placeholder="{{product.ProductImage}}">
+            <input type="text" formControlName="productImage" placeholder="{{product.productImage}}">
 
             <label>How many in stock?</label>
             <input type="number" formControlName="inStock" placeholder="{{product.inStock}}">
 
             <label>Ingredient</label>
-            <input type="text" formControlName="Ingredient" placeholder="{{product.Ingredient}}">
+            <input type="text" formControlName="ingredient" placeholder="{{product.ingredient}}">
 
             <label>Top Product</label>
-            <input type="checkbox" formControlName="TopProduct" placeholder="{{product.TopProduct}}">
+            <input type="checkbox" formControlName="featureProduct" placeholder="{{product.featureProduct}}">
 
 
             <button (click)="editProduct()">Edit Product</button>

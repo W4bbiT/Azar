@@ -1,13 +1,16 @@
+import { Review } from "./reviewModel";
+
 export interface Product{
     _id : string,
-    ProductName: string,
-    Category: string,
-    Price: number,
-    Discount: number,
-    Description: string,
-    ProductImage: string,
-    CreatedOn: Date,
+    productName: string,
+    category: string,
+    price: number,
+    discount: number,
+    description: string,
+    reviews: Review[],
+    productImage: string,
+    createdOn: Date,
     inStock: number,
-    TopProduct: Boolean,
-    Ingredient: string
+    featureProduct: Boolean,
+    ingredient: string
 }

@@ -10,18 +10,25 @@ import { Router } from '@angular/router';
 })
 export class GetAllUserComponent implements OnInit {
   users: User[];
+  page = 1;
+  limit = 10;
   constructor(
     private userService: UsersService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.userService.getAllUsers()
+    this.userService.getAllUsers(this.page, this.limit)
       .subscribe(
-        users => {
-          this.users = users;
-          console.log(this.users);
-        })
+        {
+          next:(res) => {
+            this.users = res;
+            console.log(this.users);
+          },
+          error:(err)=>{
+            throw err
+          }
+      })
   }
 
   deleteUserButton(userId: string) {
@@ -34,8 +41,6 @@ export class GetAllUserComponent implements OnInit {
         error: () => {
           alert("User not found")
         }
-      }
-
-      )
+      })
   }
 }

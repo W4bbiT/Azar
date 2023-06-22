@@ -5,7 +5,7 @@
             animation-duration: 200ms;
     -webkit-animation-timing-function: ease-out;
             animation-timing-function: ease-out;
-            background: rgba(255, 200, 200, 0.8);
+            background: rgba(153, 0, 18, 0.7);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
 }

@@ -16,7 +16,7 @@ const admin = "STAR"
 
 
 //Gettign all users 
-router.get('/gau', passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.get('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
         if (req.user.role != admin) {
             res.send("You don't have admin acces!")
@@ -28,25 +28,30 @@ router.get('/gau', passport.authenticate('jwt', { session: false }), async (req,
     }
 })
 
-//Gettign all
-router.get('/', async (req, res) => {
+// Get all users with pagination
+router.get('/gau', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
-        if (req.user.role != admin) {
-            res.send.json({message : 'you are not authorized to access this page!'})
+        if (req.user.role !== admin) {
+            res.json({ message: 'You are not authorized to access this page!' });
         } else {
-            const allUser = await User.find()
-            res.json(allUser)
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 10;
+
+            const users = await User.find()
+                .skip((page - 1) * limit)
+                .limit(limit);
+
+            res.json(users);
         }
     } catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json({ message: err.message });
     }
-})
-
+});
 //deleting one
 router.delete('/du', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
         if (req.user.role != admin) {
-            res.send.json({message : 'you are not authorized to access this page!'})
+            res.send.json({ message: 'you are not authorized to access this page!' })
         } else {
             await req.user.remove()
             res.json({ message: 'User deleted!' })
@@ -61,21 +66,21 @@ router.delete('/du', passport.authenticate('jwt', { session: false }), async (re
 //creating a product listing
 router.post('/ap', passport.authenticate('jwt', { session: false }), async (req, res) => {
     const product = new Product({
-        ProductName: req.body.ProductName,
-        Category: req.body.Category,
-        Price: req.body.Price,
+        productName: req.body.productName,
+        category: req.body.category,
+        price: req.body.price,
         inStock: req.body.inStock,
-        Description: req.body.Description,
-        Discount: req.body.Discount,
-        ProductImage: req.body.ProductImage,
-        CreatedOn: Date.now(),
-        Ingredient: req.body.Ingredient,
-        TopProduct: req.body.TopProduct
+        description: req.body.description,
+        discount: req.body.discount,
+        productImage: req.body.productImage,
+        createdOn: Date.now(),
+        ingredient: req.body.ingredient,
+        featureProduct: req.body.featureProduct
     })
     try {
         if (req.user.role != admin) {
 
-            res.send.json({message : 'you are not authorized to access this page!'})
+            res.send.json({ message: 'you are not authorized to access this page!' })
         } else {
             const newProduct = await product.save()
             res.status(201).json(newProduct)
@@ -86,36 +91,36 @@ router.post('/ap', passport.authenticate('jwt', { session: false }), async (req,
 })
 //updating a product
 router.patch('/up/:id', passport.authenticate('jwt', { session: false }), getProduct, async (req, res) => {
-    if (req.body.ProductName != null) {
-        res.product.ProductName = req.body.ProductName
+    if (req.body.productName != null) {
+        res.product.productName = req.body.productName
     }
-    if (req.body.Category != null) {
-        res.product.Category = req.body.Category
+    if (req.body.category != null) {
+        res.product.category = req.body.category
     }
-    if (req.body.Price != null) {
-        res.product.Price = req.body.Price
+    if (req.body.price != null) {
+        res.product.price = req.body.price
     }
-    if (req.body.Discount != null) {
-        res.product.Discount = req.body.Discount
+    if (req.body.discount != null) {
+        res.product.discount = req.body.discount
     }
-    if (req.body.Description != null) {
-        res.product.Description = req.body.Description
+    if (req.body.description != null) {
+        res.product.description = req.body.description
     }
     if (req.body.inStock != null) {
         res.product.inStock = req.body.inStock
     }
-    if (req.body.ProductImage != null) {
-        res.product.ProductImage = req.body.ProductImage
+    if (req.body.productImage != null) {
+        res.product.productImage = req.body.productImage
     }
-    if (req.body.TopProduct != null) {
-        res.product.TopProduct = req.body.TopProduct
+    if (req.body.featureProduct != null) {
+        res.product.featureProduct = req.body.featureProduct
     }
-    if (req.body.Ingredient != null) {
-        res.product.Ingredient = req.body.Ingredient
+    if (req.body.ingredient != null) {
+        res.product.ingredient = req.body.ingredient
     }
     try {
         if (req.user.role != admin) {
-            res.send.json({message : 'you are not authorized to access this page!'})
+            res.send.json({ message: 'you are not authorized to access this page!' })
         } else {
             const updatedProduct = await res.product.save()
             res.json(updatedProduct)
@@ -130,7 +135,7 @@ router.patch('/up/:id', passport.authenticate('jwt', { session: false }), getPro
 router.delete('/dp/:id', passport.authenticate('jwt', { session: false }), getProduct, async (req, res) => {
     try {
         if (req.user.role != admin) {
-            res.send.json({message : 'you are not authorized to access this page!'})
+            res.send.json({ message: 'you are not authorized to access this page!' })
         } else {
             await res.product.remove()
             res.json({ message: 'Product deleted!' })
@@ -142,27 +147,33 @@ router.delete('/dp/:id', passport.authenticate('jwt', { session: false }), getPr
 
 })
 
-//getting all orders
+// Get all orders
 router.get('/orders', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
-        if (req.user.role != admin) {
-
-            res.send.json({message : 'you are not authorized to access this page!'})
+        if (req.user.role !== admin) {
+            res.json({ message: 'You are not authorized to access this page!' });
         } else {
-            const orders = await Order.find().exec()
-            res.json(orders)
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 10;
+
+            const orders = await Order.find()
+                .skip((page - 1) * limit)
+                .limit(limit)
+                .exec();
+
+            res.json(orders);
         }
     } catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json({ message: err.message });
     }
-})
+});
 
 //updating an order
 router.patch('/up/:oId', passport.authenticate('jwt', { session: false }), getOrder, async (req, res) => {
     if (req.body.trackingInfo != null || req.body.verified != null) {
         try {
             if (req.user.role != admin) {
-                res.send.json({message : 'you are not authorized to access this page!'})
+                res.send.json({ message: 'you are not authorized to access this page!' })
             } else {
                 const updatedOrder = await Order.updateOne({
                     userId: req.user._id,
@@ -188,7 +199,7 @@ router.patch('/up/:oId', passport.authenticate('jwt', { session: false }), getOr
 router.delete('/do/:oId', passport.authenticate('jwt', { session: false }), getOrder, async (req, res) => {
     try {
         if (req.user.role != admin) {
-            res.send.json({message : 'you are not authorized to access this page!'})
+            res.send.json({ message: 'you are not authorized to access this page!' })
         } else {
             const deletedOrder = await Order.deleteOne({
                 userId: req.user._id,

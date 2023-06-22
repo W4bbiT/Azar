@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../models/userModel';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Cart } from '../models/cartModel';
 import { Order } from '../models/orderModel';
+import { Review } from '../models/reviewModel';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,15 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  // Get all users 
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>('/api/user').pipe(
+  // Get all users with pagination
+  getAllUsers(page: number, limit: number): Observable<User[]> {
+    const params = new HttpParams()
+      .set('page', String(page))
+      .set('limit', String(limit));
+    return this.http.get<User[]>('/api/user', { params }).pipe(
       catchError(this.handleError)
     );
   }
-
   // Get one user
   getOneUser(): Observable<User> {
     return this.http.get<User>('/api/user/profile').pipe(
@@ -100,6 +103,14 @@ export class UsersService {
     return this.http.get<Order>(`/api/user/orders/${oId}`).pipe(
       catchError(this.handleError)
     );
+  }
+  //addreview and rating
+  addReview(pId: string, data: Review): Observable<any> {
+    return this.http.post<Review>(
+      `/api/user/add-review/${pId}`,
+      data,
+      httpOptions
+    )
   }
 
   // Handle errors

@@ -35,4 +35,7 @@ app.use('/api/user', cartRouter)
 const orderRouter = require('./routes/orders')
 app.use('/api/user', orderRouter)
 
+const reviewRouter = require('./routes/review')
+app.use('/api/user', reviewRouter)
+
 app.listen(3000, () => console.log('server started'))

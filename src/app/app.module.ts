@@ -15,6 +15,7 @@ import { GetAllOrderComponent } from './components/customerComponents/get-all-or
 import { GetOneOrderComponent } from './components/customerComponents/get-one-order/get-one-order.component';
 import { GetAllCartComponent } from './components/customerComponents/get-all-cart/get-all-cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HomePageComponent } from './components/customerComponents/home-page/home-page.component';
 import { LoginComponent } from './components/customerComponents/login/login.component';
@@ -32,6 +33,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SearchProductComponent } from './components/search-product/search-product.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AddReviewModalComponent } from './components/customerComponents/add-review-modal/add-review-modal.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { FeatureProductComponent } from './components/customerComponents/feature-product/feature-product.component';
+import { TopProductComponent } from './components/customerComponents/top-product/top-product.component';
 
 @NgModule({
   declarations: [
@@ -55,14 +60,19 @@ import { FooterComponent } from './components/footer/footer.component';
     CartMenuComponent,
     SearchProductComponent,
     HeaderComponent,
-    FooterComponent  
+    FooterComponent,
+    AddReviewModalComponent,
+    FeatureProductComponent,
+    TopProductComponent  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CarouselModule
   ],
   providers: [AuthService,
   {

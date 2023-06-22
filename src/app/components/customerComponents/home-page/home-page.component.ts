@@ -11,37 +11,56 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class HomePageComponent implements OnInit {
   products: Product[];
-  cart: Cart
+  cart: Cart;
+  currentPage: number = 1;
+  limit: number = 12;
+  totalPages: number;
+
   constructor(
     private userService: UsersService,
     private productService: ProductsService,
   ) { }
 
   ngOnInit(): void {
-    this.productService.getAllProducts()
-    .subscribe(
-      {
-        next:(products)=>{
-          this.products = products
-        },
-        error:()=>{
-          alert("No products found!")
-        }
-      }
-    );
-  }
-  addToCart(productId: string){
-    this.userService.addProductToMyCart(productId, this.cart)
-    .subscribe(
-      {
-        next: (res)=>{
-          alert("Product add to cart successfully")
-        },
-        error: ()=>{
-          alert("Product not added to your cart for some reason")
-        }
-      }
-    )
+    this.fetchProducts();
   }
 
+  fetchProducts(): void {
+    this.productService.getAllProducts(this.currentPage, this.limit)
+      .subscribe({
+        next: (response: any) => {
+          this.products = response.products;
+          this.totalPages = response.totalPages;
+        },
+        error: () => {
+          alert("No products found!");
+        }
+      });
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.fetchProducts();
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.fetchProducts();
+    }
+  }
+
+  addToCart(productId: string) {
+    this.userService.addProductToMyCart(productId, this.cart)
+      .subscribe({
+        next: (res) => {
+          alert("Product added to cart successfully");
+        },
+        error: () => {
+          alert("Product not added to your cart for some reason");
+        }
+      });
+  }
 }

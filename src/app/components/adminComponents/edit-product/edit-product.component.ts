@@ -29,15 +29,15 @@ export class EditProductComponent implements OnInit {
         this.product = product;
       });
     this.productForm = this.formBuilder.group({
-      ProductName: new FormControl(),
-      Category: new FormControl(),
-      Price: new FormControl(),
-      Discount: new FormControl(),
-      Description: new FormControl(),
-      ProductImage: new FormControl(),
+      productName: new FormControl(),
+      category: new FormControl(),
+      price: new FormControl(),
+      discount: new FormControl(),
+      description: new FormControl(),
+      productImage: new FormControl(),
       inStock: new FormControl(),
-      TopProduct: new FormControl(),
-      Ingredient: new FormControl(),
+      featureProduct: new FormControl(),
+      ingredient: new FormControl(),
     })
   }
   

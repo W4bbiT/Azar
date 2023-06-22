@@ -1,12 +1,12 @@
 <div class="" clickOutside (clickOutside)="clickedOutside()">
     <div class="flex">
-        <input type="text" class="w-72 shadow-reddish shadow-inner p-2 rounded-l-full bg-transparent"
+        <input type="text" class="w-72 shadow-blackish shadow-inner p-2 rounded-l-full bg-transparent text-whiteish"
             placeholder="Search for a product" [(ngModel)]="searchTerm" aria-label="Search"
             (keyup.enter)="searchProducts()" />
-        <button class="active:shadow-inner active:shadow-reddish shadow-sm shadow-reddish bg-transparent rounded-r-full"
+        <button class="active:shadow-inner active:shadow-blackish shadow-sm shadow-blackish bg-transparent rounded-r-full"
             (click)="searchProducts()" aria-label="Search Button">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6 mx-2">
+                stroke="currentColor" class="w-6 h-6 mx-2 stroke-whiteish">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
@@ -14,11 +14,11 @@
         </button>
     </div>
 
-    <div class="absolute rounded-3xl dropDownSearch z-10 origin-top" *ngIf="isSearchResultsOpened">
+    <div class="absolute rounded-3xl dropDownSearch z-10 origin-top text-whiteish" *ngIf="isSearchResultsOpened">
         <div class="flex justify-around p-5 w-72" *ngFor="let product of searchResults">
-            <img src="{{product.ProductImage}}" class="w-10 h-10 object-contain">
-            <a href="/products/{{product._id}}" class="">{{ product.ProductName }}</a>
-            <p>({{ product.Price | currency }})</p>
+            <img src="{{product.productImage}}" class="w-10 h-10 object-contain">
+            <a href="/products/{{product._id}}" class="">{{ product.productName }}</a>
+            <p>({{ product.price | currency }})</p>
         </div>
         <div class="text-center shadow-sm shadow-reddish rounded-b-3xl p-5 w-72"
             *ngIf="searchResults?.length === 0">

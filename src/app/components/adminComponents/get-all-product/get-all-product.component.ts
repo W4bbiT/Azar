@@ -14,7 +14,9 @@ export class GetAllProductComponent implements OnInit {
 
   products: Product[];
   cart: Cart;
-  
+  page:number=1;
+  limit:number=10;
+
   constructor(
     private productService: ProductsService,
     private userService: UsersService,
@@ -22,7 +24,7 @@ export class GetAllProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.productService.getAllProducts()
+    this.productService.getAllProducts(this.page, this.limit)
       .subscribe(
         {
           next:(products)=>{

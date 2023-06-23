@@ -1,4 +1,4 @@
-<div *ngIf="cart" class="glass rounded-l-3xl p-5 text-whiteish">
+<div *ngIf="cart" class="glass rounded-l-3xl p-5 text-reddish shadow-md shadow-reddish">
     <div class="text-right">
         <button class="px-2 shadow-sm shadow-blackish rounded-full active:shadow-inner active:shadow-blackish" (click)="emptyTheCart()">Empty Cart</button>
     </div>
@@ -14,17 +14,18 @@
         <tbody>
             <tr *ngFor="let c of cart.products" class="my-2 shadow-md">
                 <td class="py-4">
-                    <a href="/products/{{c.productId._id}}">
+                    <a href="/products/{{c.productId._id}}" class="text-center">
                         <img src="{{c.productId.productImage}}" class="w-20 h-20 object-contain rounded-lg">
+                        <p class="text-sm">{{c.productId.productName}}</p>
                     </a>
                 </td>
                 <td class="p-4 items-center">
-                    <input type="number" [(ngModel)]="c.quantity" class="shadow-inner shadow-blackish rounded-full w-16 px-2 py-1 text-black ">
-                    <button class="shadow-blackish shadow-sm bg-cyan-500 rounded-full p-1 ml-2  active:shadow-inner active:shadow-blackish" (click)="updateQuantity(c.productId._id)">Update</button>
+                    <input type="number" [(ngModel)]="c.quantity" class="shadow-inner shadow-blackish rounded-full w-16 px-2 py-1">
+                    <button class="text-whiteish shadow-blackish shadow-sm bg-cyan-500 rounded-full p-1 ml-2  active:shadow-inner active:shadow-blackish" (click)="updateQuantity(c.productId._id)">Update</button>
                 </td>
                 <td class="py-4">${{(c.quantity * (c.price- (c.discount/100)*c.price)).toFixed(2)}}</td>
                 <td class="py-4">
-                    <button class="shadow-blackish shadow-sm bg-red-500 rounded-full p-1  active:shadow-inner active:shadow-blackish" (click)="pullProduct(c.productId._id)">Delete</button>
+                    <button class="text-whiteish shadow-blackish shadow-sm bg-red-500 rounded-full p-1  active:shadow-inner active:shadow-blackish" (click)="pullProduct(c.productId._id)">Delete</button>
                 </td>
             </tr>
         </tbody>
@@ -37,6 +38,6 @@
         </tfoot>
     </table>
     <div class="text-right text-lg">
-        <button class="shadow-sm shadow-blackish p-1 rounded-full bg-emerald-500 active:shadow-inner active:shadow-blackish" (click)="checkingOut()">Place Order</button>
+        <button class="text-whiteish shadow-sm shadow-blackish p-1 rounded-full bg-emerald-500 active:shadow-inner active:shadow-blackish" (click)="checkingOut()">Place Order</button>
     </div>
 </div>

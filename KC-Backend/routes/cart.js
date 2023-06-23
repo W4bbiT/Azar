@@ -41,8 +41,8 @@ router.post('/addtocart/:pId', passport.authenticate('jwt', { session: false }),
             return res.status(404).send({ message: 'Item not found' });
         }
         const productId = item;
-        const price = item.Price;
-        const discount = item.Discount;
+        const price = item.price;
+        const discount = item.discount;
         const inStock = item.inStock;
         if (inStock < quantity) {
             return res.status(400).send({ message: 'Insufficient stock' });

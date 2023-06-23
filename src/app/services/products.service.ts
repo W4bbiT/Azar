@@ -61,6 +61,7 @@ export class ProductsService {
   searchProduct(productName: string): Observable<Product[]> {
     return this.http.get<Product[]>(`/api/product/search?name=${productName}`);
   }
+
   // Get reviews for a product with pagination
   getProductReviews(pId: string, page: number, limit: number): Observable<any> {
     const params = new HttpParams()

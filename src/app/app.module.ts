@@ -37,6 +37,8 @@ import { AddReviewModalComponent } from './components/customerComponents/add-rev
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { FeatureProductComponent } from './components/customerComponents/feature-product/feature-product.component';
 import { TopProductComponent } from './components/customerComponents/top-product/top-product.component';
+import { HeroPageComponent } from './components/customerComponents/hero-page/hero-page.component';
+import { SearchResultComponent } from './components/customerComponents/search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { TopProductComponent } from './components/customerComponents/top-product
     FooterComponent,
     AddReviewModalComponent,
     FeatureProductComponent,
-    TopProductComponent  
+    TopProductComponent,
+    HeroPageComponent,
+    SearchResultComponent  
   ],
   imports: [
     BrowserModule,

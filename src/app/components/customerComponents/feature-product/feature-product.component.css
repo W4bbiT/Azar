@@ -7,12 +7,12 @@ button {
     font-weight: 600;
     width: 120px;
     cursor: pointer;
-    transform: skew(-21deg);
+    transform: skew(-15deg);
   }
   
   p {
     display: inline-block;
-    transform: skew(-21deg);
+    transform: skew(-15deg);
   }
   
   button::before {
@@ -22,7 +22,7 @@ button {
     bottom: 0;
     right: 100%;
     left: 0;
-    background: rgb(20, 20, 20);
+    background: rgb(0, 172, 49);
     opacity: 0;
     z-index: -1;
     transition: all 0.5s;

@@ -1,9 +1,9 @@
 <div clickOutside (clickOutside)="clickedOutside()">
   <div class="flex items-center cursor-pointer" *ngIf="currentUser" (click)="toggleMenu()">
-    <img src="{{ currentUser.profileImage }}" class="w-12 h-12 p-1 rounded-full border-2 border-blackish" />
+    <img src="{{ currentUser.profileImage }}" class="w-12 h-12 p-1 rounded-full border-2 border-reddish" />
   </div>
   <div
-    class="absolute mt-3 -ml-5 w-48 p-5 rounded-lg text-reddish origin-top dropDownProfile z-20 shadow-blackish shadow-md"
+    class="absolute mt-3 -ml-5 w-48 p-5 rounded-lg text-reddish origin-top dropDownProfile z-20 shadow-reddish shadow-md"
     *ngIf="isMenuOpened">
     <div>
       <div class="absolute triangle-up"></div>

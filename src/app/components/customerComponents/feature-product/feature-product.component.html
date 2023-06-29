@@ -1,6 +1,6 @@
 <owl-carousel-o [options]="carouselOptions">
   <ng-container *ngFor="let product of products">
-    <ng-template carouselSlide [dataMerge]="1">
+    <ng-template carouselSlide>
       <div class="relative">
         <img class="h-96 object-cover" [src]="product.productImage" alt="{{ product.productName }}" />
 
@@ -9,8 +9,8 @@
           {{ product.productName }}</h1>
 
         <div class="absolute font-semibold top-2/3 left-3/4 transform -translate-x-1/4 -translate-y-1/4 text-right">
-          <p class="bg-white p-2 mb-2">Now for just <span class="text-green-500">{{product.price | currency}}</span></p>
-          <button class="mx-2">Grab!</button>
+          <p class="bg-white p-2 mb-2">Now for just <span class="text-reddish">{{product.price | currency}}</span></p>
+          <button (click)="goToProductPage(product._id)" class="mx-2">Grab!</button>
         </div>
       </div>
     </ng-template>

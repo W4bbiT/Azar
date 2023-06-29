@@ -93,12 +93,11 @@ router.get('/search', async (req, res) => {
     }
     try {
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 5;
+        const limit = parseInt(req.query.limit) || 7;
         const regex = new RegExp(productName, 'i'); // Case-insensitive search regex
         const products = await Product.find({ productName: regex })
             .skip((page - 1) * limit)
             .limit(limit);
-
         res.json(products);
     } catch (err) {
         res.status(500).json({ message: err.message });

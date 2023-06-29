@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/models/productModel';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -11,7 +12,8 @@ export class FeatureProductComponent implements OnInit {
   products: any
  
   constructor(
-    private productService: ProductsService
+    private productService: ProductsService,
+    private router: Router
   ){  }
 
   ngOnInit():void{
@@ -25,13 +27,17 @@ export class FeatureProductComponent implements OnInit {
     })
   }
 
+  goToProductPage(productId: string):void {
+    this.router.navigateByUrl("/products/" + productId)
+  }
+
   carouselOptions = {
     items: 1,
     loop: true,
-    nav: true,
+    nav: false,
     dots: true,
     navText: ['', ''],
-    autoplay: false,
+    autoplay: true,
     autoplayTimeout: 5000,
     autoplayHoverPause: true,
   };

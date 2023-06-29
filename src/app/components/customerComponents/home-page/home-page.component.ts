@@ -13,7 +13,7 @@ export class HomePageComponent implements OnInit {
   products: Product[];
   cart: Cart;
   currentPage: number = 1;
-  limit: number = 12;
+  limit: number = 9;
   totalPages: number;
 
   constructor(

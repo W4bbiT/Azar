@@ -8,19 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CartMenuComponent implements OnInit {
   @Input() quantity: string
   isMenuOpened: boolean = false
-
   constructor() { }
-
   ngOnInit(): void {
-
   }
-
   toggleMenu(): void {
     this.isMenuOpened = !this.isMenuOpened;
   }
-
   clickedOutside(): void {
     this.isMenuOpened = false;
   }
-
 }

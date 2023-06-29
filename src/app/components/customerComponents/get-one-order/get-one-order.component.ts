@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from 'src/app/models/orderModel';
 import { Review } from 'src/app/models/reviewModel';
 import { ProductsService } from 'src/app/services/products.service';
@@ -14,14 +14,17 @@ import { UsersService } from 'src/app/services/users.service';
 export class GetOneOrderComponent implements OnInit {
   order: Order;
   id: string;
-  review: Review;
+  review: string;
   reviewForm: FormGroup;
   isReviewModalOpened: boolean = false;
+  pId: string
+  rating: number;
+
 
   constructor(
     private userService: UsersService,
     private route: ActivatedRoute,
-    private productService: ProductsService,
+    private router: Router,
     private formBuilder: FormBuilder
   ) {}
 
@@ -46,20 +49,29 @@ export class GetOneOrderComponent implements OnInit {
       review: new FormControl()
     });
   }
+  setRating(rating: number): void {
+    this.rating = rating;
+  }
 
-  openToReview(): void {
+  openToReview(pId: string): void {
+    this.pId = pId
     this.isReviewModalOpened = !this.isReviewModalOpened;
   }
 
-  addReview(pId: string) {
-    this.userService.addReview(pId, this.review).subscribe({
+  addReview() {
+    this.reviewForm.patchValue({ 
+      rating: this.rating
+    });
+    this.userService.addReview(this.pId, this.reviewForm.value).subscribe({
       next: () => {
-        console.log('Success');
+        alert("Successfully added the review")
       },
       error: (err) => {
-        console.log(err);
+        alert("Somethng went wrong!")
       },
     });
+    this.router.navigateByUrl('/products/' + this.pId)
+  
   }
 
   clickedOutside(): void {

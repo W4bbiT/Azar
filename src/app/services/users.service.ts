@@ -51,6 +51,18 @@ export class UsersService {
     );
   }
 
+  //addreview and rating
+  addReview(pId: string, data: Review): Observable<Review> {
+    console.log("Id: " + pId + "rating: " + data.rating + "review: "+ data.review)
+    return this.http.post<Review>(
+      `/api/user/review/add-review/${pId}`,
+      data,
+      httpOptions
+    ).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   // Get cart for user
   getCartForUser(): Observable<Cart> {
     return this.http.get<Cart>('/api/user/cart').pipe(
@@ -103,14 +115,6 @@ export class UsersService {
     return this.http.get<Order>(`/api/user/orders/${oId}`).pipe(
       catchError(this.handleError)
     );
-  }
-  //addreview and rating
-  addReview(pId: string, data: Review): Observable<any> {
-    return this.http.post<Review>(
-      `/api/user/add-review/${pId}`,
-      data,
-      httpOptions
-    )
   }
 
   // Handle errors

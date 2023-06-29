@@ -36,6 +36,6 @@ const orderRouter = require('./routes/orders')
 app.use('/api/user', orderRouter)
 
 const reviewRouter = require('./routes/review')
-app.use('/api/user', reviewRouter)
+app.use('/api/user/review', reviewRouter)
 
 app.listen(3000, () => console.log('server started'))

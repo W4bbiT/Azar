@@ -1,7 +1,1 @@
-{{searchResults |json}}
-<div class="flex justify-around p-5 w-72" *ngFor="let product of searchResults">
-    <img src="{{product.productImage}}" class="w-10 h-10 object-contain">
-    <a [routerLink]="['/products', product._id]">{{ product.productName }}</a>
-    <p>({{ product.price | currency }})</p>
-  </div>
-  
+{{searchResults | json}}

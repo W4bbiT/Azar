@@ -40,6 +40,8 @@ import { TopProductComponent } from './components/customerComponents/top-product
 import { HeroPageComponent } from './components/customerComponents/hero-page/hero-page.component';
 import { SearchResultComponent } from './components/customerComponents/search-result/search-result.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -76,7 +76,7 @@ import { SearchResultComponent } from './components/customerComponents/search-re
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    CarouselModule
+    CarouselModule,
   ],
   providers: [AuthService,
   {

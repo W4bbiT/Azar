@@ -31,7 +31,7 @@ export class TopProductComponent implements OnInit  {
   }
 
   carouselOptions = {
-    items: 3,
+    items: 1,
     loop: true,
     nav: false,
     dots: true,
@@ -39,6 +39,19 @@ export class TopProductComponent implements OnInit  {
     autoplay: true,
     autoplayTimeout: 5000,
     autoplayHoverPause: true,
+    margin: 20,
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      600: {
+        items: 3,
+      },
+      1000: {
+        items: 5,
+      }
+    }
   };
 
 }

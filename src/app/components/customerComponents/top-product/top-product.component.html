@@ -2,17 +2,16 @@
   <h2 class="text-2xl text-reddish font-bold">Top Rated</h2>
 </div>
 <owl-carousel-o [options]="carouselOptions" class="text-reddish">
-  <ng-container *ngFor="let product of topProducts">
-    <ng-template carouselSlide class="">
-      <div class="relative">
-        <img class= "h-40 rounded-md shadow-md object-cover" [src]="product.productImage" alt="{{ product.productName }}" />
-        <h1
-          class="text-2xl font-semibold mt-4 text-center">
-          {{ product.productName }}</h1>
-
-        <div class="flex flex-col items-center mt-6">
-          <p class="">{{product.description}}</p>
-          <button (click)="goToProductPage(product._id)" class="">Buy Now!</button>
+  <ng-container>
+    <ng-template carouselSlide class=""  *ngFor="let product of topProducts">
+      <div class="relative card-container">
+        <div class="card">
+          <img class="" [src]="product.productImage" alt="{{ product.productName }}" />
+          <h1 class="text-2xl font-semibold mt-4 text-center">{{ product.productName }}</h1>
+          <div class="flex flex-col items-center mt-6">
+            <p class="">{{product.description}}</p>
+            <button (click)="goToProductPage(product._id)" class="">Buy Now!</button>
+          </div>
         </div>
       </div>
     </ng-template>

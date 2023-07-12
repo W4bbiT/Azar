@@ -1,19 +1,24 @@
 <div class="flex justify-center">
   <h2 class="text-2xl text-reddish font-bold">Top Rated</h2>
 </div>
-<owl-carousel-o [options]="carouselOptions" class="text-reddish">
-  <ng-container>
-    <ng-template carouselSlide class=""  *ngFor="let product of topProducts">
-      <div class="relative card-container">
-        <div class="card">
-          <img class="" [src]="product.productImage" alt="{{ product.productName }}" />
-          <h1 class="text-2xl font-semibold mt-4 text-center">{{ product.productName }}</h1>
-          <div class="flex flex-col items-center mt-6">
-            <p class="">{{product.description}}</p>
-            <button (click)="goToProductPage(product._id)" class="">Buy Now!</button>
-          </div>
+
+
+<owl-carousel-o [options]="carouselOptions">
+  <ng-container *ngFor="let product of topProducts">
+    <ng-template carouselSlide>
+      <div class="relative">
+        <img class="h-96 object-contain" [src]="product.productImage" alt="{{ product.productName }}" />
+
+        <h1
+          class="">
+          {{ product.productName }}</h1>
+
+        <div class="">
+          <p class="bg-white p-2 mb-2">Now for just <span class="text-reddish">{{product.price | currency}}</span></p>
+          <button (click)="goToProductPage(product._id)" class="mx-2">Grab!</button>
         </div>
       </div>
     </ng-template>
   </ng-container>
 </owl-carousel-o>
+

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -39,8 +39,6 @@ import { FeatureProductComponent } from './components/customerComponents/feature
 import { TopProductComponent } from './components/customerComponents/top-product/top-product.component';
 import { HeroPageComponent } from './components/customerComponents/hero-page/hero-page.component';
 import { SearchResultComponent } from './components/customerComponents/search-result/search-result.component';
-
-
 
 @NgModule({
   declarations: [
@@ -89,6 +87,7 @@ import { SearchResultComponent } from './components/customerComponents/search-re
   UsersService,
   ProductsService
 ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -1,33 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/models/productModel';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-feature-product',
   templateUrl: './feature-product.component.html',
-  styleUrls: ['./feature-product.component.css']
+  styleUrls: ['./feature-product.component.css'],
 })
 export class FeatureProductComponent implements OnInit {
   products: any
- 
+
   constructor(
     private productService: ProductsService,
     private router: Router
-  ){  }
+  ) { }
 
-  ngOnInit():void{
+  ngOnInit(): void {
     this.productService.getFeaturedProduct().subscribe({
-      next:(data)=>{
+      next: (data) => {
         this.products = data
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err)
       }
     })
   }
 
-  goToProductPage(productId: string):void {
+  goToProductPage(productId: string): void {
     this.router.navigateByUrl("/products/" + productId)
   }
 
@@ -41,4 +40,5 @@ export class FeatureProductComponent implements OnInit {
     autoplayTimeout: 5000,
     autoplayHoverPause: true,
   };
+
 }

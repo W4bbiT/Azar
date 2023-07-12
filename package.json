@@ -23,7 +23,7 @@
     "moment": "^2.29.4",
     "ngx-owl-carousel-o": "^16.0.0",
     "rxjs": "~7.5.0",
-    "swiper": "^9.4.1",
+    "swiper": "^10.0.3",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

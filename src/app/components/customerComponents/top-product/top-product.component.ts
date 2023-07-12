@@ -26,32 +26,17 @@ export class TopProductComponent implements OnInit  {
     })
   }
 
-  goToProductPage(productId: string):void {
+  goToProductPage(productId: string): void {
     this.router.navigateByUrl("/products/" + productId)
   }
 
   carouselOptions = {
-    items: 1,
+    items: 3,
     loop: true,
-    nav: false,
+    nav: true,
     dots: true,
-    navText: ['', ''],
-    autoplay: true,
-    autoplayTimeout: 5000,
-    autoplayHoverPause: true,
-    margin: 20,
-    responsiveClass: true,
-    responsive: {
-      0: {
-        items: 1,
-      },
-      600: {
-        items: 3,
-      },
-      1000: {
-        items: 5,
-      }
-    }
-  };
-
+    margin: 10,
+    center: true,
+    stagePadding:15
+    };
 }

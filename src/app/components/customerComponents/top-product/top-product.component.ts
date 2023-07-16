@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
-
+import Swiper from 'swiper';
 @Component({
   selector: 'app-top-product',
   templateUrl: './top-product.component.html',
@@ -9,7 +9,9 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class TopProductComponent implements OnInit  {
   topProducts: any
- 
+  @ViewChild('swiper')
+  swiperRef: ElementRef | undefined;
+  swiper?: Swiper;
   constructor(
     private productService: ProductsService,
     private router: Router
@@ -26,17 +28,24 @@ export class TopProductComponent implements OnInit  {
     })
   }
 
+  swiperSlideChanged(e: any) {
+    console.log('changed: ', e);
+  }
+
+  swiperReady() {
+    this.swiper = this.swiperRef?.nativeElement.swiper;
+  }
+
+  goNext() {
+    this.swiper?.slideNext();
+  }
+
+  goPrev() {
+    this.swiper?.slidePrev();
+  }
+
   goToProductPage(productId: string): void {
     this.router.navigateByUrl("/products/" + productId)
   }
 
-  carouselOptions = {
-    items: 3,
-    loop: true,
-    nav: true,
-    dots: true,
-    margin: 10,
-    center: true,
-    stagePadding:15
-    };
 }

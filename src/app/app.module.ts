@@ -17,6 +17,7 @@ import { GetAllCartComponent } from './components/customerComponents/get-all-car
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 import { HomePageComponent } from './components/customerComponents/home-page/home-page.component';
 import { LoginComponent } from './components/customerComponents/login/login.component';
 import { ProfileComponent } from './components/customerComponents/profile/profile.component';
@@ -39,7 +40,10 @@ import { FeatureProductComponent } from './components/customerComponents/feature
 import { TopProductComponent } from './components/customerComponents/top-product/top-product.component';
 import { HeroPageComponent } from './components/customerComponents/hero-page/hero-page.component';
 import { SearchResultComponent } from './components/customerComponents/search-result/search-result.component';
-
+// import function to register Swiper custom elements
+import { register } from 'swiper/element/bundle';
+// register Swiper custom elements
+register();
 @NgModule({
   declarations: [
     AppComponent,

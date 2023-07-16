@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-feature-product',
@@ -9,7 +10,9 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class FeatureProductComponent implements OnInit {
   products: any
-
+  @ViewChild('swiper')
+  swiperRef: ElementRef | undefined;
+  swiper?: Swiper;
   constructor(
     private productService: ProductsService,
     private router: Router
@@ -30,15 +33,20 @@ export class FeatureProductComponent implements OnInit {
     this.router.navigateByUrl("/products/" + productId)
   }
 
-  carouselOptions = {
-    items: 1,
-    loop: true,
-    nav: false,
-    dots: true,
-    navText: ['', ''],
-    autoplay: true,
-    autoplayTimeout: 5000,
-    autoplayHoverPause: true,
-  };
 
+  swiperSlideChanged(e: any) {
+    console.log('changed: ', e);
+  }
+
+  swiperReady() {
+    this.swiper = this.swiperRef?.nativeElement.swiper;
+  }
+
+  goNext() {
+    this.swiper?.slideNext();
+  }
+
+  goPrev() {
+    this.swiper?.slidePrev();
+  }
 }

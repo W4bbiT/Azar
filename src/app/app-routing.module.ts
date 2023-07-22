@@ -17,10 +17,12 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoggedInAuthGuard } from './guards/logged-in-auth.guard';
 import { Routes, RouterModule } from '@angular/router';
 import { SearchResultComponent } from './components/customerComponents/search-result/search-result.component';
+import { HeroPageComponent } from './components/customerComponents/hero-page/hero-page.component';
 
 const routes: Routes = [
   //homepage
-  { path: '', component: HomePageComponent, pathMatch: 'full' },
+  { path: '', component: HeroPageComponent, pathMatch: 'full' },
+  {path: 'home', component: HomePageComponent},
   { path: 'search-results', component: SearchResultComponent}, 
   //users
   { path: 'signin', component: LoginComponent, canActivate:[LoggedInAuthGuard]},

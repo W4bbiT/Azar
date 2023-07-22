@@ -1,0 +1,70 @@
+
+body{
+    margin : 0;
+}
+.wrapper {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    perspective: 10px;
+}
+
+header{
+    position: relative;
+    display: flex;
+    height: 100%;
+    transform-style: preserve-3d;
+    z-index: -1;
+}
+
+.background{
+    transform: translateZ(-10px) scale(1.5);
+}
+.foreground{
+    transform: translateX(250px) translateY(200px) translateZ(-5px);
+
+}
+
+.background, .foreground, .title{
+    position: absolute;
+    object-fit: contain;    
+}
+.title{
+    transform: translateY(-100px)  translateZ(-7px) scale(1);
+}
+
+
+
+/* Styles for the hero section */
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    color: #c8c8c8;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.3rem;
+    color: #949494;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #bdbdbd;
+    margin-bottom: 15px;
+}
+
+ul li {
+    font-size: 1.2rem;
+    color: #aeaeae;
+    margin-bottom: 12px;
+}
+
+/* Add more custom styles as needed */

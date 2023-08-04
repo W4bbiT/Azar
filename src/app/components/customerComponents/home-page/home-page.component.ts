@@ -15,6 +15,7 @@ export class HomePageComponent implements OnInit {
   currentPage: number = 1;
   limit: number = 9;
   totalPages: number;
+  selectedCategory: string[]; 
 
   constructor(
     private userService: UsersService,
@@ -36,6 +37,10 @@ export class HomePageComponent implements OnInit {
           alert("No products found!");
         }
       });
+  }
+
+  isSelectedCategory(category: string): boolean {
+    return this.selectedCategory.includes(category);
   }
 
   previousPage() {

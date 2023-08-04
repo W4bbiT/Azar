@@ -37,7 +37,7 @@ export class EditProductComponent implements OnInit {
       productImage: new FormControl(),
       inStock: new FormControl(),
       featureProduct: new FormControl(),
-      ingredient: new FormControl(),
+      details: new FormControl(),
     })
   }
   

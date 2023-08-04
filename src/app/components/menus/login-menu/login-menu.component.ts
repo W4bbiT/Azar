@@ -14,7 +14,8 @@ export class LoginMenuComponent implements OnInit {
   email: string
   currentUser: User
   msg: String
-  isMenuOpened: boolean = false
+  isLoginMenuOpened: boolean = false
+  isRegisterMenuOpened: boolean = false
 
   constructor(private tokenStorageService: TokenStorageService,
     private userService: UsersService) { } 
@@ -41,12 +42,17 @@ export class LoginMenuComponent implements OnInit {
   }
 
     
-  toggleMenu(): void {
-    this.isMenuOpened = !this.isMenuOpened;
+  toggleLoginMenu(): void {
+    this.isLoginMenuOpened = !this.isLoginMenuOpened;
+  }
+
+  toggleRegisterMenu(): void {
+    this.isRegisterMenuOpened = !this.isRegisterMenuOpened;
   }
 
   clickedOutside(): void {
-    this.isMenuOpened = false;
+    this.isLoginMenuOpened = false;
+this.isRegisterMenuOpened = false;
   }
 
 }

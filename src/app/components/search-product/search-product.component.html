@@ -1,4 +1,4 @@
-<div class="text-reddish" clickOutside (clickOutside)="clickedOutside()">
+<div class="text-whiteish" clickOutside (clickOutside)="clickedOutside()">
     <div class="flex">
         <input type="text" class="w-44 shadow-reddish shadow-inner p-2 rounded-l-full bg-transparent focus:w-72 ease-in transition-all"
             placeholder="Search for a product" [formControl]="searchTerm" aria-label="Search" />
@@ -13,7 +13,7 @@
         </button>
     </div>
 
-    <div class="absolute rounded-3xl dropDownSearch z-10 origin-top text-reddish shadow-sm shadow-reddish" *ngIf="isSearchResultsOpened">
+    <div class="absolute rounded-3xl dropDownSearch z-10 origin-top text-whiteish shadow-sm shadow-reddish" *ngIf="isSearchResultsOpened">
         <div class="flex justify-around p-5 w-72" *ngFor="let product of searchResults">
             <img src="{{product.productImage}}" class="w-10 h-10 object-contain">
             <div class="w-7/12">

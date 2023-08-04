@@ -1,4 +1,4 @@
-<div class="flex flex-wrap m-5" *ngIf="orders">
+<div class="flex flex-wrap m-5 text-whiteish" *ngIf="orders">
     <div *ngFor="let ord of orders; let first = first" class="shadow-sm shadow-reddish py-5 px-3 m-5 h-48 w-80 rounded-3xl"
         [ngClass]="{ 'w-full shadow-md': first, 'w-80': !first }">
         <p class="font-bold shadow-sm shadow-reddish rounded-full text-center">Order Date: {{ ord.orderDate | date }}</p>

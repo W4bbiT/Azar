@@ -7,7 +7,7 @@ const ProductSchema = new mongoose.Schema({
       index:true,
   },
   category: {
-    type: String,
+    type: [String],
   },
   price: {
     type: Number,
@@ -18,9 +18,9 @@ const ProductSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  productImage: {
+  productImage: [{
     type: String,
-  },
+  }],
   createdOn: {
     type: Date,
     default: Date.now
@@ -32,8 +32,10 @@ const ProductSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  ingredient: {
-    type: String,
+  details: {
+    size: String,
+    color: String,
+    info: String,
   },
   reviews: [{
     type: mongoose.Schema.Types.ObjectId,

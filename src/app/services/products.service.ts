@@ -23,7 +23,7 @@ export class ProductsService {
       .set('page', String(page))
       .set('limit', String(limit));
     return this.http.get<Product[]>('/api/product/', { params });
-    
+
   }
   //get a product by id
   getOneProduct(pId: String): Observable<Product> {
@@ -33,7 +33,7 @@ export class ProductsService {
   //top product limit 10
   getTopProducts(): Observable<Product> {
     return this.http.get<Product>(`/api/product/top-products`)
-  }  
+  }
   getFeaturedProduct(): Observable<Product> {
     return this.http.get<Product>(`/api/product/featured-products`)
   }
@@ -62,11 +62,22 @@ export class ProductsService {
     return this.http.get<Product[]>(`/api/product/search?name=${productName}`);
   }
 
+  // search products by name
+  searchCategory(category: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`/api/product/category-search/${category}`);
+  }
+
+
   // Get reviews for a product with pagination
   getProductReviews(pId: string, page: number, limit: number): Observable<any> {
     const params = new HttpParams()
       .set('page', String(page))
       .set('limit', String(limit));
     return this.http.get(`/api/product/${pId}/reviews`, { params });
+  }
+
+  // Get reviews for a product with pagination
+  getTopReviews(): Observable<any> {
+    return this.http.get<any>('/api/user/review/get-top-reviews');
   }
 }

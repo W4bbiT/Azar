@@ -53,7 +53,7 @@ router.get('/top-products', async (req, res) => {
                     createdOn: { $first: '$createdOn' },
                     inStock: { $first: '$inStock' },
                     featureProduct: { $first: '$featureProduct' },
-                    ingredient: { $first: '$ingredient' },
+                    details: { $first: '$details' },
                     averageRating: {
                         $avg: '$reviewDetails.rating' // Calculate the average rating
                     }
@@ -93,9 +93,28 @@ router.get('/search', async (req, res) => {
     }
     try {
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 7;
+        const limit = parseInt(req.query.limit) || 10;
         const regex = new RegExp(productName, 'i'); // Case-insensitive search regex
         const products = await Product.find({ productName: regex })
+            .skip((page - 1) * limit)
+            .limit(limit);
+        res.json(products);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// Search products by category from URL parameter
+router.get('/category-search/:category', async (req, res) => {
+    const category = req.params.category;
+    if (!category) {
+        return res.status(400).json({ message: 'Invalid category' });
+    }
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const regex = new RegExp(category, 'i'); // Case-insensitive search regex
+        const products = await Product.find({ category: regex })
             .skip((page - 1) * limit)
             .limit(limit);
         res.json(products);
@@ -108,7 +127,7 @@ router.get('/search', async (req, res) => {
 // Get a single product by ID
 router.get('/:pId', getProduct, (req, res) => {
     try {
-        res.json(res.product);
+        res.json(res.product).populate('details');
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

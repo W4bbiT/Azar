@@ -1,23 +1,37 @@
-<div class="shadow-reddish m-10 rounded-3xl">
-    <div *ngIf="product" class="flex justify-start p-5">
-        <div>
-            <img class="w-96 h-96 object-contain shadow-sm shadow-reddish rounded-3xl" [src]="product.productImage"
-                alt="Product Image">
-        </div>
-        <div class="px-5">
-            <h2 class="text-2xl font-bold shadow-sm shadow-reddish text-center rounded-full mb-4">{{ product.productName
-                }}</h2>
-            <p class="mb-4">Description: {{ product.description }}</p>
-            <p class="text-lg font-bold mb-2">Price: {{ product.price | currency }}</p>
-            <p class="mb-4">Category: {{ product.category }}</p>
-            <p class="mb-4">In Stock: {{ product.inStock }}</p>
-            <p class="mb-4">Ingredients: {{ product.ingredient }}</p>
-            <div class="float-right">
-                <button (click)="addToCart(product._id)"
-                    class="shadow-sm shadow-blackish font-bold py-2 px-4 rounded-full active:shadow:inner active:shadow:blackish">
-                    Add to Cart
-                </button>
+<div class="shadow-reddish my-5 rounded-3xl text-whiteish">
+    <div *ngIf="product" class="">
+        <div class="md:flex">
+            <div>
+                <ngx-flicking [options]="{ circular: true ,panelsPerView: 1 }" [plugins]="plugins">
+                    <div flicking-panel class="card-panel justify-center" *ngFor="let image of product.productImage">
+                        <img class="object-contain h-96" src="{{image}}" />
+                    </div>
+                    <span in-viewport class="flicking-arrow-prev"></span>
+                    <span in-viewport class="flicking-arrow-next"></span>
+                </ngx-flicking>
             </div>
+
+            <div class="px-5">
+                <h2 class="text-2xl font-bold mb-4">{{ product.productName
+                    }}</h2>
+                <p class="mb-4">Description: {{ product.description }}</p>
+                <p class="text-lg font-bold mb-2">Price: {{ product.price | currency }}</p>
+                <p class="mb-4">Category: {{ product.category }}</p>
+                <p class="mb-4">In Stock: {{ product.inStock }}</p>
+                <div class="float-right">
+                    <button (click)="addToCart(product._id)"
+                        class="shadow-sm shadow-blackish font-bold py-2 px-4 rounded-full active:shadow:inner active:shadow:blackish">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-5">
+            <h3 class="text-xl font-bold">Details</h3>
+            <p class="mb-4">Size: {{ product.details.size }}</p>
+            <p class="mb-4">Color: {{ product.details.color }}</p>
+            <p class="mb-4">Info: {{ product.details.info }}</p>
         </div>
     </div>
     <div class="shadow-sm shadow-reddish p-1 rounded-3xl" *ngIf="reviews">
@@ -58,8 +72,8 @@
         <!-- Previous Button -->
         <button class="p-1 shadow-sm shadow-reddish rounded-full mr-2 active:shadow-inner active:shadow-reddish"
             (click)="previousPage()" [disabled]="page === 1">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                class="w-6 h-6 stroke-reddish">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6 stroke-reddish">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
         </button>
@@ -67,8 +81,8 @@
         <!-- Next Button -->
         <button class="p-1 shadow-sm shadow-reddish rounded-full ml-2 active:shadow-inner active:shadow-reddish"
             (click)="nextPage()" [disabled]="page === reviews.totalPages">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                class="w-6 h-6 stroke-reddish">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6 stroke-reddish">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
         </button>

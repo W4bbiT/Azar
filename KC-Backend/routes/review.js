@@ -14,6 +14,17 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 router.use(passport.initialize())
 
+router.get('/get-top-reviews', async (req, res) => { 
+    try{
+        const reviews = await Review.find({
+            rating: { $gt: 4.9 } // Using the $gt operator to find reviews with rating greater than 5
+        });
+        res.json(reviews);
+    }catch (err){
+        res.status(500).json({ message: err.message });
+    }
+})
+
 // reviews post
 router.post('/add-review/:pId', passport.authenticate('jwt', { session: false }), getProduct, async (req, res) => {
     try {

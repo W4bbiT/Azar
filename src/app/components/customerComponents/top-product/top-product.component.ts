@@ -1,7 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
-import Swiper from 'swiper';
+import { Plugin } from '@egjs/ngx-flicking';
+import { Perspective } from '@egjs/flicking-plugins';
+import { AutoPlay } from "@egjs/flicking-plugins";
+
 @Component({
   selector: 'app-top-product',
   templateUrl: './top-product.component.html',
@@ -9,9 +12,7 @@ import Swiper from 'swiper';
 })
 export class TopProductComponent implements OnInit  {
   topProducts: any
-  @ViewChild('swiper')
-  swiperRef: ElementRef | undefined;
-  swiper?: Swiper;
+
   constructor(
     private productService: ProductsService,
     private router: Router
@@ -21,6 +22,7 @@ export class TopProductComponent implements OnInit  {
     this.productService.getTopProducts().subscribe({
       next:(data)=>{
         this.topProducts = data
+        console.log(data)
       },
       error:(err)=>{
         console.log(err)
@@ -28,21 +30,7 @@ export class TopProductComponent implements OnInit  {
     })
   }
 
-  swiperSlideChanged(e: any) {
-    console.log('changed: ', e);
-  }
-
-  swiperReady() {
-    this.swiper = this.swiperRef?.nativeElement.swiper;
-  }
-
-  goNext() {
-    this.swiper?.slideNext();
-  }
-
-  goPrev() {
-    this.swiper?.slidePrev();
-  }
+  public plugins: Plugin[] = [new Perspective({ rotate: 0.1 }),new AutoPlay({ duration: 5000, direction: "NEXT", stopOnHover: false })];
 
   goToProductPage(productId: string): void {
     this.router.navigateByUrl("/products/" + productId)

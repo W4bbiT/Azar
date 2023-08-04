@@ -74,7 +74,7 @@ router.post('/ap', passport.authenticate('jwt', { session: false }), async (req,
         discount: req.body.discount,
         productImage: req.body.productImage,
         createdOn: Date.now(),
-        ingredient: req.body.ingredient,
+        details: req.body.details,
         featureProduct: req.body.featureProduct
     })
     try {
@@ -115,8 +115,8 @@ router.patch('/up/:id', passport.authenticate('jwt', { session: false }), getPro
     if (req.body.featureProduct != null) {
         res.product.featureProduct = req.body.featureProduct
     }
-    if (req.body.ingredient != null) {
-        res.product.ingredient = req.body.ingredient
+    if (req.body.details != null) {
+        res.product.details = req.body.details
     }
     try {
         if (req.user.role != admin) {

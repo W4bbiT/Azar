@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -16,7 +16,6 @@ import { GetOneOrderComponent } from './components/customerComponents/get-one-or
 import { GetAllCartComponent } from './components/customerComponents/get-all-cart/get-all-cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 import { HomePageComponent } from './components/customerComponents/home-page/home-page.component';
 import { LoginComponent } from './components/customerComponents/login/login.component';
@@ -39,10 +38,10 @@ import { FeatureProductComponent } from './components/customerComponents/feature
 import { TopProductComponent } from './components/customerComponents/top-product/top-product.component';
 import { HeroPageComponent } from './components/customerComponents/hero-page/hero-page.component';
 import { SearchResultComponent } from './components/customerComponents/search-result/search-result.component';
-// import function to register Swiper custom elements
-import { register } from 'swiper/element/bundle';
-// register Swiper custom elements
-register();
+import { SideMenuComponent } from './components/menus/side-menu/side-menu.component';
+import { CategoryFilterPipe } from './pipes/category-filter.pipe';
+import { NgxFlickingModule } from '@egjs/ngx-flicking';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,15 +69,18 @@ register();
     FeatureProductComponent,
     TopProductComponent,
     HeroPageComponent,
-    SearchResultComponent  
-  ],
+    SearchResultComponent,
+    SideMenuComponent,
+    CategoryFilterPipe
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxFlickingModule
   ],
   providers: [AuthService,
   {
@@ -90,6 +92,6 @@ register();
   ProductsService
 ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: []
 })
 export class AppModule { }

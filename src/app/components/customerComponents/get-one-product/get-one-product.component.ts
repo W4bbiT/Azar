@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cart } from 'src/app/models/cartModel';
 import { Product } from 'src/app/models/productModel';
 import { User } from 'src/app/models/userModel';
 import { ProductsService } from 'src/app/services/products.service';
 import { UsersService } from 'src/app/services/users.service';
+import { Plugin } from "@egjs/ngx-flicking";
+import { Arrow } from "@egjs/flicking-plugins";
 
 @Component({
   selector: 'app-get-one-product',
@@ -12,6 +14,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./get-one-product.component.css'],
 })
 export class GetOneProductComponent implements OnInit {
+
   product: Product;
   pId: string;
   reviews: any;
@@ -19,7 +22,7 @@ export class GetOneProductComponent implements OnInit {
   limit: number = 10;
   avgRate: number=0
   cart: Cart;
-  user: User
+  user: User;
   
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +47,8 @@ export class GetOneProductComponent implements OnInit {
     });
     this.getReviews();
   }
+
+  public plugins: Plugin[] = [new Arrow()];
 
   getReviews(): void {
     this.productService.getProductReviews(this.pId, this.page, this.limit)

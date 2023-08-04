@@ -8,9 +8,13 @@ export interface Product{
     discount: number,
     description: string,
     reviews: Review[],
-    productImage: string,
+    productImage: [string],
     createdOn: Date,
     inStock: number,
     featureProduct: Boolean,
-    ingredient: string
+    details: {
+        size:string,
+        color:string,
+        info:string
+    }
 }

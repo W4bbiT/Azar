@@ -1,68 +1,84 @@
-<div class="wrapper">
-    <header>
-        <img src="assets/Images/bgHero.png" class="background">
-        <img src="assets/Images/logo2.JPEG" class="foreground mix-blend-screen">
-    </header>
-    <section>
-        <div>
-            <h1>Welcome to Azar: Forge Your Legacy</h1>
-            <p>Discover a collection designed to elevate your performance and empower you to surpass your limits.
-                Explore our carefully curated selection of cutting-edge activewear, engineered with advanced
-                materials
-                and innovative technologies to optimize your training and competition experience. Our products are
-                meticulously crafted to enhance
-                your comfort, style, and performance. Shop now and gear up to take your athletic journey to new
-                heights.
-            </p>
-        </div>
-        <div>
-            <h2>Why Choose Azar to Forge Your Legacy?</h2>
-            <ul>
-                <li>Superior Performance: Azar products are engineered to enhance your performance, offering
-                    superior
-                    comfort, flexibility, and durability, allowing you to focus solely on achieving your athletic
-                    aspirations.</li>
-                <li>Cutting-Edge Innovation: Our dedication to innovation means we constantly push boundaries and
-                    stay
-                    ahead of the game. We embrace the latest technologies and advancements in athletic apparel to
-                    provide you with gear that gives you the competitive edge.</li>
-                <li>Unmatched Style: Azar seamlessly blends performance and style, ensuring that you not only
-                    perform
-                    your best but also look your best. Our modern designs and attention to detail will make you
-                    stand
-                    out, whether you're on the track, in the gym, or on the field.</li>
-                <li>Exceptional Quality: We are committed to delivering exceptional quality in every product we
-                    offer.
-                    Each garment is carefully crafted with premium materials to withstand the demands of your active
-                    lifestyle.</li>
-                <li>Inspiring Legacy: Azar represents more than just a brand; it's a symbol of empowerment and
-                    inspiration. When you choose Azar, you join a community of like-minded individuals who are
-                    dedicated
-                    to pushing their limits and leaving a lasting impact on the world.</li>
-            </ul>
-            <p>Choose Azar and embark on a journey of athleticism, determination, and achievement. Elevate your
-                performance, break barriers, and create a legacy that will inspire generations to come. Shop with us
-                today and become part of the Azar movement.</p>
-        </div>
+<div class="firstSection">
+    <div class="wrapper">
+        <header>
+            <img src="assets/Images/bgHero.png" class="background">
+            <div class="foreground mix-blend-screen">
+                <img src="assets/Images/logo2.JPEG" class="">
+            </div>
+            <a href="/home" class="btn rounded-full text-white">Shop Now</a>
+            <div class="md:flex review">
+                <div class="card overflow-x-hidden w-96 h-96 rounded-3xl text-whiteish p-3">
+                    <h2 class="font-semibold text-reddish">Welcome to Azar: Forge Your Legacy</h2>
+                    <p>Discover a world of athletic excellence and style with Azar. Our carefully curated collection of
+                        cutting-edge activewear is designed to elevate your performance and empower you to push beyond
+                        your limits. Embrace the spirit of determination and join a community of like-minded individuals
+                        who are committed to leaving a lasting impact on the world. Step into Azar and forge your own
+                        legacy today.</p>
+                </div>
+                <div class="card hidden md:block overflow-x-hidden w-96 h-96 rounded-3xl text-whiteish p-3">
+                    <h2 class="font-semibold text-reddish">Where Performance Meets Style</h2>
+                    <p>At Azar, we believe that true greatness is forged through perseverance and a relentless pursuit
+                        of excellence. Our brand embodies this philosophy, combining performance and style seamlessly.
+                        Step onto the track, into the gym, or onto the field with confidence, knowing that Azar's
+                        premium materials and modern designs will make you stand out. Elevate your performance, break
+                        barriers, and leave an inspiring legacy with Azar.</p>
+                </div>
+                <div class="card hidden md:block overflow-hidden w-96 h-96 rounded-3xl text-whiteish p-3">
+                    <h2 class="font-semibold text-reddish">Reviews</h2>
+                    <div *ngFor="let review of reviews">
+                        <p class="">◎ {{review.review}}</p>
+                    </div>
+                </div>
+            </div>
 
-        <div>
-            <h2>About Us</h2>
-            <p>We are more than just an athletic clothing brand – we are a movement. Our mission is to inspire
-                individuals to embrace their inner champions and push beyond their boundaries. We believe that true
-                greatness is forged through perseverance, dedication, and a relentless pursuit of excellence. With
-                this
-                philosophy at our core, we have created a brand that embodies the spirit of determination and
-                empowers
-                athletes to leave their mark on the world.</p>
-            <p>We take pride in our commitment to quality and innovation. Each Azar product is crafted with
-                meticulous
-                attention to detail, utilizing state-of-the-art materials and performance-driven design. Our team of
-                dedicated experts combines their expertise with feedback from athletes to create gear that meets the
-                demands of the most intense workouts and competitions. With Azar, you can trust that you are
-                equipping
-                yourself with the best tools to achieve your goals and forge your own legacy.</p>
+        </header>
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to Azar</h1>
+                <p class="hero-text">Embrace your athletic potential with our revolutionary activewear designed for
+                    speed,
+                    agility, and excellence.</p>
+
+                <div class="why-choose">
+                    <div class="why-choose-item">
+                        <img src="assets/Images/lightweight.png" alt="Lightweight">
+                        <h3>Unrivaled Lightweight Performance</h3>
+                        <p>Move freely and effortlessly with our lightweight designs that keep you agile and fast on the
+                            field.</p>
+                    </div>
+                    <div class="why-choose-item">
+                        <img src="assets/Images/premium-quality.png" alt="Premium Quality">
+                        <h3>Premium Quality & Durability</h3>
+                        <p>Experience unmatched durability and premium quality in every Azar garment, built to withstand
+                            intense workouts and competitions.</p>
+                    </div>
+                    <div class="why-choose-item">
+                        <img src="assets/Images/moisture-wicking.png" alt="Moisture-Wicking">
+                        <h3>Moisture-Wicking Mastery</h3>
+                        <p>Stay cool and dry with our advanced moisture-wicking fabrics that keep sweat at bay, so you
+                            can
+                            focus on your game.</p>
+                    </div>
+                    <div class="why-choose-item">
+                        <img src="assets/Images/stretch.png" alt="Stretch & Flexibility">
+                        <h3>Unmatched Stretch & Flexibility</h3>
+                        <p>Experience maximum flexibility and freedom of movement with Azar's stretchy apparel,
+                            engineered
+                            for your best performance.</p>
+                    </div>
+                </div>
+
+                <div class="about-us">
+                    <p>At Azar, we've experienced the frustration of heavy clothing slowing us down on the field. That's
+                        why we created a brand that produces lightweight, premium activewear, allowing athletes like you
+                        to
+                        keep a constant speed and reach new heights of performance.</p>
+                    <p>Our mission is to inspire you to embrace your athletic potential, chase greatness with unwavering
+                        dedication, and leave an indelible mark on the world of sports. Together, let's forge a legacy
+                        of
+                        speed, agility, and triumph.</p>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
 </div>
-
-<app-home-page></app-home-page>

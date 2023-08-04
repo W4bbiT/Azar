@@ -1,8 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
-import Swiper from 'swiper';
-
+import { Plugin } from "@egjs/ngx-flicking";
+import { AutoPlay } from "@egjs/flicking-plugins";
 @Component({
   selector: 'app-feature-product',
   templateUrl: './feature-product.component.html',
@@ -10,9 +10,6 @@ import Swiper from 'swiper';
 })
 export class FeatureProductComponent implements OnInit {
   products: any
-  @ViewChild('swiper')
-  swiperRef: ElementRef | undefined;
-  swiper?: Swiper;
   constructor(
     private productService: ProductsService,
     private router: Router
@@ -28,25 +25,9 @@ export class FeatureProductComponent implements OnInit {
       }
     })
   }
+  plugins: Plugin[] = [new AutoPlay({ duration: 10000, direction: "NEXT", stopOnHover: true })];
 
   goToProductPage(productId: string): void {
     this.router.navigateByUrl("/products/" + productId)
-  }
-
-
-  swiperSlideChanged(e: any) {
-    console.log('changed: ', e);
-  }
-
-  swiperReady() {
-    this.swiper = this.swiperRef?.nativeElement.swiper;
-  }
-
-  goNext() {
-    this.swiper?.slideNext();
-  }
-
-  goPrev() {
-    this.swiper?.slidePrev();
   }
 }

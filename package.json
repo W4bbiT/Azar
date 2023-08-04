@@ -19,9 +19,10 @@
     "@angular/platform-browser": "^16.0.4",
     "@angular/platform-browser-dynamic": "^16.0.4",
     "@angular/router": "^16.0.4",
+    "@egjs/flicking-plugins": "^4.7.1",
+    "@egjs/ngx-flicking": "^4.11.0",
     "moment": "^2.29.4",
     "rxjs": "~7.5.0",
-    "swiper": "^10.0.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

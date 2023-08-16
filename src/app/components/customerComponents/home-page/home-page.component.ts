@@ -13,7 +13,7 @@ export class HomePageComponent implements OnInit {
   products: Product[];
   cart: Cart;
   currentPage: number = 1;
-  limit: number = 9;
+  limit: number = 50;
   totalPages: number;
   selectedCategory: string[]; 
 
@@ -27,20 +27,38 @@ export class HomePageComponent implements OnInit {
   }
 
   fetchProducts(): void {
-    this.productService.getAllProducts(this.currentPage, this.limit)
-      .subscribe({
-        next: (response: any) => {
-          this.products = response.products;
-          this.totalPages = response.totalPages;
-        },
-        error: () => {
-          alert("No products found!");
-        }
-      });
+    if (this.selectedCategory.length > 0) {
+      this.productService.searchCategory(this.selectedCategory, this.currentPage, this.limit)
+        .subscribe({
+          next: (products: Product[]) => {
+            this.products = products;
+            // You might need to update totalPages based on the response from the API
+          },
+          error: () => {
+            alert("No products found for the selected category!");
+          }
+        });
+    } else {
+      this.productService.getAllProducts(this.currentPage, this.limit)
+        .subscribe({
+          next: (response: any) => {
+            this.products = response.products;
+            this.totalPages = response.totalPages;
+          },
+          error: () => {
+            alert("No products found!");
+          }
+        });
+    }
   }
 
-  isSelectedCategory(category: string): boolean {
-    return this.selectedCategory.includes(category);
+  onCategory(category: string){
+    this.selectedCategory = [category]; // Set the selected category
+    this.fetchProducts(); // Fetch products for the selected category
+  }
+
+  getCategoryClass(category: string): string {
+    return this.selectedCategory.includes(category) ? 'category-enter' : 'category-leave';
   }
 
   previousPage() {

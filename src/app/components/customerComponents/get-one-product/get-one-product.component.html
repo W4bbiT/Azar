@@ -2,9 +2,9 @@
     <div *ngIf="product" class="">
         <div class="md:flex">
             <div>
-                <ngx-flicking [options]="{ circular: true ,panelsPerView: 1 }" [plugins]="plugins">
-                    <div flicking-panel class="card-panel justify-center" *ngFor="let image of product.productImage">
-                        <img class="object-contain h-96" src="{{image}}" />
+                <ngx-flicking [options]="{ circular: true ,panelsPerView: 1 }" [plugins]="plugins" class="h-96 w-96">
+                    <div flicking-panel class="card-panel" *ngFor="let image of product.productImage">
+                        <img src="{{image}}" class="h-96 w-96 object-contain"/>
                     </div>
                     <span in-viewport class="flicking-arrow-prev"></span>
                     <span in-viewport class="flicking-arrow-next"></span>

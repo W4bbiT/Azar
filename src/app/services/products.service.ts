@@ -63,8 +63,12 @@ export class ProductsService {
   }
 
   // search products by name
-  searchCategory(category: string): Observable<Product[]> {
-    return this.http.get<Product[]>(`/api/product/category-search/${category}`);
+  searchCategory(categories: string[], page: number, limit: number): Observable<Product[]> {
+    const combinedCategories = categories.join('-'); // Combine categories with hyphens
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+    return this.http.get<Product[]>(`/api/product/category-search/${combinedCategories}`, { params });
   }
 
 

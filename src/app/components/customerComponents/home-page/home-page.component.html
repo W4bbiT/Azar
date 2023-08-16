@@ -1,18 +1,25 @@
 <app-feature-product></app-feature-product>
 
-<div class="text-whiteish">
+<div class="flex text-whiteish">
 
-  <div class="glass">
-    <h2>Categories</h2>
-    <select class="bg-black " [(ngModel)]="selectedCategory">
-      <option value="">All Categories</option>
-      <option class="" *ngFor="let product of products" [value]="product.category">{{product.category}}</option>
-    </select> 
-
+  <div class="w-60">
+    <button [ngClass]="getCategoryClass('Men')" class="w-60 p-5 text-2xl font-semibold" (click)="onCategory('Men')">Men</button>
+    <div class="w-60">
+      <button [ngClass]="getCategoryClass('T-Shirts')" class="w-60 text-xl p-5" (click)="onCategory('T-Shirts')">T-Shirts</button>
+      <button [ngClass]="getCategoryClass('Hoodies')" class="w-60 text-xl p-5" (click)="onCategory('Hoodies')">Hoodies</button>
+      <button [ngClass]="getCategoryClass('Jackets')" class="w-60 text-xl p-5" (click)="onCategory('Jackets')">Jackets</button>
+      <button [ngClass]="getCategoryClass('Vests & Tank Tops')" class="w-60 text-xl p-5" (click)="onCategory('Vests & Tank Tops')">Vests & Tank Tops</button>
+      <button [ngClass]="getCategoryClass('Tracksuits')" class="w-60 text-xl p-5" (click)="onCategory('Tracksuits')">Tracksuits</button>
+      <button [ngClass]="getCategoryClass('Compressions')" class="w-60 text-xl p-5" (click)="onCategory('Compressions')">Compressions</button>
+      <button [ngClass]="getCategoryClass('Joggers & Pants')" class="w-60 text-xl p-5" (click)="onCategory('Joggers & Pants')">Joggers & Pants</button>
+      <button [ngClass]="getCategoryClass('Shorts')" class="w-60 text-xl p-5" (click)="onCategory('Shorts')">Shorts</button>
+      <button [ngClass]="getCategoryClass('Socks')" class="w-60 text-xl p-5" (click)="onCategory('Socks')">Socks</button>
+      <button [ngClass]="getCategoryClass('Caps & Beanies')" class="w-60 text-xl p-5" (click)="onCategory('Caps & Beanies')">Caps & Beanies</button>
+    </div>
   </div>
-  <div class="">
+  <div class="p-5">
     <div class="flex flex-wrap" *ngIf="products">
-      <div class="m-5" *ngFor="let product of products | categoryFilter: selectedCategory">
+      <div class="m-5" *ngFor="let product of products">
         <div class="card w-64 h-fit p-2 rounded-3xl glass">
           <div class="card-img rounded-3xl">
             <a href="/products/{{product._id}}">
@@ -43,9 +50,7 @@
               </svg> </button>
           </div>
         </div>
-
       </div>
-
     </div>
     <div class="flex justify-center text-white items-center mb-5" *ngIf="totalPages > 1">
       <!-- Previous Button -->
@@ -67,7 +72,8 @@
       </button>
     </div>
   </div>
-
 </div>
 <app-top-product></app-top-product>
+
+
 

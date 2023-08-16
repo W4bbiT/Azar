@@ -104,24 +104,36 @@ router.get('/search', async (req, res) => {
     }
 });
 
-// Search products by category from URL parameter
-router.get('/category-search/:category', async (req, res) => {
-    const category = req.params.category;
-    if (!category) {
-        return res.status(400).json({ message: 'Invalid category' });
+// Search products by category and subcategories from URL parameter
+router.get('/category-search/:categories', async (req, res) => {
+    const combinedCategories = req.params.categories;
+    const categories = combinedCategories.split('-').map(category => category.replace(/%20/g, ' '));
+    
+    if (categories.length === 0) {
+        return res.status(400).json({ message: 'No categories provided' });
     }
+    
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
-        const regex = new RegExp(category, 'i'); // Case-insensitive search regex
-        const products = await Product.find({ category: regex })
+        
+        // Build an array of regex patterns for each category
+        const categoryRegexArray = categories.map(category => new RegExp(category, 'i'));
+        
+        // Query products that match all categories using $all
+        const products = await Product.find({ category: { $all: categoryRegexArray } })
             .skip((page - 1) * limit)
             .limit(limit);
+            
         res.json(products);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
+
+
+
+
 
 
 // Get a single product by ID

@@ -47,60 +47,47 @@ h2 {
 }
 
 
-.category-enter {
-    background: #f90000;
+.selected {
+    text-decoration: underline;
     /* Change this to the highlight color you want */
     color: white;
     margin: 10px;
-    -webkit-animation: category-enter-animation 300ms ease;
-    animation: category-enter-animation 300ms ease;
+    text-transform: uppercase;
+    -webkit-animation: category-animation 300ms ease alternate;
+    animation: category-animation 300ms ease;
 }
 
-.category-leave {
-    /* Change this to the highlight color you want */
-    color: white;
-    margin: 10px;
-    -webkit-animation: category-leave-animation 300ms ease;
-    animation: category-leave-animation 300ms ease;
 
-}
-
-@-webkit-keyframes category-enter-animation {
+@-webkit-keyframes category-animation {
     0% {
-        transform: translateX(-100%);
+        transform: scale(1);
+        text-transform: lowercase;
+
+    }
+    70%{
+        transform: scale(1.1);
     }
 
     100% {
-        transform: translateX(0%);
+        text-transform: uppercase;
+        transform: scale(1);
+        text-decoration: underline;
     }
 }
 
-@keyframes category-enter-animation {
+@keyframes category-animation {
     0% {
-        transform: translateX(-100%);
+        transform: scale(1);
+        text-transform: lowercase;
+
+    }
+    70%{
+        transform: scale(1.1);
     }
 
     100% {
-        transform: translateX(0%);
-    }
-}
-
-@-webkit-keyframes category-leave-animation {
-    0% {
-        transform: translateX(0%);
-    }
-
-    100% {
-        transform: translateX(-100%);
-    }
-}
-
-@keyframes category-leave-animation {
-    0% {
-        transform: translateX(0%);
-    }
-
-    100% {
-        transform: translateX(-100%);
+        text-transform: uppercase;
+        transform: scale(1);
+        text-decoration: underline;
     }
 }

@@ -27,7 +27,7 @@ export class HomePageComponent implements OnInit {
   }
 
   fetchProducts(): void {
-    if (this.selectedCategory.length > 0) {
+    if (this.selectedCategory.length > 0 && !this.selectedCategory.includes('/')) {
       this.productService.searchCategory(this.selectedCategory, this.currentPage, this.limit)
         .subscribe({
           next: (products: Product[]) => {
@@ -52,14 +52,15 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  onCategory(category: string){
-    this.selectedCategory = [category]; // Set the selected category
+  onCategory(categories: string[]){
+    this.selectedCategory = categories; // Set the selected category
     this.fetchProducts(); // Fetch products for the selected category
   }
 
-  getCategoryClass(category: string): string {
-    return this.selectedCategory.includes(category) ? 'category-enter' : 'category-leave';
+  isSelectedCategory(categories: string[]): boolean {
+    return categories.every(category => this.selectedCategory.includes(category));
   }
+  
 
   previousPage() {
     if (this.currentPage > 1) {

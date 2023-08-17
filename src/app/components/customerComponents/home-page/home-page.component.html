@@ -3,18 +3,45 @@
 <div class="flex text-whiteish">
 
   <div class="w-60">
-    <button [ngClass]="getCategoryClass('Men')" class="w-60 p-5 text-2xl font-semibold" (click)="onCategory('Men')">Men</button>
+    <button [class.selected]="isSelectedCategory(['/'])" class="w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['/'])">All</button>
+    <button [class.selected]="isSelectedCategory(['Men'])" class="w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['Men'])">Men</button>
     <div class="w-60">
-      <button [ngClass]="getCategoryClass('T-Shirts')" class="w-60 text-xl p-5" (click)="onCategory('T-Shirts')">T-Shirts</button>
-      <button [ngClass]="getCategoryClass('Hoodies')" class="w-60 text-xl p-5" (click)="onCategory('Hoodies')">Hoodies</button>
-      <button [ngClass]="getCategoryClass('Jackets')" class="w-60 text-xl p-5" (click)="onCategory('Jackets')">Jackets</button>
-      <button [ngClass]="getCategoryClass('Vests & Tank Tops')" class="w-60 text-xl p-5" (click)="onCategory('Vests & Tank Tops')">Vests & Tank Tops</button>
-      <button [ngClass]="getCategoryClass('Tracksuits')" class="w-60 text-xl p-5" (click)="onCategory('Tracksuits')">Tracksuits</button>
-      <button [ngClass]="getCategoryClass('Compressions')" class="w-60 text-xl p-5" (click)="onCategory('Compressions')">Compressions</button>
-      <button [ngClass]="getCategoryClass('Joggers & Pants')" class="w-60 text-xl p-5" (click)="onCategory('Joggers & Pants')">Joggers & Pants</button>
-      <button [ngClass]="getCategoryClass('Shorts')" class="w-60 text-xl p-5" (click)="onCategory('Shorts')">Shorts</button>
-      <button [ngClass]="getCategoryClass('Socks')" class="w-60 text-xl p-5" (click)="onCategory('Socks')">Socks</button>
-      <button [ngClass]="getCategoryClass('Caps & Beanies')" class="w-60 text-xl p-5" (click)="onCategory('Caps & Beanies')">Caps & Beanies</button>
+      <button [class.selected]="isSelectedCategory(['Men','T-Shirts'])" class="w-60 text-xl text-left" (click)="onCategory(['Men' ,'T-Shirts'])">T-Shirts</button>
+      <button [class.selected]="isSelectedCategory(['Men','Hoodies'])" class="w-60 text-xl text-left" (click)="onCategory(['Men','Hoodies'])">Hoodies</button>
+      <button [class.selected]="isSelectedCategory(['Men','Jackets'])" class="w-60 text-xl text-left" (click)="onCategory(['Men','Jackets'])">Jackets</button>
+      <button [class.selected]="isSelectedCategory(['Men','Tank Tops'])" class="w-60 text-xl text-left" (click)="onCategory(['Men','Tank Tops'])">Vests & Tank Tops</button>
+      <button [class.selected]="isSelectedCategory(['Men','Tracksuits'])" class="w-60 text-xl text-left" (click)="onCategory(['Men','Tracksuits'])">Tracksuits</button>
+      <button [class.selected]="isSelectedCategory(['Men','Compressions'])" class="w-60 text-xl text-left" (click)="onCategory(['Men','Compressions'])">Compressions</button>
+      <button [class.selected]="isSelectedCategory(['Men','Joggers','Pants'])" class="w-60 text-xl text-left" (click)="onCategory(['Men','Joggers','Pants'])">Joggers & Pants</button>
+      <button [class.selected]="isSelectedCategory(['Men','Shorts'])" class="w-60 text-xl text-left" (click)="onCategory(['Men','Shorts'])">Shorts</button>
+      <button [class.selected]="isSelectedCategory(['Men','Socks'])" class="w-60 text-xl text-left" (click)="onCategory(['Men','Socks'])">Socks</button>
+      <button [class.selected]="isSelectedCategory(['Men','Accessories'])" class="w-60 text-xl text-left" (click)="onCategory(['Men','Accessories'])">Accessories</button>
+    </div>
+    <button [class.selected]="isSelectedCategory(['Boys'])" class="w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['Boys'])">Boys</button>
+    <div class="w-60">
+      <button [class.selected]="isSelectedCategory(['Boys','T-Shirts'])" class="w-60 text-xl text-left" (click)="onCategory(['Boys' ,'T-Shirts'])">T-Shirts</button>
+      <button [class.selected]="isSelectedCategory(['Boys','Hoodies'])" class="w-60 text-xl text-left" (click)="onCategory(['Boys','Hoodies'])">Hoodies</button>
+      <button [class.selected]="isSelectedCategory(['Boys','Jackets'])" class="w-60 text-xl text-left" (click)="onCategory(['Boys','Jackets'])">Jackets</button>
+      <button [class.selected]="isSelectedCategory(['Boys','Tank Tops'])" class="w-60 text-xl text-left" (click)="onCategory(['Boys','Tank Tops'])">Vests & Tank Tops</button>
+      <button [class.selected]="isSelectedCategory(['Boys','Tracksuits'])" class="w-60 text-xl text-left" (click)="onCategory(['Boys','Tracksuits'])">Tracksuits</button>
+      <button [class.selected]="isSelectedCategory(['Boys','Compressions'])" class="w-60 text-xl text-left" (click)="onCategory(['Boys','Compressions'])">Compressions</button>
+      <button [class.selected]="isSelectedCategory(['Boys','Joggers','Pants'])" class="w-60 text-xl text-left" (click)="onCategory(['Boys','Joggers','Pants'])">Joggers & Pants</button>
+      <button [class.selected]="isSelectedCategory(['Boys','Shorts'])" class="w-60 text-xl text-left" (click)="onCategory(['Boys','Shorts'])">Shorts</button>
+      <button [class.selected]="isSelectedCategory(['Boys','Socks'])" class="w-60 text-xl text-left" (click)="onCategory(['Boys','Socks'])">Socks</button>
+      <button [class.selected]="isSelectedCategory(['Boys','Accessories'])" class="w-60 text-xl text-left" (click)="onCategory(['Boys','Accessories'])">Accessories</button>
+    </div>
+    <button [class.selected]="isSelectedCategory(['Girls'])" class="w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['Girls'])">Girls</button>
+    <div class="w-60">
+      <button [class.selected]="isSelectedCategory(['Girls','T-Shirts'])" class="w-60 text-xl text-left" (click)="onCategory(['Girls' ,'T-Shirts'])">T-Shirts</button>
+      <button [class.selected]="isSelectedCategory(['Girls','Hoodies'])" class="w-60 text-xl text-left" (click)="onCategory(['Girls','Hoodies'])">Hoodies</button>
+      <button [class.selected]="isSelectedCategory(['Girls','Jackets'])" class="w-60 text-xl text-left" (click)="onCategory(['Girls','Jackets'])">Jackets</button>
+      <button [class.selected]="isSelectedCategory(['Girls','Tank Tops'])" class="w-60 text-xl text-left" (click)="onCategory(['Girls','Tank Tops'])">Vests & Tank Tops</button>
+      <button [class.selected]="isSelectedCategory(['Girls','Tracksuits'])" class="w-60 text-xl text-left" (click)="onCategory(['Girls','Tracksuits'])">Tracksuits</button>
+      <button [class.selected]="isSelectedCategory(['Girls','Compressions'])" class="w-60 text-xl text-left" (click)="onCategory(['Girls','Compressions'])">Compressions</button>
+      <button [class.selected]="isSelectedCategory(['Girls','Joggers','Pants'])" class="w-60 text-xl text-left" (click)="onCategory(['Girls','Joggers','Pants'])">Joggers & Pants</button>
+      <button [class.selected]="isSelectedCategory(['Girls','Shorts'])" class="w-60 text-xl text-left" (click)="onCategory(['Girls','Shorts'])">Shorts</button>
+      <button [class.selected]="isSelectedCategory(['Girls','Socks'])" class="w-60 text-xl text-left" (click)="onCategory(['Girls','Socks'])">Socks</button>
+      <button [class.selected]="isSelectedCategory(['Girls','Accessories'])" class="w-60 text-xl text-left" (click)="onCategory(['Girls','Accessories'])">Accessories</button>
     </div>
   </div>
   <div class="p-5">
@@ -23,7 +50,7 @@
         <div class="card w-64 h-fit p-2 rounded-3xl glass">
           <div class="card-img rounded-3xl">
             <a href="/products/{{product._id}}">
-              <img class="rounded-3xl w-64 h-40 object-cover" [src]="product.productImage" alt="Product Image">
+              <img class="rounded-3xl w-64 h-40 object-cover" [src]="product.productImage[0]" alt="Product Image">
             </a>
           </div>
           <h2 class="text-xl font-semibold mt-5">{{product.productName}}</h2>

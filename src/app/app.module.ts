@@ -41,6 +41,7 @@ import { SearchResultComponent } from './components/customerComponents/search-re
 import { SideMenuComponent } from './components/menus/side-menu/side-menu.component';
 import { CategoryFilterPipe } from './pipes/category-filter.pipe';
 import { NgxFlickingModule } from '@egjs/ngx-flicking';
+import { SideBarComponent } from './components/customerComponents/side-bar/side-bar.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { NgxFlickingModule } from '@egjs/ngx-flicking';
     HeroPageComponent,
     SearchResultComponent,
     SideMenuComponent,
-    CategoryFilterPipe
+    CategoryFilterPipe,
+    SideBarComponent
     ],
   imports: [
     BrowserModule,

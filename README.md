@@ -1,4 +1,6 @@
 # Myshop
+Quick look video!
+[REC-20230817222427.mp4.zip](https://github.com/W4bbiT/My-Shop/files/12375057/REC-20230817222427.mp4.zip)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1.
 

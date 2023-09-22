@@ -137,11 +137,13 @@ router.get('/category-search/:categories', async (req, res) => {
 
 
 // Get a single product by ID
-router.get('/:pId', getProduct, (req, res) => {
+router.get('/:pId', getProduct, async (req, res) => {
     try {
-        res.json(res.product).populate('details');
+        const product = res.product;
+        await product.populate('details').execPopulate();
+        res.json({ success: true, data: product });
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.status(500).json({ success: false, message: err.message });
     }
 });
 
@@ -154,6 +156,11 @@ router.get('/:pId/reviews', getProductReviews, (req, res) => {
     }
 });
 
+// Error handling middleware
+router.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ success: false, message: 'Something went wrong!' });
+});
 
 // getProduct middleware
 async function getProduct(req, res, next) {

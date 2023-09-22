@@ -1,7 +1,7 @@
 {
     "/api/*":{
-        "target": "https://azar-backend.onrender.com/",
-        "secure": true,
+        "target": "https://azar-backend.onrender.com",
+        "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
     }

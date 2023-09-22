@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../models/productModel'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Review } from '../models/reviewModel';
 
 const httpOptions = {
   headers: new HttpHeaders({

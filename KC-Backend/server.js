@@ -38,4 +38,4 @@ app.use('/api/user', orderRouter)
 const reviewRouter = require('./routes/review')
 app.use('/api/user/review', reviewRouter)
 
-app.listen(3000, () => console.log('server started'))
+app.listen(process.env.PORT, () => console.log('server started'))

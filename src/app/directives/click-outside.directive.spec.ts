@@ -1,6 +1,5 @@
 import { ClickOutsideDirective } from './click-outside.directive';
 import { ElementRef } from '@angular/core';
-import { Subject } from 'rxjs';
 
 describe('ClickOutsideDirective', () => {
   let directive: ClickOutsideDirective;

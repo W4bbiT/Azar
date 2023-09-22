@@ -33,7 +33,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SearchProductComponent } from './components/search-product/search-product.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AddReviewModalComponent } from './components/customerComponents/add-review-modal/add-review-modal.component';
 import { FeatureProductComponent } from './components/customerComponents/feature-product/feature-product.component';
 import { TopProductComponent } from './components/customerComponents/top-product/top-product.component';
 import { HeroPageComponent } from './components/customerComponents/hero-page/hero-page.component';
@@ -66,7 +65,6 @@ import { SideBarComponent } from './components/customerComponents/side-bar/side-
     SearchProductComponent,
     HeaderComponent,
     FooterComponent,
-    AddReviewModalComponent,
     FeatureProductComponent,
     TopProductComponent,
     HeroPageComponent,

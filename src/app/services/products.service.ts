@@ -37,25 +37,25 @@ export class ProductsService {
 
   //top product limit 10
   getTopProducts(): Observable<Product> {
-    return this.http.get<Product>(AUTH_API + `/product/top-products`).pipe(
+    return this.http.get<Product>(AUTH_API + `/product/top-products/`).pipe(
       catchError(this.handleError)
     );
   }
   getFeaturedProduct(): Observable<Product> {
-    return this.http.get<Product>(AUTH_API + `/product/featured-products`).pipe(
+    return this.http.get<Product>(AUTH_API + `/product/featured-products/`).pipe(
       catchError(this.handleError)
     );
   }
   //delete product
   deleteProduct(pId: String): Observable<any> {
-    return this.http.delete(AUTH_API + `/admin/dp/${pId}`).pipe(
+    return this.http.delete(AUTH_API + `/admin/dp/${pId}/`).pipe(
       catchError(this.handleError)
     );
   }
   //create a product listing
   createProduct(data: Product): Observable<Product> {
     return this.http.post<Product>(
-      AUTH_API + '/admin/ap',
+      AUTH_API + '/admin/ap/',
       data,
       httpOptions,
     ).pipe(
@@ -65,7 +65,7 @@ export class ProductsService {
   //edit product
   editProduct(pId: String, data: Product): Observable<Product> {
     return this.http.patch<Product>(
-      AUTH_API + `/admin/up/${pId}`,
+      AUTH_API + `/admin/up/${pId}/`,
       data,
       httpOptions
     ).pipe(
@@ -74,7 +74,7 @@ export class ProductsService {
   }
   // search products by name
   searchProduct(productName: string): Observable<Product[]> {
-    return this.http.get<Product[]>(AUTH_API + `/product/search?name=${productName}`).pipe(
+    return this.http.get<Product[]>(AUTH_API + `/product/search?name=${productName}/`).pipe(
       catchError(this.handleError)
     );
   }
@@ -85,7 +85,7 @@ export class ProductsService {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('limit', limit.toString());
-    return this.http.get<Product[]>(AUTH_API + `/product/category-search/${combinedCategories}`, { params }).pipe(
+    return this.http.get<Product[]>(AUTH_API + `/product/category-search/${combinedCategories}/`, { params }).pipe(
       catchError(this.handleError)
     );
   }
@@ -96,14 +96,14 @@ export class ProductsService {
     const params = new HttpParams()
       .set('page', String(page))
       .set('limit', String(limit));
-    return this.http.get(AUTH_API + `/product/${pId}/reviews`, { params }).pipe(
+    return this.http.get(AUTH_API + `/product/${pId}/reviews/`, { params }).pipe(
       catchError(this.handleError)
     );
   }
 
   // Get reviews for a product with pagination
   getTopReviews(): Observable<any> {
-    return this.http.get<any>(AUTH_API + '/user/review/get-top-reviews').pipe(
+    return this.http.get<any>(AUTH_API + '/user/review/get-top-reviews/').pipe(
       catchError(this.handleError)
     );
   }

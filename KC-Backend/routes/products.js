@@ -140,7 +140,7 @@ router.get('/category-search/:categories', async (req, res) => {
 router.get('/:pId', getProduct, async (req, res) => {
     try {
         const product = res.product;
-        await product.populate('details').exec();
+        await product.populate('details');
         res.json({ success: true, data: product });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
@@ -170,7 +170,7 @@ async function getProduct(req, res, next) {
     }
     try {
         const productId = req.params.pId;
-        const product = await Product.findById(productId).populate('details').exec();
+        const product = await Product.findById(productId).populate('details');
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
         }

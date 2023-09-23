@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Product } from '../models/productModel'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
@@ -23,25 +23,35 @@ export class ProductsService {
     const params = new HttpParams()
       .set('page', String(page))
       .set('limit', String(limit));
-    return this.http.get<Product[]>(AUTH_API + '/product/', { params });
+    return this.http.get<Product[]>(AUTH_API + '/product/', { params }).pipe(
+      catchError(this.handleError)
+    );
 
   }
   //get a product by id
   getOneProduct(pId: String): Observable<Product> {
     // return this.http.get<Product>(AUTH_API + `/product/${pId}`)
-    return this.http.get<Product>(AUTH_API + `/product/${pId}`)
+    return this.http.get<Product>(AUTH_API + `/product/${pId}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   //top product limit 10
   getTopProducts(): Observable<Product> {
-    return this.http.get<Product>(AUTH_API + `/product/top-products`)
+    return this.http.get<Product>(AUTH_API + `/product/top-products`).pipe(
+      catchError(this.handleError)
+    );
   }
   getFeaturedProduct(): Observable<Product> {
-    return this.http.get<Product>(AUTH_API + `/product/featured-products`)
+    return this.http.get<Product>(AUTH_API + `/product/featured-products`).pipe(
+      catchError(this.handleError)
+    );
   }
   //delete product
   deleteProduct(pId: String): Observable<any> {
-    return this.http.delete(AUTH_API + `/admin/dp/${pId}`)
+    return this.http.delete(AUTH_API + `/admin/dp/${pId}`).pipe(
+      catchError(this.handleError)
+    );
   }
   //create a product listing
   createProduct(data: Product): Observable<Product> {
@@ -49,7 +59,9 @@ export class ProductsService {
       AUTH_API + '/admin/ap',
       data,
       httpOptions,
-    )
+    ).pipe(
+      catchError(this.handleError)
+    );
   }
   //edit product
   editProduct(pId: String, data: Product): Observable<Product> {
@@ -57,11 +69,15 @@ export class ProductsService {
       AUTH_API + `/admin/up/${pId}`,
       data,
       httpOptions
-    )
+    ).pipe(
+      catchError(this.handleError)
+    );
   }
   // search products by name
   searchProduct(productName: string): Observable<Product[]> {
-    return this.http.get<Product[]>(AUTH_API + `/product/search?name=${productName}`);
+    return this.http.get<Product[]>(AUTH_API + `/product/search?name=${productName}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   // search products by name
@@ -70,7 +86,9 @@ export class ProductsService {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('limit', limit.toString());
-    return this.http.get<Product[]>(AUTH_API + `/product/category-search/${combinedCategories}`, { params });
+    return this.http.get<Product[]>(AUTH_API + `/product/category-search/${combinedCategories}`, { params }).pipe(
+      catchError(this.handleError)
+    );
   }
 
 
@@ -79,11 +97,20 @@ export class ProductsService {
     const params = new HttpParams()
       .set('page', String(page))
       .set('limit', String(limit));
-    return this.http.get(AUTH_API + `/product/${pId}/reviews`, { params });
+    return this.http.get(AUTH_API + `/product/${pId}/reviews`, { params }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   // Get reviews for a product with pagination
   getTopReviews(): Observable<any> {
-    return this.http.get<any>(AUTH_API + '/user/review/get-top-reviews');
+    return this.http.get<any>(AUTH_API + '/user/review/get-top-reviews').pipe(
+      catchError(this.handleError)
+    );
+  }
+  // Handle errors
+  private handleError(error: any): Observable<never> {
+    console.error('An error occurred:', error);
+    return throwError('Something went wrong. Please try again later.');
   }
 }

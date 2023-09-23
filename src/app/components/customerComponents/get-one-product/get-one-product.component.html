@@ -34,7 +34,7 @@
             <p class="mb-4">Info: {{ product.details.info }}</p>
         </div>
     </div>
-    <div class="shadow-sm shadow-reddish p-1 rounded-3xl" *ngIf="reviews">
+    <!-- <div class="shadow-sm shadow-reddish p-1 rounded-3xl" *ngIf="reviews">
         <div class="flex justify-between m-5">
             <h3 class="text-lg font-semibold">Product Reviews:</h3>
             <div class="text-right justify-center">
@@ -64,7 +64,7 @@
             </div>
             <p>{{ review.review }}</p>
         </div>
-    </div>
+    </div> -->
     <div *ngIf="!reviews" class="flex justify-center">
         <h3 class="p-2 shadow-sm shadow-reddish rounded-full">No reviews yet</h3>
     </div>

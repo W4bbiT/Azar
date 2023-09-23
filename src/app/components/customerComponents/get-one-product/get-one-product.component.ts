@@ -31,6 +31,7 @@ export class GetOneProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('ngOnInit called');
     this.pId = this.route.snapshot.paramMap.get('pId');
     this.productService.getOneProduct(this.pId).subscribe({
       next: (res) => {

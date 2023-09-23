@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../models/productModel'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-const AUTH_API = `https://azar-backend.onrender.com/`
+const AUTH_API = `https://azar-backend.onrender.com/api/`
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,29 +23,29 @@ export class ProductsService {
     const params = new HttpParams()
       .set('page', String(page))
       .set('limit', String(limit));
-    return this.http.get<Product[]>(AUTH_API + '/api/product/', { params });
+    return this.http.get<Product[]>(AUTH_API + '/product/', { params });
 
   }
   //get a product by id
   getOneProduct(pId: String): Observable<Product> {
-    return this.http.get<Product>(AUTH_API + `/api/product/${pId}`)
+    return this.http.get<Product>(AUTH_API + `/product/${pId}`)
   }
 
   //top product limit 10
   getTopProducts(): Observable<Product> {
-    return this.http.get<Product>(AUTH_API + `/api/product/top-products`)
+    return this.http.get<Product>(AUTH_API + `/product/top-products`)
   }
   getFeaturedProduct(): Observable<Product> {
-    return this.http.get<Product>(AUTH_API + `/api/product/featured-products`)
+    return this.http.get<Product>(AUTH_API + `/product/featured-products`)
   }
   //delete product
   deleteProduct(pId: String): Observable<any> {
-    return this.http.delete(AUTH_API + `/api/admin/dp/${pId}`)
+    return this.http.delete(AUTH_API + `/admin/dp/${pId}`)
   }
   //create a product listing
   createProduct(data: Product): Observable<Product> {
     return this.http.post<Product>(
-      AUTH_API + '/api/admin/ap',
+      AUTH_API + '/admin/ap',
       data,
       httpOptions,
     )
@@ -53,14 +53,14 @@ export class ProductsService {
   //edit product
   editProduct(pId: String, data: Product): Observable<Product> {
     return this.http.patch<Product>(
-      AUTH_API + `/api/admin/up/${pId}`,
+      AUTH_API + `/admin/up/${pId}`,
       data,
       httpOptions
     )
   }
   // search products by name
   searchProduct(productName: string): Observable<Product[]> {
-    return this.http.get<Product[]>(AUTH_API + `/api/product/search?name=${productName}`);
+    return this.http.get<Product[]>(AUTH_API + `/product/search?name=${productName}`);
   }
 
   // search products by name
@@ -69,7 +69,7 @@ export class ProductsService {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('limit', limit.toString());
-    return this.http.get<Product[]>(AUTH_API + `/api/product/category-search/${combinedCategories}`, { params });
+    return this.http.get<Product[]>(AUTH_API + `/product/category-search/${combinedCategories}`, { params });
   }
 
 
@@ -78,11 +78,11 @@ export class ProductsService {
     const params = new HttpParams()
       .set('page', String(page))
       .set('limit', String(limit));
-    return this.http.get(AUTH_API + `/api/product/${pId}/reviews`, { params });
+    return this.http.get(AUTH_API + `/product/${pId}/reviews`, { params });
   }
 
   // Get reviews for a product with pagination
   getTopReviews(): Observable<any> {
-    return this.http.get<any>(AUTH_API + '/api/user/review/get-top-reviews');
+    return this.http.get<any>(AUTH_API + '/user/review/get-top-reviews');
   }
 }

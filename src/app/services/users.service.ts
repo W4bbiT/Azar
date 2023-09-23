@@ -7,7 +7,7 @@ import { Cart } from '../models/cartModel';
 import { Order } from '../models/orderModel';
 import { Review } from '../models/reviewModel';
 
-const AUTH_API = `https://azar-backend.onrender.com/`
+const AUTH_API = `https://azar-backend.onrender.com/api/`
 
 @Injectable({
   providedIn: 'root'
@@ -21,34 +21,34 @@ export class UsersService {
     const params = new HttpParams()
       .set('page', String(page))
       .set('limit', String(limit));
-    return this.http.get<User[]>(AUTH_API + '/api/user', { params }).pipe(
+    return this.http.get<User[]>(AUTH_API + '/user', { params }).pipe(
       catchError(this.handleError)
     );
   }
   // Get one user
   getOneUser(): Observable<User> {
-    return this.http.get<User>(AUTH_API + '/api/user/profile').pipe(
+    return this.http.get<User>(AUTH_API + '/user/profile').pipe(
       catchError(this.handleError)
     );
   }
 
   // Delete user
   deleteUser(id: string): Observable<any> {
-    return this.http.delete(AUTH_API + `/api/admin/du/${id}`).pipe(
+    return this.http.delete(AUTH_API + `/admin/du/${id}`).pipe(
       catchError(this.handleError)
     );
   }
 
   // Create a user
   createUser(data: User): Observable<User> {
-    return this.http.post<User>(AUTH_API + '/api/user/register', data, httpOptions).pipe(
+    return this.http.post<User>(AUTH_API + '/user/register', data, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   // Edit user
   editUser(data: User): Observable<User> {
-    return this.http.patch<User>(AUTH_API + '/api/user/update-user', data, httpOptions).pipe(
+    return this.http.patch<User>(AUTH_API + '/user/update-user', data, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -57,7 +57,7 @@ export class UsersService {
   addReview(pId: string, data: Review): Observable<Review> {
     console.log("Id: " + pId + "rating: " + data.rating + "review: "+ data.review)
     return this.http.post<Review>(
-      AUTH_API + `/api/user/review/add-review/${pId}`,
+      AUTH_API + `/user/review/add-review/${pId}`,
       data,
       httpOptions
     ).pipe(
@@ -67,54 +67,54 @@ export class UsersService {
 
   // Get cart for user
   getCartForUser(): Observable<Cart> {
-    return this.http.get<Cart>(AUTH_API + '/api/user/cart').pipe(
+    return this.http.get<Cart>(AUTH_API + '/user/cart').pipe(
       catchError(this.handleError)
     );
   }
 
   // Add a product to cart
   addProductToMyCart(pid: string, data: Cart): Observable<Cart> {
-    return this.http.post<Cart>(AUTH_API + `/api/user/addtocart/${pid}`, data, httpOptions).pipe(
+    return this.http.post<Cart>(AUTH_API + `/user/addtocart/${pid}`, data, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   // Update cart
   updateCart(pid: string, data: Cart): Observable<Cart> {
-    return this.http.patch<Cart>(AUTH_API + `/api/user/editcart/${pid}`, data, httpOptions).pipe(
+    return this.http.patch<Cart>(AUTH_API + `/user/editcart/${pid}`, data, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   // Delete a product from cart
   pullProductFromCart(pid: string): Observable<any> {
-    return this.http.delete(AUTH_API + `/api/user/delete-item/${pid}`).pipe(
+    return this.http.delete(AUTH_API + `/user/delete-item/${pid}`).pipe(
       catchError(this.handleError)
     );
   }
 
   // Checkout cart
   checkoutCart(): Observable<any> {
-    return this.http.post<any>(AUTH_API + '/api/user/orders', httpOptions).pipe(
+    return this.http.post<any>(AUTH_API + '/user/orders', httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   emptyCart(): Observable<any> {
-    return this.http.delete<any>(AUTH_API + '/api/user/empty-cart', httpOptions).pipe(
+    return this.http.delete<any>(AUTH_API + '/user/empty-cart', httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   // Get orders for this user
   getOrderForThisUser(): Observable<Order[]> {
-    return this.http.get<Order[]>(AUTH_API + '/api/user/orders').pipe(
+    return this.http.get<Order[]>(AUTH_API + '/user/orders').pipe(
       catchError(this.handleError)
     );
   }
 
   getOneOrder(oId: string): Observable<Order> {
-    return this.http.get<Order>(AUTH_API + `/api/user/orders/${oId}`).pipe(
+    return this.http.get<Order>(AUTH_API + `/user/orders/${oId}`).pipe(
       catchError(this.handleError)
     );
   }

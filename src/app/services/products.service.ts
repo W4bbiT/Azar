@@ -28,7 +28,7 @@ export class ProductsService {
   }
   //get a product by id
   getOneProduct(pId: String): Observable<Product> {
-    return this.http.get<Product>(AUTH_API + '/product/' + pId)
+    return this.http.get<Product>(AUTH_API + `/product/${pId}`)
   }
 
   //top product limit 10

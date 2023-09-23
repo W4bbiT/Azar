@@ -7,7 +7,7 @@ import { Cart } from '../models/cartModel';
 import { Order } from '../models/orderModel';
 import { Review } from '../models/reviewModel';
 
-const AUTH_API = `https://azar-backend.onrender.com/api/`
+const AUTH_API = `https://azar-backend.onrender.com/api`
 
 @Injectable({
   providedIn: 'root'

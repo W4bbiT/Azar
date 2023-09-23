@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../models/productModel'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-const AUTH_API = `https://azar-backend.onrender.com/api/`
+const AUTH_API = `https://azar-backend.onrender.com/api`
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -28,7 +28,7 @@ export class ProductsService {
   }
   //get a product by id
   getOneProduct(pId: String): Observable<Product> {
-    return this.http.get<Product>(AUTH_API + `/product/${pId}`)
+    return this.http.get<Product>(AUTH_API + '/product/' + pId)
   }
 
   //top product limit 10

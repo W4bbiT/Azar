@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../models/productModel'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-const AUTH_API = `https://azar-backend.onrender.com/api/`
+const AUTH_API = `https://azar-backend.onrender.com/api`
 
 const httpOptions = {
   headers: new HttpHeaders({

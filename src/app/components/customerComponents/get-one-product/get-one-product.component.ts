@@ -20,7 +20,7 @@ export class GetOneProductComponent implements OnInit {
   reviews: any;
   page: number = 1;
   limit: number = 10;
-  avgRate: number=0
+  avgRate: number=0;
   cart: Cart;
   user: User;
   

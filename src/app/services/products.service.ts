@@ -29,8 +29,8 @@ export class ProductsService {
 
   }
   //get a product by id
-  getOneProduct(pId: String): Observable<Product> {
-    return this.http.get<Product>(AUTH_API + `/product/${pId}/`).pipe(
+  getOneProduct(pId: String): Observable<any> {
+    return this.http.get(AUTH_API + `/product/${pId}/`).pipe(
       catchError(this.handleError)
     );
   }

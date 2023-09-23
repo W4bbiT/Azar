@@ -88,3 +88,31 @@
         </button>
     </div>
 </div>
+
+<div *ngIf="product" class="">
+    <h2>{{ product.productName }}</h2>
+    <p>Description: {{ product.description }}</p>
+    <p>Price: {{ product.price | currency }}</p>
+    <!-- Add other relevant product details -->
+  
+    <!-- Display Average Rating and Customer Count -->
+    <div>
+      <p>Average Rating: {{ reviews.averageRating }}</p>
+      <p>Number of Reviews: {{ reviews.customersCount }}</p>
+    </div>
+  
+    <!-- Display Review -->
+    <div *ngIf="reviews.reviews.length > 0">
+      <h3>Review</h3>
+      <p>Rating: {{ reviews.reviews[0].rating }}</p>
+      <p>{{ reviews.reviews[0].review }}</p>
+      <p>Review Date: {{ reviews.reviews[0].reviewDate | date }}</p>
+      <p>Reviewer Name: {{ reviews.reviews[0].user.fName }}</p>
+      <p>Reviewer State: {{ reviews.reviews[0].user.address.state }}</p>
+      <img [src]="reviews.reviews[0].user.profileImage" alt="Reviewer Profile Image">
+    </div>
+    <div *ngIf="reviews.reviews.length === 0">
+      <p>No reviews yet.</p>
+    </div>
+  </div>
+  

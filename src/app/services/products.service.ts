@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Product } from '../models/productModel'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Review } from '../models/reviewModel';
 
 const AUTH_API = `https://azar-backend.onrender.com/api`
 
@@ -29,8 +30,8 @@ export class ProductsService {
 
   }
   //get a product by id
-  getOneProduct(pId: String): Observable<any> {
-    return this.http.get(AUTH_API + `/product/${pId}/`).pipe(
+  getOneProduct(pId: String): Observable<Product> {
+    return this.http.get<Product>(AUTH_API + `/product/${pId}/`).pipe(
       catchError(this.handleError)
     );
   }
@@ -92,11 +93,11 @@ export class ProductsService {
 
 
   // Get reviews for a product with pagination
-  getProductReviews(pId: string, page: number, limit: number): Observable<any> {
+  getProductReviews(pId: string, page: number, limit: number): Observable<Review> {
     const params = new HttpParams()
       .set('page', String(page))
       .set('limit', String(limit));
-    return this.http.get(AUTH_API + `/product/${pId}/reviews/`, { params }).pipe(
+    return this.http.get<Review>(AUTH_API + `/product/${pId}/reviews/`, { params }).pipe(
       catchError(this.handleError)
     );
   }

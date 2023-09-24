@@ -30,9 +30,10 @@ header {
 
 .foreground {
     position: absolute;
-    width: 80%;
+    width: 100%;
+    top: -50%;
     z-index: -1; 
-    transform: translateZ(-8px) scale(1);
+    transform: translateZ(-7px) scale(1);
 }
 
 .btn{   

@@ -3,7 +3,7 @@
         <div class="md:flex">
             <div>
                 <ngx-flicking [options]="{ circular: true ,panelsPerView: 1 }" [plugins]="plugins" class="h-96 w-96">
-                    <div flicking-panel class="card-panel" *ngFor="let image of product.productImage">
+                    <div flicking-panel class="card-panel" *ngFor="let image of product?.productImage">
                         <img src="{{image}}" class="h-96 w-96 object-contain" />
                     </div>
                     <span in-viewport class="flicking-arrow-prev"></span>
@@ -11,8 +11,7 @@
                 </ngx-flicking>
             </div>
             <div class="px-5">
-                <h2 class="text-2xl font-bold mb-4">{{ product?.productName
-                    }}</h2>
+                <h2 class="text-2xl font-bold mb-4">{{ product?.productName}}</h2>
                 <p class="mb-4">Description: {{ product?.description }}</p>
                 <p class="text-lg font-bold mb-2">Price: {{ product?.price | currency }}</p>
                 <p class="mb-4">Category: {{ product?.category }}</p>

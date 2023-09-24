@@ -92,11 +92,11 @@ export class ProductsService {
 
 
   // Get reviews for a product with pagination
-  getProductReviews(pId: string, page: number, limit: number): Observable<any> {
+  getProductReviews(pId: string, page: number, limit: number): Observable<Review> {
     const params = new HttpParams()
       .set('page', String(page))
       .set('limit', String(limit));
-    return this.http.get<any>(AUTH_API + `/product/${pId}/reviews`, { params }).pipe(
+    return this.http.get<Review>(AUTH_API + `/product/${pId}/reviews`, { params }).pipe(
       catchError(this.handleError)
     );
   }

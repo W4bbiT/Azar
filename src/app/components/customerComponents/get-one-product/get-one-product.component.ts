@@ -47,6 +47,7 @@ export class GetOneProductComponent implements OnInit {
         next: (res) => {
           if (res) {
             this.product = res;
+            console.log('Product:', this.product);
           }
         },
         error: (err) => {
@@ -55,7 +56,6 @@ export class GetOneProductComponent implements OnInit {
       });
     }
   }
-
   getReviews(): void {
     if (this.pId) {
       this.productService.getProductReviews(this.pId, this.page, this.limit)

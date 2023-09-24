@@ -3,3 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    width: 100vw;
+}

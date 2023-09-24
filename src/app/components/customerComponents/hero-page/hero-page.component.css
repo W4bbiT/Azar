@@ -34,18 +34,16 @@ header {
     width: 100%;
     top: -25%;
     z-index: -1; 
-    transform: translateZ(-7px) scale(1);
+    transform: translateZ(-7px) scale(1.5);
 }
 
 .btn{   
     position: absolute;
     padding: 5px;
-    width: 300px;
     font-weight: 700;
     color: white;
     text-align: center;
-    top: 35%;
-    left: 50%;
+    top: 30%;
     background-color: red;
 }
 

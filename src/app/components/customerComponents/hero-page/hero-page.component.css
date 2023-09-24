@@ -40,15 +40,13 @@ header {
 .btn{   
     position: absolute;
     padding: 5px;
-    z-index: 1; 
     width: 300px;
     font-weight: 700;
     color: white;
     text-align: center;
     top: 35%;
     left: 50%;
-    transform: translate3d(-50%,20%,1px);
-    background-color: transparent;
+    background-color: red;
 }
 
 .review{

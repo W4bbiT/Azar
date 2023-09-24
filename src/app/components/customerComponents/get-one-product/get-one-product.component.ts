@@ -20,10 +20,10 @@ export class GetOneProductComponent implements OnInit {
   reviews: any;
   page: number = 1;
   limit: number = 10;
-  avgRate: number=0;
+  avgRate: number = 0;
   cart: Cart;
   user: User;
-  
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductsService,
@@ -31,8 +31,13 @@ export class GetOneProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('ngOnInit called');
     this.pId = this.route.snapshot.paramMap.get('pId');
+    this.getProduct();
+    this.getReviews();
+  }
+
+  public plugins: Plugin[] = [new Arrow()];
+  getProduct(): void {
     this.productService.getOneProduct(this.pId).subscribe({
       next: (res) => {
         if (res) {
@@ -46,17 +51,13 @@ export class GetOneProductComponent implements OnInit {
         console.log(err);
       },
     });
-    this.getReviews();
   }
-
-  public plugins: Plugin[] = [new Arrow()];
-
   getReviews(): void {
     this.productService.getProductReviews(this.pId, this.page, this.limit)
       .subscribe({
         next: (res) => {
           this.reviews = res;
-          this.avgRate = (res.averageRating/5)*100;
+          this.avgRate = (res.averageRating / 5) * 100;
           console.log(this.reviews)
         },
         error: (err) => {

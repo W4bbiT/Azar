@@ -1,16 +1,15 @@
 <div class="shadow-reddish my-5 rounded-3xl text-whiteish">
-    <div *ngIf="product" class="">
+    <div *ngIf="product">
         <div class="md:flex">
             <div>
                 <ngx-flicking [options]="{ circular: true ,panelsPerView: 1 }" [plugins]="plugins" class="h-96 w-96">
                     <div flicking-panel class="card-panel" *ngFor="let image of product.productImage">
-                        <img src="{{image}}" class="h-96 w-96 object-contain"/>
+                        <img src="{{image}}" class="h-96 w-96 object-contain" />
                     </div>
                     <span in-viewport class="flicking-arrow-prev"></span>
                     <span in-viewport class="flicking-arrow-next"></span>
                 </ngx-flicking>
             </div>
-
             <div class="px-5">
                 <h2 class="text-2xl font-bold mb-4">{{ product.productName
                     }}</h2>
@@ -26,7 +25,6 @@
                 </div>
             </div>
         </div>
-
         <div class="px-5">
             <h3 class="text-xl font-bold">Details</h3>
             <p class="mb-4">Size: {{ product.details.size }}</p>
@@ -88,38 +86,3 @@
         </button>
     </div>
 </div>
-
-<div>
-    <h2>{{ product.productName }}</h2>
-    <p>Description: {{ product.description }}</p>
-    <p>Price: {{ product.price | currency }}</p>
-    <p>In Stock: {{ product.inStock }}</p>
-    <p>Category: {{ product.category }}</p>
-    <!-- Add other relevant product details -->
-  
-    <!-- Display Product Image(s) -->
-    <div *ngFor="let image of product.productImage">
-      <img [src]="image" alt="Product Image">
-    </div>
-  
-    <!-- Display Product Details -->
-    <div>
-      <h3>Details:</h3>
-      <p>Color: {{ product.details.color }}</p>
-      <p>Size: {{ product.details.size }}</p>
-      <p>Info: {{ product.details.info }}</p>
-    </div>
-  
-    <!-- Display Reviews -->
-    <div>
-      <h3>Reviews:</h3>
-      <ul>
-        <li *ngFor="let reviewId of product.reviews">
-          <!-- Display each review using the reviewId -->
-          <!-- You can fetch the review details by making another API call with the reviewId -->
-          {{ reviewId }}
-        </li>
-      </ul>
-    </div>
-  </div>
-  

@@ -4,12 +4,14 @@ div{
 }
 .sidebar {
     width: 20vw;
+    opacity: 0.7;
 }
   
 .selected {
     color: #990011FF;
-    margin: 5px;
+    margin: 2px;
     text-transform: uppercase;
+    opacity: 1;
     -webkit-animation: category-animation 300ms ease alternate;
     animation: category-animation 300ms ease;
 }

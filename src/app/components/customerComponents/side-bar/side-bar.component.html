@@ -1,6 +1,6 @@
-<div class="p-2">
-    <button [class.selected]="isSelectedCategory(['/'])" class="w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['/'])">All</button>
-    <button [class.selected]="isSelectedCategory(['Men'])" class="w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['Men'])">Men</button>
+<div class="sidebar p-2">
+    <button [class.selected]="isSelectedCategory(['/'])" class="md:w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['/'])">All</button>
+    <button [class.selected]="isSelectedCategory(['Men'])" class="md:w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['Men'])">Men</button>
     <div>
       <button [class.selected]="isSelectedCategory(['Men','T-Shirts'])" class="md:w-60 md:text-xl text-left" (click)="onCategory(['Men' ,'T-Shirts'])">T-Shirts</button>
       <button [class.selected]="isSelectedCategory(['Men','Hoodies'])" class="md:w-60 md:text-xl text-left" (click)="onCategory(['Men','Hoodies'])">Hoodies</button>
@@ -13,7 +13,7 @@
       <button [class.selected]="isSelectedCategory(['Men','Socks'])" class="md:w-60 md:text-xl text-left" (click)="onCategory(['Men','Socks'])">Socks</button>
       <button [class.selected]="isSelectedCategory(['Men','Accessories'])" class="md:w-60 md:text-xl text-left" (click)="onCategory(['Men','Accessories'])">Accessories</button>
     </div>
-    <button [class.selected]="isSelectedCategory(['Boys'])" class="w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['Boys'])">Boys</button>
+    <button [class.selected]="isSelectedCategory(['Boys'])" class="md:w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['Boys'])">Boys</button>
     <div>
       <button [class.selected]="isSelectedCategory(['Boys','T-Shirts'])" class="md:w-60 md:text-xl text-left" (click)="onCategory(['Boys' ,'T-Shirts'])">T-Shirts</button>
       <button [class.selected]="isSelectedCategory(['Boys','Hoodies'])" class="md:w-60 md:text-xl text-left" (click)="onCategory(['Boys','Hoodies'])">Hoodies</button>
@@ -26,7 +26,7 @@
       <button [class.selected]="isSelectedCategory(['Boys','Socks'])" class="md:w-60 md:text-xl text-left" (click)="onCategory(['Boys','Socks'])">Socks</button>
       <button [class.selected]="isSelectedCategory(['Boys','Accessories'])" class="md:w-60 md:text-xl text-left" (click)="onCategory(['Boys','Accessories'])">Accessories</button>
     </div>
-    <button [class.selected]="isSelectedCategory(['Girls'])" class="w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['Girls'])">Girls</button>
+    <button [class.selected]="isSelectedCategory(['Girls'])" class="md:w-60 p-2 text-2xl font-bold text-left" (click)="onCategory(['Girls'])">Girls</button>
     <div>
       <button [class.selected]="isSelectedCategory(['Girls','T-Shirts'])" class="md:w-60 md:text-xl text-left" (click)="onCategory(['Girls' ,'T-Shirts'])">T-Shirts</button>
       <button [class.selected]="isSelectedCategory(['Girls','Hoodies'])" class="md:w-60 md:text-xl text-left" (click)="onCategory(['Girls','Hoodies'])">Hoodies</button>

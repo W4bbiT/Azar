@@ -2,7 +2,16 @@
 div{
     color: #FCF6F5FF
 }
-
+.sidebar {
+    /* Your default styles for sidebar go here */
+    width: 20vw; /* Default width for larger screens */
+  }
+  
+  @media (max-width: 767px) {
+    .sidebar {
+      width: 50vw; /* Adjust the width for smaller screens */
+    }
+  }
 .selected {
     color: #990011FF;
     margin: 5px;

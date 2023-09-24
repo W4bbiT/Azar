@@ -63,6 +63,7 @@ export class GetOneProductComponent implements OnInit {
           next: (res) => {
             this.reviews = res;
             this.avgRate = (res?.averageRating / 5) * 100;
+            console.log(this.reviews, this.avgRate);
           },
           error: (err) => {
             console.error('Error getting reviews:', err);

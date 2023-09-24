@@ -46,7 +46,7 @@
         <div *ngFor="let review of reviews.reviews" class="border-t-2 rounded-3xl p-4">
             <div class="flex justify-between">
                 <div class="flex items-center mb-2">
-                    <img class="w-10 h-10 rounded-full mr-4" [src]="review.user.profileImage" alt="User Profile Image">
+                    <img class="w-10 h-10 rounded-full mr-4" [src]="review?.user?.profileImage" alt="User Profile Image">
                     <div>
                         <p class="font-bold">{{ review?.user?.fName }}</p>
                         <p>State: {{ review?.user?.address?.state }}</p>

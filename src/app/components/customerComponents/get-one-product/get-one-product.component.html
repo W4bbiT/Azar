@@ -89,30 +89,37 @@
     </div>
 </div>
 
-<div *ngIf="product" class="">
+<div *ngIf="product">
     <h2>{{ product.productName }}</h2>
     <p>Description: {{ product.description }}</p>
     <p>Price: {{ product.price | currency }}</p>
+    <p>In Stock: {{ product.inStock }}</p>
+    <p>Category: {{ product.category }}</p>
     <!-- Add other relevant product details -->
   
-    <!-- Display Average Rating and Customer Count -->
-    <div>
-      <p>Average Rating: {{ reviews.averageRating }}</p>
-      <p>Number of Reviews: {{ reviews.customersCount }}</p>
+    <!-- Display Product Image(s) -->
+    <div *ngFor="let image of product.productImage">
+      <img [src]="image" alt="Product Image">
     </div>
   
-    <!-- Display Review -->
-    <div *ngIf="reviews.reviews.length > 0">
-      <h3>Review</h3>
-      <p>Rating: {{ reviews.reviews[0].rating }}</p>
-      <p>{{ reviews.reviews[0].review }}</p>
-      <p>Review Date: {{ reviews.reviews[0].reviewDate | date }}</p>
-      <p>Reviewer Name: {{ reviews.reviews[0].user.fName }}</p>
-      <p>Reviewer State: {{ reviews.reviews[0].user.address.state }}</p>
-      <img [src]="reviews.reviews[0].user.profileImage" alt="Reviewer Profile Image">
+    <!-- Display Product Details -->
+    <div>
+      <h3>Details:</h3>
+      <p>Color: {{ product.details.color }}</p>
+      <p>Size: {{ product.details.size }}</p>
+      <p>Info: {{ product.details.info }}</p>
     </div>
-    <div *ngIf="reviews.reviews.length === 0">
-      <p>No reviews yet.</p>
+  
+    <!-- Display Reviews -->
+    <div>
+      <h3>Reviews:</h3>
+      <ul>
+        <li *ngFor="let reviewId of product.reviews">
+          <!-- Display each review using the reviewId -->
+          <!-- You can fetch the review details by making another API call with the reviewId -->
+          {{ reviewId }}
+        </li>
+      </ul>
     </div>
   </div>
   

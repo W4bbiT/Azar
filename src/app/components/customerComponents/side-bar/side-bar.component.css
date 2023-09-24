@@ -3,9 +3,8 @@ div{
     color: #FCF6F5FF
 }
 .sidebar {
-    /* Your default styles for sidebar go here */
-    width: 15vw; /* Default width for larger screens */
-  }
+    width: 20vw;
+}
   
 .selected {
     color: #990011FF;

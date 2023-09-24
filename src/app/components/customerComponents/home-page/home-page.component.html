@@ -1,9 +1,9 @@
 <app-feature-product class="w-screen"></app-feature-product>
 
-<div class="flex text-whiteish w-2/3">
+<div class="flex text-whiteish">
 
   <div class="md:w-60">
-    <app-side-bar [selectedCategory]="selectedCategory" (categoryChange)="onCategory($event)">
+    <app-side-bar class="w-20" [selectedCategory]="selectedCategory" (categoryChange)="onCategory($event)">
     </app-side-bar>
   </div>
   <div class="p-5">

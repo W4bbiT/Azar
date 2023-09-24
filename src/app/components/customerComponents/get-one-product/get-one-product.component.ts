@@ -46,9 +46,7 @@ export class GetOneProductComponent implements OnInit {
       this.productService.getOneProduct(this.pId).subscribe({
         next: (res) => {
           if (res) {
-            this.product = res;
-            console.log('Product:', this.product);
-          }
+            this.product = res.data;          }
         },
         error: (err) => {
           console.error('Error getting product:', err);
@@ -63,7 +61,6 @@ export class GetOneProductComponent implements OnInit {
           next: (res) => {
             this.reviews = res;
             this.avgRate = (res?.averageRating / 5) * 100;
-            console.log(this.reviews, this.avgRate);
           },
           error: (err) => {
             console.error('Error getting reviews:', err);

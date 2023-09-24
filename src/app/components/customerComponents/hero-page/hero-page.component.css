@@ -31,7 +31,7 @@ header {
 .foreground {
     position: absolute;
     width: 100%;
-    top: -50%;
+    top: -25%;
     z-index: -1; 
     transform: translateZ(-7px) scale(1);
 }

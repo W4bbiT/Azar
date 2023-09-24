@@ -4,9 +4,9 @@ div{
 }
 .sidebar{
     width: 20vw;
-    
+
     @media (max-width: 768px) {
-        font-size: 8px; /* Adjust the font size for smaller screens */
+        font-size: 4px; /* Adjust the font size for smaller screens */
     }
 }
 .selected {

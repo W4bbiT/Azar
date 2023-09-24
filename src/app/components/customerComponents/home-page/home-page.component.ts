@@ -15,7 +15,7 @@ export class HomePageComponent implements OnInit {
   currentPage: number = 1;
   limit: number = 50;
   totalPages: number;
-  selectedCategory: string[]; 
+  selectedCategory: string[] = ['all']; 
 
   constructor(
     private userService: UsersService,

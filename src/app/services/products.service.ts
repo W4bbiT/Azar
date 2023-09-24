@@ -31,7 +31,6 @@ export class ProductsService {
   //get a product by id
   getOneProduct(pId: string): Observable<Product> {
     return this.http.get<Product>(AUTH_API + `/product/${pId}`).pipe(
-      tap((res) => console.log('Product response from backend: ', res)),
       catchError(this.handleError)
     );
   }

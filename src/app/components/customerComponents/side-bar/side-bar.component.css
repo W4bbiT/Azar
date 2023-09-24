@@ -2,7 +2,9 @@
 div{
     color: #FCF6F5FF
 }
-
+.sidebar{
+    width: 25%;
+}
 .selected {
     color: #990011FF;
     margin: 10px;

@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Review } from 'src/app/models/reviewModel';
 import { ProductsService } from 'src/app/services/products.service';
 @Component({
   selector: 'app-hero-page',
@@ -8,12 +7,11 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./hero-page.component.css']
 })
 export class HeroPageComponent implements OnInit{
-  @ViewChild('swiper')
-
   reviews: any
 
   constructor(
-      private productService: ProductsService
+      private productService: ProductsService,
+      private router: Router
     ){
 
   }
@@ -27,5 +25,8 @@ export class HeroPageComponent implements OnInit{
         console.log(err)
       }
     })
+  }
+  shopNow() {
+    this.router.navigate(['/home']);
   }
 }

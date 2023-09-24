@@ -41,13 +41,23 @@ header {
     padding: 5px;
     z-index: -1; 
     width: 300px;
+    font-weight: 700;
+    color: white;
     text-align: center;
     top: 35%;
     left: 50%;
     transform: translate3d(-50%,20%,-5px) scale(2);
-    background: rgb(200, 0, 0);
+    background-color: transparent;
 }
-
+.btn::before {
+    background-color: rgb(252, 70, 100);
+    transform: translateX(-100%);
+    transition: all .3s;
+    z-index: -1;
+   }
+.btn:hover::before {
+    transform: translateX(0);
+}
 h2 {
     font-size: 1.5rem;
     color: #ff0000;

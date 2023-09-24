@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent {
-  @Input() selectedCategory: string[] = ['all'];
+  @Input() selectedCategory: string[] = ['/'];
   @Output() categoryChange = new EventEmitter<string[]>();
 
   onCategory(category: string[]): void {

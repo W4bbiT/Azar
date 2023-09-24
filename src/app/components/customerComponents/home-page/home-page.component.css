@@ -12,6 +12,10 @@ svg {
     height: 25px;
 }
 
+.sidebar{
+    width:25%;
+}
+
 .card-footer {
     display: flex;
     justify-content: space-between;

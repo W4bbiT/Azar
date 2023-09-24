@@ -32,38 +32,43 @@ export class GetOneProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.pId = this.route.snapshot.paramMap.get('pId');
-    this.getProduct();
-    this.getReviews();
+    if (this.pId) {
+      this.getProduct();
+      this.getReviews();
+    } else {
+      console.error('Product ID is undefined.');
+    }
   }
 
   public plugins: Plugin[] = [new Arrow()];
   getProduct(): void {
-    this.productService.getOneProduct(this.pId).subscribe({
-      next: (res) => {
-        if (res) {
-          this.product = res;
-        }
-      },
-      error: (err) => {
-        if (err.status === 401) {
-          alert('No products found!');
-        }
-        console.log(err);
-      },
-    });
-  }
-  getReviews(): void {
-    this.productService.getProductReviews(this.pId, this.page, this.limit)
-      .subscribe({
+    if (this.pId) {
+      this.productService.getOneProduct(this.pId).subscribe({
         next: (res) => {
-          this.reviews = res;
-          this.avgRate = (res.averageRating / 5) * 100;
-          console.log(this.reviews)
+          if (res) {
+            this.product = res;
+          }
         },
         error: (err) => {
-          console.log(err)
-        }
+          console.error('Error getting product:', err);
+        },
       });
+    }
+  }
+
+  getReviews(): void {
+    if (this.pId) {
+      this.productService.getProductReviews(this.pId, this.page, this.limit)
+        .subscribe({
+          next: (res) => {
+            this.reviews = res;
+            this.avgRate = (res?.averageRating / 5) * 100;
+          },
+          error: (err) => {
+            console.error('Error getting reviews:', err);
+          }
+        });
+    }
   }
 
   previousPage(): void {

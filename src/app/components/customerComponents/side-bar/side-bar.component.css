@@ -3,7 +3,11 @@ div{
     color: #FCF6F5FF
 }
 .sidebar{
-    width: 25vw;
+    width: 20vw;
+    
+    @media (max-width: 768px) {
+        font-size: 8px; /* Adjust the font size for smaller screens */
+    }
 }
 .selected {
     color: #990011FF;

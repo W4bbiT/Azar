@@ -21,8 +21,8 @@ import { HeroPageComponent } from './components/customerComponents/hero-page/her
 
 const routes: Routes = [
   //homepage
-  { path: '', component: HeroPageComponent, pathMatch: 'full' },
-  {path: 'home', component: HomePageComponent},
+  { path: 'hero', component: HeroPageComponent},
+  {path: '', component: HomePageComponent, pathMatch: 'full' },
   { path: 'search-results', component: SearchResultComponent}, 
   //users
   { path: 'signin', component: LoginComponent, canActivate:[LoggedInAuthGuard]},

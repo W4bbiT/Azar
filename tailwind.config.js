@@ -8,7 +8,8 @@ module.exports = {
       colors: {
         'blackish': '#212121',
         'whiteish': '#FCF6F5FF',
-        'reddish':'#990011FF',
+        'reddish':'#ce4257',
+
       }
     },
   },
